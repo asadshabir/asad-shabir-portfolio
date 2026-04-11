@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Sparkles } from "lucide-react";
+import Card3D from "./Card3D";
 
 const filters = ["All", "Full-Stack Apps", "AI Chatbots & Agents", "Automation Tools"];
 
@@ -12,6 +13,8 @@ const projects = [
     tech: ["OpenAI Agents SDK", "Python", "FastAPI", "React", "Supabase"],
     live: "#",
     github: "#",
+    gradient: "from-primary to-accent",
+    featured: true,
   },
   {
     title: "AI-Powered Robotics Book",
@@ -20,6 +23,8 @@ const projects = [
     tech: ["Next.js", "OpenAI", "TypeScript", "Tailwind"],
     live: "#",
     github: "#",
+    gradient: "from-accent to-primary",
+    featured: false,
   },
   {
     title: "Full-Stack E-Commerce Platform",
@@ -28,6 +33,8 @@ const projects = [
     tech: ["Next.js", "Supabase", "Stripe", "TypeScript"],
     live: "#",
     github: "#",
+    gradient: "from-primary to-primary",
+    featured: false,
   },
   {
     title: "Workflow Automation Engine",
@@ -36,6 +43,8 @@ const projects = [
     tech: ["Python", "FastAPI", "Celery", "Redis"],
     live: "#",
     github: "#",
+    gradient: "from-accent to-accent",
+    featured: false,
   },
   {
     title: "AI Resume Analyzer",
@@ -44,6 +53,8 @@ const projects = [
     tech: ["Python", "LangChain", "React", "FastAPI"],
     live: "#",
     github: "#",
+    gradient: "from-primary to-accent",
+    featured: false,
   },
   {
     title: "Real-Time Dashboard",
@@ -52,12 +63,13 @@ const projects = [
     tech: ["React", "Node.js", "PostgreSQL", "WebSockets"],
     live: "#",
     github: "#",
+    gradient: "from-accent to-primary",
+    featured: false,
   },
 ];
 
 const Projects = () => {
   const [active, setActive] = useState("All");
-
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
   return (
@@ -81,8 +93,10 @@ const Projects = () => {
         {/* Filters */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {filters.map((f) => (
-            <button
+            <motion.button
               key={f}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => setActive(f)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
                 active === f
@@ -91,7 +105,7 @@ const Projects = () => {
               }`}
             >
               {f}
-            </button>
+            </motion.button>
           ))}
         </div>
 
@@ -102,52 +116,72 @@ const Projects = () => {
               <motion.div
                 key={project.title}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                whileHover={{ y: -8 }}
-                className="glass rounded-xl overflow-hidden group"
+                initial={{ opacity: 0, scale: 0.85, rotateX: -10 }}
+                animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+                exit={{ opacity: 0, scale: 0.85 }}
+                transition={{ duration: 0.4, type: "spring" }}
               >
-                {/* Gradient top bar */}
-                <div className="h-1 bg-gradient-to-r from-primary to-accent" />
+                <Card3D
+                  glowColor={project.gradient.includes("accent") ? "magenta" : "cyan"}
+                  className="overflow-hidden group h-full"
+                >
+                  {/* Gradient top bar */}
+                  <div className={`h-1.5 bg-gradient-to-r ${project.gradient}`} />
 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* Tech stack */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs px-2 py-1 rounded bg-primary/10 text-primary font-mono"
+                  {/* Featured badge */}
+                  {project.featured && (
+                    <div className="absolute top-4 right-4 z-20">
+                      <motion.div
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                        className="flex items-center gap-1 px-2 py-1 rounded-full bg-primary/20 text-primary text-xs font-mono border border-primary/30"
                       >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                        <Sparkles className="w-3 h-3" />
+                        Featured
+                      </motion.div>
+                    </div>
+                  )}
 
-                  {/* Links */}
-                  <div className="flex gap-3">
-                    <a
-                      href={project.live}
-                      className="flex items-center gap-1.5 text-sm text-primary hover:underline"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" /> Live Demo
-                    </a>
-                    <a
-                      href={project.github}
-                      className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
-                    >
-                      <Github className="w-3.5 h-3.5" /> GitHub
-                    </a>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                      {project.description}
+                    </p>
+
+                    {/* Tech stack with 3D hover */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((t) => (
+                        <motion.span
+                          key={t}
+                          whileHover={{ scale: 1.1, y: -2 }}
+                          className="text-xs px-2.5 py-1 rounded-md bg-primary/10 text-primary font-mono border border-primary/10"
+                        >
+                          {t}
+                        </motion.span>
+                      ))}
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex gap-4">
+                      <motion.a
+                        whileHover={{ x: 2 }}
+                        href={project.live}
+                        className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" /> Live Demo
+                      </motion.a>
+                      <motion.a
+                        whileHover={{ x: 2 }}
+                        href={project.github}
+                        className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+                      >
+                        <Github className="w-3.5 h-3.5" /> GitHub
+                      </motion.a>
+                    </div>
                   </div>
-                </div>
+                </Card3D>
               </motion.div>
             ))}
           </AnimatePresence>

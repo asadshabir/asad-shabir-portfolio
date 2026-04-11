@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import ChatBot, { ChatButton } from "@/components/ChatBot";
 import ScrollProgress from "@/components/ScrollProgress";
+import SectionDivider from "@/components/SectionDivider";
 
 const Index = () => {
   const [chatOpen, setChatOpen] = useState(false);
@@ -17,10 +18,15 @@ const Index = () => {
       <ScrollProgress />
       <Navbar />
       <Hero onOpenChat={() => setChatOpen(true)} />
+      <SectionDivider />
       <About />
+      <SectionDivider />
       <Skills />
+      <SectionDivider />
       <Experience />
+      <SectionDivider />
       <Projects />
+      <SectionDivider />
       <Contact />
 
       {/* Footer */}
@@ -32,7 +38,6 @@ const Index = () => {
         </div>
       </footer>
 
-      {/* ChatBot */}
       <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />
       {!chatOpen && <ChatButton onClick={() => setChatOpen(true)} />}
     </div>
