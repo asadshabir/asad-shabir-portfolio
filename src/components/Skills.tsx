@@ -20,7 +20,7 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, scale: 0.7, rotateX: -30 },
-  show: { opacity: 1, scale: 1, rotateX: 0, transition: { type: "spring", stiffness: 200, damping: 20 } },
+  show: { opacity: 1, scale: 1, rotateX: 0, transition: { type: "spring" as const, stiffness: 200, damping: 20 } },
 };
 
 const Skills = () => (
