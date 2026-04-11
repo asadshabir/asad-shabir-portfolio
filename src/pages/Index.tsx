@@ -1,16 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
+import ChatBot, { ChatButton } from "@/components/ChatBot";
+import ScrollProgress from "@/components/ScrollProgress";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [chatOpen, setChatOpen] = useState(false);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen">
+      <ScrollProgress />
+      <Navbar />
+      <Hero onOpenChat={() => setChatOpen(true)} />
+      <About />
+      <Skills />
+      <Experience />
+      <Projects />
+      <Contact />
+
+      {/* Footer */}
+      <footer className="py-8 border-t border-border/30">
+        <div className="container px-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Asad Shabir. Built with passion & AI.
+          </p>
+        </div>
+      </footer>
+
+      {/* ChatBot */}
+      <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />
+      {!chatOpen && <ChatButton onClick={() => setChatOpen(true)} />}
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
