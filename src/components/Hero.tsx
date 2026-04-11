@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, MessageCircle, Download } from "lucide-react";
 import ParticleBackground from "./ParticleBackground";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/profile-photo.png";
 
 const titles = [
   "Full-Stack Developer",
@@ -13,6 +13,8 @@ const titles = [
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   const [titleIndex, setTitleIndex] = useState(0);
+  const photoRef = useRef<HTMLDivElement>(null);
+  const [photoTilt, setPhotoTilt] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,15 +23,18 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToProjects = () => {
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!photoRef.current) return;
+    const rect = photoRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setPhotoTilt({ x: y * -12, y: x * 12 });
   };
 
-  const downloadResume = () => {
-    // Confetti-like animation feedback
-    const btn = document.getElementById("resume-btn");
-    if (btn) btn.classList.add("animate-pulse-glow");
-    setTimeout(() => btn?.classList.remove("animate-pulse-glow"), 2000);
+  const handleMouseLeave = () => setPhotoTilt({ x: 0, y: 0 });
+
+  const scrollToProjects = () => {
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -37,28 +42,75 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
       <ParticleBackground />
 
       {/* Gradient orbs */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-[120px]" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px]" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-[120px] animate-float" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] animate-float" style={{ animationDelay: "1.5s" }} />
 
       <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 px-6 py-20">
-        {/* Profile Photo */}
+        {/* 3D Profile Photo */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          ref={photoRef}
+          initial={{ opacity: 0, scale: 0.7, rotateY: -30 }}
+          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+          transition={{ duration: 1, type: "spring", stiffness: 80 }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{ perspective: "1000px" }}
           className="relative flex-shrink-0"
         >
-          <div className="relative w-56 h-56 lg:w-72 lg:h-72">
-            {/* Rotating neon border */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent animate-spin-slow" style={{ padding: "3px" }}>
+          <motion.div
+            animate={{ rotateX: photoTilt.x, rotateY: photoTilt.y }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            className="relative w-60 h-60 lg:w-80 lg:h-80"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {/* Outer rotating neon ring */}
+            <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-primary via-accent to-primary animate-spin-slow opacity-60 blur-sm" />
+            <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-primary via-accent to-primary animate-spin-slow" style={{ padding: "2px" }}>
               <div className="w-full h-full rounded-full bg-background" />
             </div>
+
+            {/* Inner glow ring */}
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 blur-md animate-pulse-glow" />
+
+            {/* Photo */}
             <img
               src={profilePhoto}
               alt="Asad Shabir"
-              className="absolute inset-2 rounded-full object-cover neon-glow-cyan"
+              className="absolute inset-2 rounded-full object-cover object-top neon-glow-cyan z-10"
+              style={{ transform: "translateZ(30px)" }}
             />
-          </div>
+
+            {/* Floating orbit particles */}
+            {[0, 1, 2, 3, 4, 5].map((i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1.5 h-1.5 rounded-full bg-primary"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  boxShadow: "0 0 8px hsl(var(--primary) / 0.8)",
+                }}
+                animate={{
+                  x: [
+                    Math.cos((i * Math.PI * 2) / 6) * 160,
+                    Math.cos((i * Math.PI * 2) / 6 + Math.PI) * 160,
+                    Math.cos((i * Math.PI * 2) / 6) * 160,
+                  ],
+                  y: [
+                    Math.sin((i * Math.PI * 2) / 6) * 160,
+                    Math.sin((i * Math.PI * 2) / 6 + Math.PI) * 160,
+                    Math.sin((i * Math.PI * 2) / 6) * 160,
+                  ],
+                  opacity: [0.3, 0.8, 0.3],
+                }}
+                transition={{
+                  duration: 8 + i * 0.5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Text Content */}
@@ -78,8 +130,10 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4"
           >
-            Asad{" "}
-            <span className="gradient-text">Shabir</span>
+            <span className="inline-block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.15)" }}>
+              Asad{" "}
+            </span>
+            <span className="gradient-text" style={{ textShadow: "none" }}>Shabir</span>
           </motion.h1>
 
           {/* Cycling titles */}
@@ -87,9 +141,9 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             <AnimatePresence mode="wait">
               <motion.p
                 key={titleIndex}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
+                initial={{ opacity: 0, y: 30, rotateX: -45 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                exit={{ opacity: 0, y: -30, rotateX: 45 }}
                 transition={{ duration: 0.4 }}
                 className="text-xl md:text-2xl font-semibold neon-text-cyan text-primary"
               >
@@ -115,28 +169,32 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             transition={{ delay: 0.7 }}
             className="flex flex-wrap gap-4 justify-center lg:justify-start"
           >
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
               onClick={scrollToProjects}
-              className="group flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover-lift neon-glow-cyan transition-all"
+              className="group flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold neon-glow-cyan transition-all"
             >
               <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
               Explore My Projects
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
               onClick={onOpenChat}
-              className="group flex items-center gap-2 px-6 py-3 rounded-lg glass border-primary/30 text-primary font-semibold hover-lift hover:neon-glow-cyan transition-all"
+              className="group flex items-center gap-2 px-6 py-3 rounded-lg glass border-primary/30 text-primary font-semibold hover:neon-glow-cyan transition-all"
             >
               <MessageCircle className="w-4 h-4" />
               Talk to My AI
-            </button>
-            <button
-              id="resume-btn"
-              onClick={downloadResume}
-              className="group flex items-center gap-2 px-6 py-3 rounded-lg glass border-accent/30 text-accent font-semibold hover-lift hover:neon-glow-magenta transition-all"
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex items-center gap-2 px-6 py-3 rounded-lg glass border-accent/30 text-accent font-semibold hover:neon-glow-magenta transition-all"
             >
               <Download className="w-4 h-4" />
               Download Resume
-            </button>
+            </motion.button>
           </motion.div>
         </div>
       </div>

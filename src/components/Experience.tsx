@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
+import Card3D from "./Card3D";
 
 const experiences = [
   {
@@ -34,64 +35,78 @@ const experiences = [
   },
 ];
 
-const Experience = () => {
-  return (
-    <section id="experience" className="py-32 relative">
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
+const Experience = () => (
+  <section id="experience" className="py-32 relative">
+    <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
 
-      <div className="container px-6 relative z-10">
+    <div className="container px-6 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4">Experience</p>
+        <h2 className="text-4xl md:text-5xl font-bold">
+          My <span className="gradient-text">Journey</span>
+        </h2>
+      </motion.div>
+
+      <div className="max-w-3xl mx-auto relative">
+        {/* Animated glowing vertical line */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4">Experience</p>
-          <h2 className="text-4xl md:text-5xl font-bold">
-            My <span className="gradient-text">Journey</span>
-          </h2>
-        </motion.div>
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute left-6 md:left-8 top-0 bottom-0 w-px origin-top"
+          style={{
+            background: "linear-gradient(180deg, hsl(var(--primary) / 0.6), hsl(var(--accent) / 0.4), transparent)",
+            boxShadow: "0 0 8px hsl(var(--primary) / 0.3)",
+          }}
+        />
 
-        {/* Timeline */}
-        <div className="max-w-3xl mx-auto relative">
-          {/* Vertical line */}
-          <div className="absolute left-6 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-accent/50 to-transparent" />
-
-          {experiences.map((exp, i) => (
+        {experiences.map((exp, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.2, duration: 0.6, type: "spring" }}
+            className="relative pl-16 md:pl-20 pb-12 last:pb-0"
+          >
+            {/* Glowing dot */}
             <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.2, duration: 0.5 }}
-              className="relative pl-16 md:pl-20 pb-12 last:pb-0"
-            >
-              {/* Dot */}
-              <div className="absolute left-4 md:left-6 top-1 w-4 h-4 rounded-full bg-primary neon-glow-cyan border-2 border-background" />
+              transition={{ delay: i * 0.2 + 0.3, type: "spring" }}
+              className="absolute left-4 md:left-6 top-1 w-4 h-4 rounded-full bg-primary border-2 border-background"
+              style={{ boxShadow: "0 0 12px hsl(var(--primary) / 0.6), 0 0 24px hsl(var(--primary) / 0.2)" }}
+            />
 
-              <div className="glass rounded-xl p-6 hover-lift">
-                <div className="flex items-center gap-2 text-primary text-sm font-mono mb-2">
-                  <Briefcase className="w-4 h-4" />
-                  {exp.date}
-                </div>
-                <h3 className="text-xl font-bold mb-1">{exp.role}</h3>
-                <p className="text-muted-foreground font-medium mb-4">{exp.company}</p>
-                <ul className="space-y-2">
-                  {exp.points.map((point, j) => (
-                    <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
+            <Card3D glowColor={i === 0 ? "cyan" : i === 1 ? "magenta" : "both"} className="p-6">
+              <div className="flex items-center gap-2 text-primary text-sm font-mono mb-2">
+                <Briefcase className="w-4 h-4" />
+                {exp.date}
               </div>
-            </motion.div>
-          ))}
-        </div>
+              <h3 className="text-xl font-bold mb-1">{exp.role}</h3>
+              <p className="text-muted-foreground font-medium mb-4">{exp.company}</p>
+              <ul className="space-y-2">
+                {exp.points.map((point, j) => (
+                  <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" style={{ boxShadow: "0 0 6px hsl(var(--primary) / 0.5)" }} />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </Card3D>
+          </motion.div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Experience;
