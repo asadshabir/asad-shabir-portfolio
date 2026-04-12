@@ -1,7 +1,20 @@
 import { motion } from "framer-motion";
 
 const SectionDivider = () => (
-  <div className="relative h-24 flex items-center justify-center overflow-hidden">
+  <div className="relative h-32 flex items-center justify-center overflow-hidden">
+    {/* Aurora-style background glow */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1 }}
+      className="absolute inset-0"
+    >
+      <div className="absolute top-1/2 left-1/4 w-40 h-8 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 right-1/4 w-40 h-8 bg-accent/5 rounded-full blur-3xl" />
+    </motion.div>
+
+    {/* Main glowing line */}
     <motion.div
       initial={{ scaleX: 0, opacity: 0 }}
       whileInView={{ scaleX: 1, opacity: 1 }}
@@ -12,6 +25,8 @@ const SectionDivider = () => (
         background: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), hsl(var(--accent) / 0.4), transparent)",
       }}
     />
+
+    {/* Center dot */}
     <motion.div
       initial={{ scale: 0 }}
       whileInView={{ scale: 1 }}

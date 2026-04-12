@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Sparkles, Cpu, Zap } from "lucide-react";
 import Card3D from "./Card3D";
+import BackgroundBeams from "./aceternity/BackgroundBeams";
 
 const items = [
   { icon: Cpu, title: "AI & Agents", desc: "Agentic AI systems, RAG pipelines, and intelligent chatbots", glow: "cyan" as const },
@@ -10,6 +11,7 @@ const items = [
 
 const About = () => (
   <section id="about" className="py-32 relative">
+    <BackgroundBeams className="opacity-30" />
     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
 
     <div className="container px-6 relative z-10">

@@ -166,15 +166,30 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
   );
 };
 
-// Static AI bot icon with gentle wave animation
+// Static AI bot icon with gentle wave animation + "Ready to Talk!" label
 export const ChatButton = ({ onClick }: { onClick: () => void }) => (
   <motion.button
     initial={{ opacity: 0, scale: 0 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ delay: 1, type: "spring" }}
     onClick={onClick}
-    className="fixed bottom-6 right-4 md:right-8 z-50 group"
+    className="fixed bottom-6 right-4 md:right-8 z-50 group flex items-center gap-3"
   >
+    {/* "Ready to Talk!" label */}
+    <motion.div
+      initial={{ opacity: 0, x: 10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 1.5 }}
+      className="hidden sm:block px-4 py-2 rounded-full glass-strong border-primary/30 text-sm font-semibold text-primary neon-text-cyan"
+    >
+      <motion.span
+        animate={{ opacity: [0.7, 1, 0.7] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+      >
+        Ready to Talk!
+      </motion.span>
+    </motion.div>
+
     <div className="relative w-16 h-16">
       {/* Outer glow ring */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-30 blur-lg animate-pulse-glow" />
@@ -191,6 +206,21 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => (
           <Bot className="w-7 h-7 text-primary-foreground" />
         </motion.div>
       </div>
+
+      {/* Sparkle particles around orb */}
+      {[0, 1, 2].map((i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-primary"
+          style={{
+            top: `${20 + i * 25}%`,
+            left: i % 2 === 0 ? "-4px" : "calc(100% + 2px)",
+            boxShadow: "0 0 6px hsl(var(--primary) / 0.8)",
+          }}
+          animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5] }}
+          transition={{ duration: 2 + i * 0.5, delay: i * 0.7, repeat: Infinity }}
+        />
+      ))}
     </div>
   </motion.button>
 );
