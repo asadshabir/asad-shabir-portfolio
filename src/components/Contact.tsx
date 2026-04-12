@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Twitter, Download, Send } from "lucide-react";
+import { Mail, Linkedin, Github, Twitter, Download, Send, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Card3D from "./Card3D";
 
 const socials = [
-  { icon: Mail, label: "Gmail", href: "mailto:asad@example.com" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/asadshabir" },
-  { icon: Github, label: "GitHub", href: "https://github.com/asadshabir" },
-  { icon: Twitter, label: "X / Twitter", href: "https://x.com/asadshabir" },
+  { icon: Mail, label: "Gmail", href: "mailto:asad@example.com", color: "group-hover:text-red-400" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/asadshabir", color: "group-hover:text-blue-400" },
+  { icon: Github, label: "GitHub", href: "https://github.com/asadshabir", color: "group-hover:text-foreground" },
+  { icon: Twitter, label: "X / Twitter", href: "https://x.com/asadshabir", color: "group-hover:text-sky-400" },
 ];
 
 const Contact = () => {
@@ -26,8 +26,9 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 relative">
+    <section id="contact" className="py-32 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px]" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
 
       <div className="container px-6 relative z-10">
         <motion.div
@@ -37,44 +38,49 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4">Get In Touch</p>
+          <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4 flex items-center justify-center gap-2">
+            <Heart className="w-4 h-4" /> Get In Touch
+          </p>
           <h2 className="text-4xl md:text-5xl font-bold">
             Let's <span className="gradient-text">Connect</span>
           </h2>
+          <p className="text-muted-foreground mt-4 max-w-md mx-auto">
+            Have a project in mind or want to collaborate? I'd love to hear from you.
+          </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <Card3D glowColor="cyan" className="p-8 h-full">
-              <h3 className="text-xl font-bold mb-6">Find me online</h3>
-              <div className="space-y-4 mb-8">
+            <Card3D glowColor="cyan" className="p-8 md:p-10 h-full">
+              <h3 className="text-2xl font-bold mb-8">Find me online</h3>
+              <div className="space-y-5 mb-10">
                 {socials.map((s) => (
                   <motion.a
                     key={s.label}
-                    whileHover={{ x: 4 }}
+                    whileHover={{ x: 6, scale: 1.02 }}
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                    className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-all group"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:neon-glow-cyan transition-all duration-300">
-                      <s.icon className="w-5 h-5 text-primary" />
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:neon-glow-cyan group-hover:scale-110 transition-all duration-300">
+                      <s.icon className={`w-5 h-5 text-primary ${s.color} transition-colors`} />
                     </div>
-                    <span className="font-medium">{s.label}</span>
+                    <span className="font-semibold text-lg">{s.label}</span>
                   </motion.a>
                 ))}
               </div>
 
               <motion.button
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold neon-glow-cyan transition-all"
+                className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold text-lg neon-glow-cyan transition-all"
               >
-                <Download className="w-4 h-4" />
+                <Download className="w-5 h-5" />
                 Download Resume
               </motion.button>
             </Card3D>
@@ -85,16 +91,16 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <Card3D glowColor="magenta" className="p-8 h-full">
-              <form onSubmit={handleSubmit} className="space-y-4 h-full flex flex-col">
-                <h3 className="text-xl font-bold mb-2">Send a message</h3>
+            <Card3D glowColor="magenta" className="p-8 md:p-10 h-full">
+              <form onSubmit={handleSubmit} className="space-y-5 h-full flex flex-col">
+                <h3 className="text-2xl font-bold mb-4">Send a message</h3>
                 <input
                   type="text"
                   placeholder="Your name"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all text-sm"
+                  className="w-full px-5 py-3.5 rounded-xl bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
                 />
                 <input
                   type="email"
@@ -102,24 +108,24 @@ const Contact = () => {
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all text-sm"
+                  className="w-full px-5 py-3.5 rounded-xl bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
                 />
                 <textarea
                   placeholder="Your message"
-                  rows={4}
+                  rows={5}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all text-sm resize-none flex-1"
+                  className="w-full px-5 py-3.5 rounded-xl bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm resize-none flex-1"
                 />
                 <motion.button
                   type="submit"
                   disabled={sending}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold neon-glow-cyan transition-all disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg neon-glow-cyan transition-all disabled:opacity-50"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-5 h-5" />
                   {sending ? "Sending..." : "Send Message"}
                 </motion.button>
               </form>

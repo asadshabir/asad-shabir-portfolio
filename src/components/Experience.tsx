@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
+import { Briefcase, Sparkles } from "lucide-react";
 import Card3D from "./Card3D";
 
 const experiences = [
@@ -36,8 +36,11 @@ const experiences = [
 ];
 
 const Experience = () => (
-  <section id="experience" className="py-32 relative">
+  <section id="experience" className="py-32 relative overflow-hidden">
+    {/* Ambient light beams */}
     <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
+    <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[120px]" />
+    <div className="absolute bottom-0 left-1/3 w-[350px] h-[350px] bg-primary/3 rounded-full blur-[130px]" />
 
     <div className="container px-6 relative z-10">
       <motion.div
@@ -45,12 +48,17 @@ const Experience = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-16"
+        className="text-center mb-20"
       >
-        <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4">Experience</p>
+        <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4 flex items-center justify-center gap-2">
+          <Sparkles className="w-4 h-4" /> Experience
+        </p>
         <h2 className="text-4xl md:text-5xl font-bold">
           My <span className="gradient-text">Journey</span>
         </h2>
+        <p className="text-muted-foreground mt-4 max-w-md mx-auto">
+          A timeline of growth, impact, and continuous learning.
+        </p>
       </motion.div>
 
       <div className="max-w-3xl mx-auto relative">
@@ -62,8 +70,8 @@ const Experience = () => (
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="absolute left-6 md:left-8 top-0 bottom-0 w-px origin-top"
           style={{
-            background: "linear-gradient(180deg, hsl(var(--primary) / 0.6), hsl(var(--accent) / 0.4), transparent)",
-            boxShadow: "0 0 8px hsl(var(--primary) / 0.3)",
+            background: "linear-gradient(180deg, hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.5), hsl(var(--primary) / 0.2), transparent)",
+            boxShadow: "0 0 12px hsl(var(--primary) / 0.4), 0 0 24px hsl(var(--primary) / 0.15)",
           }}
         />
 
@@ -74,7 +82,7 @@ const Experience = () => (
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.2, duration: 0.6, type: "spring" }}
-            className="relative pl-16 md:pl-20 pb-12 last:pb-0"
+            className="relative pl-16 md:pl-20 pb-14 last:pb-0"
           >
             {/* Glowing dot */}
             <motion.div
@@ -82,21 +90,21 @@ const Experience = () => (
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2 + 0.3, type: "spring" }}
-              className="absolute left-4 md:left-6 top-1 w-4 h-4 rounded-full bg-primary border-2 border-background"
-              style={{ boxShadow: "0 0 12px hsl(var(--primary) / 0.6), 0 0 24px hsl(var(--primary) / 0.2)" }}
+              className="absolute left-4 md:left-6 top-1 w-5 h-5 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background"
+              style={{ boxShadow: "0 0 16px hsl(var(--primary) / 0.7), 0 0 32px hsl(var(--primary) / 0.25)" }}
             />
 
-            <Card3D glowColor={i === 0 ? "cyan" : i === 1 ? "magenta" : "both"} className="p-6">
-              <div className="flex items-center gap-2 text-primary text-sm font-mono mb-2">
+            <Card3D glowColor={i === 0 ? "cyan" : i === 1 ? "magenta" : "both"} className="p-7">
+              <div className="flex items-center gap-2 text-primary text-sm font-mono mb-3">
                 <Briefcase className="w-4 h-4" />
                 {exp.date}
               </div>
-              <h3 className="text-xl font-bold mb-1">{exp.role}</h3>
-              <p className="text-muted-foreground font-medium mb-4">{exp.company}</p>
-              <ul className="space-y-2">
+              <h3 className="text-xl font-bold mb-1.5">{exp.role}</h3>
+              <p className="text-muted-foreground font-medium mb-5 text-sm">{exp.company}</p>
+              <ul className="space-y-3">
                 {exp.points.map((point, j) => (
-                  <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" style={{ boxShadow: "0 0 6px hsl(var(--primary) / 0.5)" }} />
+                  <li key={j} className="text-sm text-muted-foreground flex items-start gap-3">
+                    <span className="w-2 h-2 rounded-full bg-gradient-to-br from-primary to-accent mt-1.5 flex-shrink-0" style={{ boxShadow: "0 0 8px hsl(var(--primary) / 0.5)" }} />
                     {point}
                   </li>
                 ))}
