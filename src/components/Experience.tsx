@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Briefcase, Sparkles } from "lucide-react";
 import Card3D from "./Card3D";
+import BackgroundBeams from "./aceternity/BackgroundBeams";
 
 const experiences = [
   {
@@ -37,6 +38,7 @@ const experiences = [
 
 const Experience = () => (
   <section id="experience" className="py-32 relative overflow-hidden">
+    <BackgroundBeams className="opacity-50" />
     {/* Ambient light beams */}
     <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
     <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[120px]" />
@@ -62,7 +64,7 @@ const Experience = () => (
       </motion.div>
 
       <div className="max-w-3xl mx-auto relative">
-        {/* Animated glowing vertical line */}
+        {/* Tracing beam - animated glowing vertical line */}
         <motion.div
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
@@ -73,6 +75,15 @@ const Experience = () => (
             background: "linear-gradient(180deg, hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.5), hsl(var(--primary) / 0.2), transparent)",
             boxShadow: "0 0 12px hsl(var(--primary) / 0.4), 0 0 24px hsl(var(--primary) / 0.15)",
           }}
+        />
+        {/* Tracing beam dot */}
+        <motion.div
+          className="absolute left-[21px] md:left-[29px] w-3 h-3 rounded-full bg-primary z-10"
+          style={{ boxShadow: "0 0 16px hsl(var(--primary) / 0.8)" }}
+          initial={{ top: 0, opacity: 0 }}
+          whileInView={{ top: "100%", opacity: [0, 1, 1, 0] }}
+          viewport={{ once: true }}
+          transition={{ duration: 2, ease: "easeInOut" }}
         />
 
         {experiences.map((exp, i) => (
@@ -95,6 +106,17 @@ const Experience = () => (
             />
 
             <Card3D glowColor={i === 0 ? "cyan" : i === 1 ? "magenta" : "both"} className="p-7">
+              {/* Soft light beam behind card */}
+              <div
+                className="absolute -inset-2 -z-10 rounded-xl opacity-20 blur-xl"
+                style={{
+                  background: i === 0
+                    ? "radial-gradient(ellipse, hsl(var(--primary) / 0.3), transparent 70%)"
+                    : i === 1
+                    ? "radial-gradient(ellipse, hsl(var(--accent) / 0.3), transparent 70%)"
+                    : "radial-gradient(ellipse, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.1), transparent 70%)",
+                }}
+              />
               <div className="flex items-center gap-2 text-primary text-sm font-mono mb-3">
                 <Briefcase className="w-4 h-4" />
                 {exp.date}

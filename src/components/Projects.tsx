@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, Sparkles } from "lucide-react";
 import Card3D from "./Card3D";
+import BackgroundBeams from "./aceternity/BackgroundBeams";
 
 const filters = [
   { label: "All", color: "from-primary to-accent" },
@@ -91,6 +92,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-32 relative">
+      <BackgroundBeams className="opacity-30" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px]" />
       <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
 
@@ -108,7 +110,7 @@ const Projects = () => {
           </h2>
         </motion.div>
 
-        {/* Filters */}
+        {/* Filters with MovingBorder style */}
         <div className="flex flex-wrap justify-center gap-3 mb-14">
           {filters.map((f) => (
             <motion.button
@@ -140,7 +142,7 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Grid */}
+        {/* 3D Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
@@ -153,7 +155,7 @@ const Projects = () => {
                 transition={{ duration: 0.4, type: "spring" }}
               >
                 <Card3D
-                  glowColor={project.category === "AI & Agents" ? "magenta" : "cyan"}
+                  glowColor={project.category === "AI & Agents" ? "magenta" : project.category === "Automation Tools" ? "cyan" : "both"}
                   className={`overflow-hidden group h-full ${project.border}`}
                 >
                   {/* Project image */}
@@ -165,7 +167,6 @@ const Projects = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
 
-                    {/* Featured badge */}
                     {project.featured && (
                       <div className="absolute top-3 right-3 z-20">
                         <motion.div
@@ -178,6 +179,18 @@ const Projects = () => {
                         </motion.div>
                       </div>
                     )}
+
+                    {/* Live Demo badge */}
+                    <div className="absolute top-3 left-3 z-20">
+                      <motion.div
+                        animate={{ boxShadow: ["0 0 8px hsl(var(--primary) / 0.3)", "0 0 16px hsl(var(--primary) / 0.6)", "0 0 8px hsl(var(--primary) / 0.3)"] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                        className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-mono border border-primary/20 backdrop-blur-md"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                        Live
+                      </motion.div>
+                    </div>
                   </div>
 
                   <div className="p-6">
@@ -188,7 +201,6 @@ const Projects = () => {
                       {project.description}
                     </p>
 
-                    {/* Tech stack */}
                     <div className="flex flex-wrap gap-2 mb-5">
                       {project.tech.map((t) => (
                         <motion.span
@@ -201,7 +213,6 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    {/* Links */}
                     <div className="flex gap-4">
                       <motion.a
                         whileHover={{ x: 2 }}

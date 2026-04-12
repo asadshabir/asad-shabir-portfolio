@@ -1,13 +1,19 @@
 import { motion } from "framer-motion";
+import { Bot, Brain, Cpu, Layers, Code2, Cloud } from "lucide-react";
+import Card3D from "./Card3D";
+import InfiniteMovingCards from "./aceternity/InfiniteMovingCards";
+import BackgroundBeams from "./aceternity/BackgroundBeams";
 
-const skills = [
-  "React", "Next.js", "TypeScript", "Python", "FastAPI", "OpenAI Agents SDK",
-  "Prompt Engineering", "LangChain", "Supabase", "Tailwind CSS", "AI Chatbots",
-  "Automation", "Node.js", "PostgreSQL", "Docker", "Git", "REST APIs",
-  "GraphQL", "Framer Motion", "Vercel", "Web3", "RAG Systems",
+const categories = [
+  { icon: Bot, label: "AI Chatbots", gradient: "from-primary to-teal-400", glow: "cyan" as const },
+  { icon: Brain, label: "Agentic AI", gradient: "from-accent to-violet-500", glow: "magenta" as const },
+  { icon: Cpu, label: "AI-Native", gradient: "from-violet-500 to-primary", glow: "both" as const },
+  { icon: Layers, label: "SDD", gradient: "from-teal-400 to-primary", glow: "cyan" as const },
+  { icon: Code2, label: "Full-Stack Apps", gradient: "from-accent to-fuchsia-400", glow: "magenta" as const },
+  { icon: Cloud, label: "DevOps", gradient: "from-primary to-accent", glow: "both" as const },
 ];
 
-const marqueeIcons = [
+const marqueeItems = [
   "React", "Next.js", "TypeScript", "Python", "FastAPI", "OpenAI",
   "LangChain", "Supabase", "Tailwind", "Docker", "Node.js", "PostgreSQL",
   "Vercel", "Git", "GraphQL", "Framer Motion",
@@ -15,7 +21,7 @@ const marqueeIcons = [
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.04 } },
+  show: { transition: { staggerChildren: 0.1 } },
 };
 
 const item = {
@@ -23,17 +29,9 @@ const item = {
   show: { opacity: 1, scale: 1, rotateX: 0, transition: { type: "spring" as const, stiffness: 200, damping: 20 } },
 };
 
-const colorCycle = [
-  "from-primary to-accent",
-  "from-accent to-violet-500",
-  "from-violet-500 to-primary",
-  "from-teal-400 to-primary",
-  "from-accent to-fuchsia-400",
-  "from-primary to-teal-400",
-];
-
 const Skills = () => (
   <section id="skills" className="py-32 relative overflow-hidden">
+    <BackgroundBeams />
     <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px]" />
     <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
 
@@ -51,53 +49,39 @@ const Skills = () => (
         </h2>
       </motion.div>
 
-      {/* 3D Skill tokens */}
+      {/* 3D Category Tokens */}
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-5xl mx-auto mb-20"
-        style={{ perspective: "800px" }}
+        className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-20"
+        style={{ perspective: "1000px" }}
       >
-        {skills.map((skill, i) => (
-          <motion.div
-            key={skill}
-            variants={item}
-            whileHover={{
-              scale: 1.15,
-              rotateY: 10,
-              rotateX: -6,
-              transition: { type: "spring", stiffness: 300 },
-            }}
-            className="glass rounded-xl px-4 py-4 text-center text-sm font-medium cursor-default hover:neon-glow-cyan hover:border-primary/50 transition-all relative overflow-hidden group"
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            {/* Vibrant gradient overlay on hover */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${colorCycle[i % colorCycle.length]} opacity-0 group-hover:opacity-15 transition-opacity duration-500`} />
-            <span className="relative z-10">{skill}</span>
+        {categories.map((cat, i) => (
+          <motion.div key={cat.label} variants={item}>
+            <Card3D glowColor={cat.glow} className="p-6 text-center group cursor-default">
+              <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}
+                style={{ boxShadow: `0 0 20px hsl(var(--primary) / 0.2)` }}
+              >
+                <cat.icon className="w-8 h-8 text-primary-foreground" />
+              </div>
+              <h3 className="font-bold text-lg">{cat.label}</h3>
+              {/* Animated gradient underline */}
+              <motion.div
+                className={`h-0.5 mx-auto mt-3 rounded-full bg-gradient-to-r ${cat.gradient}`}
+                initial={{ width: 0 }}
+                whileInView={{ width: "60%" }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}
+              />
+            </Card3D>
           </motion.div>
         ))}
       </motion.div>
 
       {/* Infinite 3D Marquee */}
-      <div className="relative overflow-hidden py-4">
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
-        <div className="flex animate-marquee whitespace-nowrap" style={{ perspective: "600px" }}>
-          {[...marqueeIcons, ...marqueeIcons].map((icon, i) => (
-            <span
-              key={i}
-              className="mx-6 text-muted-foreground/30 text-lg font-mono font-semibold inline-block"
-              style={{
-                transform: `rotateY(${Math.sin(i * 0.3) * 8}deg)`,
-              }}
-            >
-              {icon}
-            </span>
-          ))}
-        </div>
-      </div>
+      <InfiniteMovingCards items={marqueeItems} speed="slow" />
     </div>
   </section>
 );

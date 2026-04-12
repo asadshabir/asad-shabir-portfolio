@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowDown, MessageCircle, Download } from "lucide-react";
 import ParticleBackground from "./ParticleBackground";
+import FlipWords from "./aceternity/FlipWords";
+import SparklesEffect from "./aceternity/Sparkles";
 import profilePhoto from "@/assets/profile-photo.png";
 
 const titles = [
@@ -12,23 +14,15 @@ const titles = [
 ];
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
-  const [titleIndex, setTitleIndex] = useState(0);
   const photoRef = useRef<HTMLDivElement>(null);
   const [photoTilt, setPhotoTilt] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTitleIndex((prev) => (prev + 1) % titles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!photoRef.current) return;
     const rect = photoRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setPhotoTilt({ x: y * -12, y: x * 12 });
+    setPhotoTilt({ x: y * -15, y: x * 15 });
   };
 
   const handleMouseLeave = () => setPhotoTilt({ x: 0, y: 0 });
@@ -46,7 +40,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] animate-float" style={{ animationDelay: "1.5s" }} />
 
       <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 px-6 py-20">
-        {/* 3D Profile Photo */}
+        {/* 3D Profile Photo with Parallax */}
         <motion.div
           ref={photoRef}
           initial={{ opacity: 0, scale: 0.7, rotateY: -30 }}
@@ -54,13 +48,13 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           transition={{ duration: 1, type: "spring", stiffness: 80 }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          style={{ perspective: "1000px" }}
+          style={{ perspective: "1200px" }}
           className="relative flex-shrink-0"
         >
           <motion.div
             animate={{ rotateX: photoTilt.x, rotateY: photoTilt.y }}
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            className="relative w-60 h-60 lg:w-80 lg:h-80"
+            className="relative w-64 h-64 lg:w-80 lg:h-80"
             style={{ transformStyle: "preserve-3d" }}
           >
             {/* Outer rotating neon ring */}
@@ -72,12 +66,15 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             {/* Inner glow ring */}
             <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 blur-md animate-pulse-glow" />
 
-            {/* Photo */}
+            {/* Photo - crystal clear, no blur */}
             <img
               src={profilePhoto}
               alt="Asad Shabir"
-              className="absolute inset-2 rounded-full object-cover object-top neon-glow-cyan z-10"
-              style={{ transform: "translateZ(30px)" }}
+              className="absolute inset-2 rounded-full object-cover object-top z-10"
+              style={{
+                transform: "translateZ(30px)",
+                boxShadow: "0 0 30px hsl(var(--primary) / 0.3), 0 0 60px hsl(var(--primary) / 0.1)",
+              }}
             />
 
             {/* Floating orbit particles */}
@@ -92,22 +89,18 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
                 }}
                 animate={{
                   x: [
-                    Math.cos((i * Math.PI * 2) / 6) * 160,
-                    Math.cos((i * Math.PI * 2) / 6 + Math.PI) * 160,
-                    Math.cos((i * Math.PI * 2) / 6) * 160,
+                    Math.cos((i * Math.PI * 2) / 6) * 170,
+                    Math.cos((i * Math.PI * 2) / 6 + Math.PI) * 170,
+                    Math.cos((i * Math.PI * 2) / 6) * 170,
                   ],
                   y: [
-                    Math.sin((i * Math.PI * 2) / 6) * 160,
-                    Math.sin((i * Math.PI * 2) / 6 + Math.PI) * 160,
-                    Math.sin((i * Math.PI * 2) / 6) * 160,
+                    Math.sin((i * Math.PI * 2) / 6) * 170,
+                    Math.sin((i * Math.PI * 2) / 6 + Math.PI) * 170,
+                    Math.sin((i * Math.PI * 2) / 6) * 170,
                   ],
                   opacity: [0.3, 0.8, 0.3],
                 }}
-                transition={{
-                  duration: 8 + i * 0.5,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                transition={{ duration: 8 + i * 0.5, repeat: Infinity, ease: "linear" }}
               />
             ))}
           </motion.div>
@@ -130,26 +123,24 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4"
           >
-            <span className="inline-block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.15)" }}>
-              Asad{" "}
-            </span>
-            <span className="gradient-text" style={{ textShadow: "none" }}>Shabir</span>
+            <SparklesEffect>
+              <span className="inline-block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.15)" }}>
+                Asad{" "}
+              </span>
+              <span className="gradient-text" style={{ textShadow: "none" }}>Shabir</span>
+            </SparklesEffect>
           </motion.h1>
 
-          {/* Cycling titles */}
-          <div className="h-10 md:h-12 mb-6 overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={titleIndex}
-                initial={{ opacity: 0, y: 30, rotateX: -45 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                exit={{ opacity: 0, y: -30, rotateX: 45 }}
-                transition={{ duration: 0.4 }}
-                className="text-xl md:text-2xl font-semibold neon-text-cyan text-primary"
-              >
-                {titles[titleIndex]}
-              </motion.p>
-            </AnimatePresence>
+          {/* FlipWords cycling titles */}
+          <div className="h-12 md:h-14 mb-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="text-xl md:text-2xl lg:text-3xl font-semibold neon-text-cyan text-primary"
+            >
+              <FlipWords words={titles} duration={3000} />
+            </motion.div>
           </div>
 
           <motion.p
@@ -162,7 +153,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             and automation systems that actually work.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons with MovingBorder style */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

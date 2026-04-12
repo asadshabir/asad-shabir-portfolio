@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Twitter, Download, Send, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Card3D from "./Card3D";
+import BackgroundBeams from "./aceternity/BackgroundBeams";
 
 const socials = [
   { icon: Mail, label: "Gmail", href: "mailto:asad@example.com", color: "group-hover:text-red-400" },
@@ -27,6 +28,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-32 relative overflow-hidden">
+      <BackgroundBeams className="opacity-40" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px]" />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
 
