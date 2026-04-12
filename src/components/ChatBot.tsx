@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, MessageCircle, Sparkles } from "lucide-react";
+import { X, Send, Bot, Sparkles } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -54,106 +54,119 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.9, rotateX: -10 }}
-          animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
-          exit={{ opacity: 0, y: 30, scale: 0.9 }}
-          transition={{ type: "spring", stiffness: 200, damping: 25 }}
-          className="fixed bottom-24 right-4 md:right-8 w-[380px] max-w-[calc(100vw-2rem)] h-[520px] glass-strong rounded-2xl flex flex-col z-50 overflow-hidden"
-          style={{
-            boxShadow: "0 0 40px hsl(var(--primary) / 0.15), 0 20px 60px rgba(0,0,0,0.5)",
-          }}
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between px-5 py-4 border-b border-border/50 bg-gradient-to-r from-primary/10 to-accent/10">
-            <div className="flex items-center gap-2">
-              <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 4, ease: "linear" }}>
-                <Sparkles className="w-5 h-5 text-primary" />
-              </motion.div>
-              <span className="font-bold">Ask Asad AI</span>
+        <>
+          {/* Mobile: full-screen overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 md:hidden"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 30, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            className="fixed z-50 glass-strong flex flex-col overflow-hidden
+              inset-0 rounded-none md:rounded-2xl
+              md:bottom-24 md:right-4 lg:right-8 md:top-auto md:left-auto
+              md:w-[400px] md:h-[540px] md:max-w-[calc(100vw-2rem)]"
+            style={{
+              boxShadow: "0 0 40px hsl(var(--primary) / 0.15), 0 20px 60px rgba(0,0,0,0.5)",
+            }}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-border/50 bg-gradient-to-r from-primary/10 to-accent/10">
+              <div className="flex items-center gap-2">
+                <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 4, ease: "linear" }}>
+                  <Sparkles className="w-5 h-5 text-primary" />
+                </motion.div>
+                <span className="font-bold text-lg">Ask Asad AI</span>
+              </div>
+              <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors p-1">
+                <X className="w-6 h-6" />
+              </button>
             </div>
-            <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
-              <X className="w-5 h-5" />
-            </button>
-          </div>
 
-          {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
-            {messages.map((msg, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-              >
-                <div
-                  className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
-                    msg.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-md"
-                      : "bg-muted/50 text-foreground rounded-bl-md"
-                  }`}
+            {/* Messages */}
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
+              {messages.map((msg, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  {msg.content}
-                </div>
-              </motion.div>
-            ))}
-            {isTyping && (
-              <div className="flex justify-start">
-                <div className="bg-muted/50 px-4 py-3 rounded-2xl rounded-bl-md">
-                  <div className="flex gap-1">
-                    {[0, 150, 300].map((d) => (
-                      <span key={d} className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: `${d}ms` }} />
-                    ))}
+                  <div
+                    className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+                      msg.role === "user"
+                        ? "bg-primary text-primary-foreground rounded-br-md"
+                        : "bg-muted/50 text-foreground rounded-bl-md"
+                    }`}
+                  >
+                    {msg.content}
+                  </div>
+                </motion.div>
+              ))}
+              {isTyping && (
+                <div className="flex justify-start">
+                  <div className="bg-muted/50 px-4 py-3 rounded-2xl rounded-bl-md">
+                    <div className="flex gap-1">
+                      {[0, 150, 300].map((d) => (
+                        <span key={d} className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: `${d}ms` }} />
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {messages.length <= 1 && (
-              <div className="flex flex-wrap gap-2 pt-2">
-                {suggestions.map((s) => (
-                  <motion.button
-                    key={s}
-                    whileHover={{ scale: 1.05 }}
-                    onClick={() => sendMessage(s)}
-                    className="text-xs px-3 py-1.5 rounded-full glass text-primary hover:bg-primary/10 transition-colors"
-                  >
-                    {s}
-                  </motion.button>
-                ))}
-              </div>
-            )}
-          </div>
+              {messages.length <= 1 && (
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {suggestions.map((s) => (
+                    <motion.button
+                      key={s}
+                      whileHover={{ scale: 1.05 }}
+                      onClick={() => sendMessage(s)}
+                      className="text-xs px-3 py-1.5 rounded-full glass text-primary hover:bg-primary/10 transition-colors"
+                    >
+                      {s}
+                    </motion.button>
+                  ))}
+                </div>
+              )}
+            </div>
 
-          {/* Input */}
-          <form
-            onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
-            className="flex items-center gap-2 p-4 border-t border-border/50"
-          >
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me anything..."
-              className="flex-1 px-4 py-2.5 rounded-full bg-background/50 border border-border/50 focus:border-primary/50 outline-none text-sm"
-            />
-            <motion.button
-              type="submit"
-              disabled={!input.trim()}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-all"
+            {/* Input */}
+            <form
+              onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
+              className="flex items-center gap-2 p-4 border-t border-border/50"
             >
-              <Send className="w-4 h-4" />
-            </motion.button>
-          </form>
-        </motion.div>
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Ask me anything..."
+                className="flex-1 px-4 py-3 rounded-full bg-background/50 border border-border/50 focus:border-primary/50 outline-none text-sm"
+              />
+              <motion.button
+                type="submit"
+                disabled={!input.trim()}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="w-11 h-11 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-all"
+              >
+                <Send className="w-4 h-4" />
+              </motion.button>
+            </form>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );
 };
 
-// 3D Floating chat orb button
+// Static AI bot icon with gentle wave animation
 export const ChatButton = ({ onClick }: { onClick: () => void }) => (
   <motion.button
     initial={{ opacity: 0, scale: 0 }}
@@ -162,27 +175,23 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => (
     onClick={onClick}
     className="fixed bottom-6 right-4 md:right-8 z-50 group"
   >
-    <motion.div
-      animate={{
-        y: [0, -6, 0],
-        rotateY: [0, 360],
-      }}
-      transition={{
-        y: { repeat: Infinity, duration: 3, ease: "easeInOut" },
-        rotateY: { repeat: Infinity, duration: 8, ease: "linear" },
-      }}
-      className="relative w-16 h-16"
-      style={{ perspective: "500px", transformStyle: "preserve-3d" }}
-    >
-      {/* Outer glow */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-40 blur-lg animate-pulse-glow" />
-      {/* Orb */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+    <div className="relative w-16 h-16">
+      {/* Outer glow ring */}
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-30 blur-lg animate-pulse-glow" />
+      {/* Main orb - STATIC position, no floating */}
+      <div
+        className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
         style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.4), inset 0 -4px 12px hsl(var(--accent) / 0.3)" }}
       >
-        <MessageCircle className="w-6 h-6 text-primary-foreground" />
+        {/* Bot icon with subtle wave */}
+        <motion.div
+          animate={{ rotate: [0, 3, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+        >
+          <Bot className="w-7 h-7 text-primary-foreground" />
+        </motion.div>
       </div>
-    </motion.div>
+    </div>
   </motion.button>
 );
 

@@ -23,9 +23,19 @@ const item = {
   show: { opacity: 1, scale: 1, rotateX: 0, transition: { type: "spring" as const, stiffness: 200, damping: 20 } },
 };
 
+const colorCycle = [
+  "from-primary to-accent",
+  "from-accent to-violet-500",
+  "from-violet-500 to-primary",
+  "from-teal-400 to-primary",
+  "from-accent to-fuchsia-400",
+  "from-primary to-teal-400",
+];
+
 const Skills = () => (
   <section id="skills" className="py-32 relative overflow-hidden">
     <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px]" />
+    <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
 
     <div className="container px-6 relative z-10">
       <motion.div
@@ -50,21 +60,21 @@ const Skills = () => (
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-5xl mx-auto mb-20"
         style={{ perspective: "800px" }}
       >
-        {skills.map((skill) => (
+        {skills.map((skill, i) => (
           <motion.div
             key={skill}
             variants={item}
             whileHover={{
-              scale: 1.12,
-              rotateY: 8,
-              rotateX: -5,
+              scale: 1.15,
+              rotateY: 10,
+              rotateX: -6,
               transition: { type: "spring", stiffness: 300 },
             }}
             className="glass rounded-xl px-4 py-4 text-center text-sm font-medium cursor-default hover:neon-glow-cyan hover:border-primary/50 transition-all relative overflow-hidden group"
             style={{ transformStyle: "preserve-3d" }}
           >
-            {/* Hover gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {/* Vibrant gradient overlay on hover */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${colorCycle[i % colorCycle.length]} opacity-0 group-hover:opacity-15 transition-opacity duration-500`} />
             <span className="relative z-10">{skill}</span>
           </motion.div>
         ))}
