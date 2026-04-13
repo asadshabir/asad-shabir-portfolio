@@ -8,9 +8,18 @@ import profilePhoto from "@/assets/profile-photo.png";
 
 const titles = [
   "Full-Stack Developer",
-  "Agentic AI Engineer",
-  "Prompt Engineer & Chatbot Architect",
-  "Automation Builder",
+  "AI-Native Developer",
+  "Python Developer",
+  "Chatbot Developer",
+  "QA Engineer",
+  "AI Engineer",
+  "Debug Master",
+  "Premium Apps Builder",
+  "Spec-Driven Developer",
+  "Prompt Engineer",
+  "Agentic AI Orchestration",
+  "Backend Developer",
+  "DevOps Developer",
 ];
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
@@ -32,15 +41,15 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ParticleBackground />
 
       {/* Gradient orbs */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-[120px] animate-float" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] animate-float" style={{ animationDelay: "1.5s" }} />
 
-      <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 px-6 py-20">
-        {/* 3D Profile Photo with Parallax */}
+      <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-20 px-4 sm:px-6 py-20">
+        {/* 3D Profile Photo */}
         <motion.div
           ref={photoRef}
           initial={{ opacity: 0, scale: 0.7, rotateY: -30 }}
@@ -54,7 +63,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           <motion.div
             animate={{ rotateX: photoTilt.x, rotateY: photoTilt.y }}
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            className="relative w-64 h-64 lg:w-80 lg:h-80"
+            className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80"
             style={{ transformStyle: "preserve-3d" }}
           >
             {/* Outer rotating neon ring */}
@@ -66,7 +75,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             {/* Inner glow ring */}
             <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 blur-md animate-pulse-glow" />
 
-            {/* Photo - crystal clear, no blur */}
+            {/* Photo - crystal clear */}
             <img
               src={profilePhoto}
               alt="Asad Shabir"
@@ -81,7 +90,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             {[0, 1, 2, 3, 4, 5].map((i) => (
               <motion.div
                 key={i}
-                className="absolute w-1.5 h-1.5 rounded-full bg-primary"
+                className="absolute w-1.5 h-1.5 rounded-full bg-primary hidden sm:block"
                 style={{
                   top: "50%",
                   left: "50%",
@@ -112,7 +121,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-sm font-mono tracking-widest uppercase text-primary mb-4"
+            className="text-xs sm:text-sm font-mono tracking-widest uppercase text-primary mb-4"
           >
             Welcome to my universe
           </motion.p>
@@ -121,7 +130,8 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4"
+            style={{ letterSpacing: "0.04em" }}
           >
             <SparklesEffect>
               <span className="inline-block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.15)" }}>
@@ -132,14 +142,14 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           </motion.h1>
 
           {/* FlipWords cycling titles */}
-          <div className="h-12 md:h-14 mb-6">
+          <div className="h-10 sm:h-12 md:h-14 mb-6">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-xl md:text-2xl lg:text-3xl font-semibold neon-text-cyan text-primary"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold neon-text-cyan text-primary"
             >
-              <FlipWords words={titles} duration={3000} />
+              <FlipWords words={titles} duration={2500} />
             </motion.div>
           </div>
 
@@ -147,24 +157,24 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-muted-foreground text-lg max-w-xl mb-10 leading-relaxed mx-auto lg:mx-0"
+            className="text-muted-foreground text-base sm:text-lg max-w-xl mb-8 sm:mb-10 leading-relaxed mx-auto lg:mx-0"
           >
             Building intelligent, production-ready AI agents, full-stack applications,
             and automation systems that actually work.
           </motion.p>
 
-          {/* CTA Buttons with MovingBorder style */}
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-wrap gap-4 justify-center lg:justify-start"
+            className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start"
           >
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={scrollToProjects}
-              className="group flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold neon-glow-cyan transition-all"
+              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold neon-glow-cyan transition-all text-sm sm:text-base"
             >
               <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
               Explore My Projects
@@ -173,7 +183,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={onOpenChat}
-              className="group flex items-center gap-2 px-6 py-3 rounded-lg glass border-primary/30 text-primary font-semibold hover:neon-glow-cyan transition-all"
+              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg glass border-primary/30 text-primary font-semibold hover:neon-glow-cyan transition-all text-sm sm:text-base"
             >
               <MessageCircle className="w-4 h-4" />
               Talk to My AI
@@ -181,7 +191,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="group flex items-center gap-2 px-6 py-3 rounded-lg glass border-accent/30 text-accent font-semibold hover:neon-glow-magenta transition-all"
+              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg glass border-accent/30 text-accent font-semibold hover:neon-glow-magenta transition-all text-sm sm:text-base"
             >
               <Download className="w-4 h-4" />
               Download Resume

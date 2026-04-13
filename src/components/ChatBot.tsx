@@ -74,17 +74,19 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
               md:w-[400px] md:h-[540px] md:max-w-[calc(100vw-2rem)]"
             style={{
               boxShadow: "0 0 40px hsl(var(--primary) / 0.15), 0 20px 60px rgba(0,0,0,0.5)",
+              paddingTop: "env(safe-area-inset-top)",
+              paddingBottom: "env(safe-area-inset-bottom)",
             }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-border/50 bg-gradient-to-r from-primary/10 to-accent/10">
+            <div className="flex items-center justify-between px-4 sm:px-5 py-4 border-b border-border/50 bg-gradient-to-r from-primary/10 to-accent/10">
               <div className="flex items-center gap-2">
                 <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 4, ease: "linear" }}>
                   <Sparkles className="w-5 h-5 text-primary" />
                 </motion.div>
                 <span className="font-bold text-lg">Ask Asad AI</span>
               </div>
-              <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors p-1">
+              <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors p-2 -mr-1">
                 <X className="w-6 h-6" />
               </button>
             </div>
@@ -100,7 +102,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+                    className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                       msg.role === "user"
                         ? "bg-primary text-primary-foreground rounded-br-md"
                         : "bg-muted/50 text-foreground rounded-bl-md"
@@ -141,7 +143,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
             {/* Input */}
             <form
               onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
-              className="flex items-center gap-2 p-4 border-t border-border/50"
+              className="flex items-center gap-2 p-3 sm:p-4 border-t border-border/50"
             >
               <input
                 value={input}
@@ -154,7 +156,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                 disabled={!input.trim()}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-11 h-11 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-all"
+                className="w-11 h-11 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-all flex-shrink-0"
               >
                 <Send className="w-4 h-4" />
               </motion.button>
@@ -166,63 +168,82 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
   );
 };
 
-// Static AI bot icon with gentle wave animation + "Ready to Talk!" label
-export const ChatButton = ({ onClick }: { onClick: () => void }) => (
-  <motion.button
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ delay: 1, type: "spring" }}
-    onClick={onClick}
-    className="fixed bottom-6 right-4 md:right-8 z-50 group flex items-center gap-3"
-  >
-    {/* "Ready to Talk!" label */}
-    <motion.div
-      initial={{ opacity: 0, x: 10 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 1.5 }}
-      className="hidden sm:block px-4 py-2 rounded-full glass-strong border-primary/30 text-sm font-semibold text-primary neon-text-cyan"
+// Static AI bot icon with smart scroll behavior
+export const ChatButton = ({ onClick }: { onClick: () => void }) => {
+  const [showLabel, setShowLabel] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Hide label after scrolling past hero (~100vh)
+      setShowLabel(window.scrollY < window.innerHeight * 0.8);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1, type: "spring" }}
+      onClick={onClick}
+      className="fixed bottom-6 right-4 sm:right-6 md:right-8 z-50 group flex items-center gap-3"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <motion.span
-        animate={{ opacity: [0.7, 1, 0.7] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-      >
-        Ready to Talk!
-      </motion.span>
-    </motion.div>
+      {/* "Ready to Talk!" label - hidden on scroll past hero */}
+      <AnimatePresence>
+        {showLabel && (
+          <motion.div
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 10 }}
+            transition={{ duration: 0.3 }}
+            className="hidden sm:block px-4 py-2 rounded-full glass-strong border-primary/30 text-sm font-semibold text-primary neon-text-cyan"
+          >
+            <motion.span
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            >
+              Ready to Talk!
+            </motion.span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-    <div className="relative w-16 h-16">
-      {/* Outer glow ring */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-30 blur-lg animate-pulse-glow" />
-      {/* Main orb - STATIC position, no floating */}
-      <div
-        className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-        style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.4), inset 0 -4px 12px hsl(var(--accent) / 0.3)" }}
-      >
-        {/* Bot icon with subtle wave */}
-        <motion.div
-          animate={{ rotate: [0, 3, -3, 0] }}
-          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+      <div className="relative w-14 h-14 sm:w-16 sm:h-16">
+        {/* Outer glow ring */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-30 blur-lg animate-pulse-glow" />
+        {/* Main orb - STATIC */}
+        <div
+          className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+          style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.4), inset 0 -4px 12px hsl(var(--accent) / 0.3)" }}
         >
-          <Bot className="w-7 h-7 text-primary-foreground" />
-        </motion.div>
-      </div>
+          {/* Bot icon with subtle wave */}
+          <motion.div
+            animate={{ rotate: [0, 3, -3, 0] }}
+            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          >
+            <Bot className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground" />
+          </motion.div>
+        </div>
 
-      {/* Sparkle particles around orb */}
-      {[0, 1, 2].map((i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary"
-          style={{
-            top: `${20 + i * 25}%`,
-            left: i % 2 === 0 ? "-4px" : "calc(100% + 2px)",
-            boxShadow: "0 0 6px hsl(var(--primary) / 0.8)",
-          }}
-          animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5] }}
-          transition={{ duration: 2 + i * 0.5, delay: i * 0.7, repeat: Infinity }}
-        />
-      ))}
-    </div>
-  </motion.button>
-);
+        {/* Sparkle particles */}
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-primary"
+            style={{
+              top: `${20 + i * 25}%`,
+              left: i % 2 === 0 ? "-4px" : "calc(100% + 2px)",
+              boxShadow: "0 0 6px hsl(var(--primary) / 0.8)",
+            }}
+            animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5] }}
+            transition={{ duration: 2 + i * 0.5, delay: i * 0.7, repeat: Infinity }}
+          />
+        ))}
+      </div>
+    </motion.button>
+  );
+};
 
 export default ChatBot;
