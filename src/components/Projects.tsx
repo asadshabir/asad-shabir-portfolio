@@ -208,12 +208,16 @@ const Projects = () => {
                     <div className="flex gap-4">
                       <a
                         href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium"
                       >
                         <ExternalLink className="w-3.5 h-3.5" /> Live Demo
                       </a>
                       <a
                         href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
                       >
                         <Github className="w-3.5 h-3.5" /> GitHub
