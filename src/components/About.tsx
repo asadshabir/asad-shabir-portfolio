@@ -26,12 +26,20 @@ const About = () => (
         <h2 className="text-4xl md:text-5xl font-bold mb-8">
           Crafting the <span className="gradient-text">Future</span> with Code & AI
         </h2>
-        <p className="text-lg text-muted-foreground leading-relaxed mb-12">
-          I'm Asad Shabir — an AI Engineer and Full-Stack Developer from Pakistan who lives at the intersection
-          of intelligent systems and beautiful, production-ready applications. I specialize in building
-          agentic AI systems, conversational chatbots, and end-to-end automation pipelines that don't
-          just work in demos — they ship, scale, and deliver real value. From OpenAI Agents SDK to
-          Next.js to FastAPI, I bring ideas to life fast.
+        <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+          I'm <span className="text-foreground font-semibold">Asad Shabir</span> — an
+          <span className="text-primary"> AI Engineer</span>,
+          <span className="text-accent"> Agentic AI Developer</span>, and Full-Stack Engineer from Pakistan.
+          I build intelligent, production-ready systems with the
+          <span className="text-foreground font-semibold"> OpenAI Agents SDK</span>,
+          <span className="text-foreground font-semibold"> Groq</span>, LangChain, FastAPI, Next.js, and Supabase.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed mb-12">
+          Currently leveling up at <span className="text-primary font-semibold">PIAIC / GIAIC</span> in
+          Agentic AI &amp; Spec-Driven Development, and applying enterprise-grade engineering practices learned
+          at <span className="text-accent font-semibold">Digitel FTE</span> — including telecom-grade
+          DevOps, QA automation, and scalable backend architecture. From multi-agent orchestration to
+          buttery-smooth UIs, I ship work that doesn't just demo well — it scales, ships, and earns trust.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
