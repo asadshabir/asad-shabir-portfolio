@@ -1,22 +1,28 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Bot, Sparkles } from "lucide-react";
+import { X, Send, Bot, Sparkles, ExternalLink } from "lucide-react";
+import { answerAboutAsad, type ChatResponse } from "@/lib/asadKnowledge";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  references?: ChatResponse["references"];
 }
 
 const suggestions = [
-  "What are your top skills?",
+  "What are Asad's top skills?",
   "Tell me about ASA-Mind",
-  "What full-stack apps have you built?",
-  "How can you help my project?",
+  "Is Asad available for freelance?",
+  "How can I contact Asad?",
 ];
 
 const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hey! 👋 I'm Asad's AI assistant. Ask me anything about my skills, projects, or how I can help you!" },
+    {
+      role: "assistant",
+      content:
+        "Hey! 👋 I'm **Ask Asad AI** — I only answer questions about Asad Shabir: his skills, projects (like ASA-Mind), experience at Digitel FTE, PIAIC/GIAIC studies, and how to hire him. What would you like to know?",
+    },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -31,23 +37,13 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
     setMessages((prev) => [...prev, { role: "user", content: text }]);
     setInput("");
     setIsTyping(true);
-    await new Promise((r) => setTimeout(r, 1200));
+    await new Promise((r) => setTimeout(r, 700 + Math.random() * 600));
 
-    let response = "That's a great question! ";
-    const lowerText = text.toLowerCase();
-    if (lowerText.includes("skill")) {
-      response = "My top skills include React, Next.js, TypeScript, Python, FastAPI, OpenAI Agents SDK, LangChain, Prompt Engineering, and Supabase. I'm particularly strong in agentic AI systems and full-stack development!";
-    } else if (lowerText.includes("asa-mind") || lowerText.includes("asamind")) {
-      response = "ASA-Mind is my flagship project — an intelligent AI Chat Assistant powered by OpenAI Agents SDK. It features multi-agent orchestration, real-time streaming responses, and conversational memory.";
-    } else if (lowerText.includes("full-stack") || lowerText.includes("app")) {
-      response = "I've built several full-stack applications including e-commerce platforms with Stripe integration, real-time dashboards with WebSockets, and various SaaS tools.";
-    } else if (lowerText.includes("help") || lowerText.includes("project") || lowerText.includes("hire")) {
-      response = "I'd love to help! I can assist with AI integration, full-stack web development, automation pipelines, or prompt engineering. Feel free to reach out!";
-    } else {
-      response += "I'm an AI Engineer and Full-Stack Developer specializing in agentic AI systems. What specifically would you like to know?";
-    }
-
-    setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    const res = answerAboutAsad(text);
+    setMessages((prev) => [
+      ...prev,
+      { role: "assistant", content: res.text, references: res.references },
+    ]);
     setIsTyping(false);
   };
 
@@ -108,7 +104,38 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                         : "bg-muted/50 text-foreground rounded-bl-md"
                     }`}
                   >
-                    {msg.content}
+                    {msg.content.split("\n").map((line, idx) => (
+                      <p key={idx} className={idx > 0 ? "mt-1.5" : ""}>
+                        {line.split(/(\*\*[^*]+\*\*)/g).map((part, j) =>
+                          part.startsWith("**") && part.endsWith("**") ? (
+                            <strong key={j} className="font-semibold text-primary">
+                              {part.slice(2, -2)}
+                            </strong>
+                          ) : (
+                            <span key={j}>{part}</span>
+                          )
+                        )}
+                      </p>
+                    ))}
+                    {msg.references && msg.references.length > 0 && (
+                      <div className="mt-3 pt-2.5 border-t border-border/40 space-y-1.5">
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-mono">
+                          References
+                        </p>
+                        {msg.references.map((ref) => (
+                          <a
+                            key={ref.url}
+                            href={ref.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 text-xs text-primary hover:text-accent hover:underline transition-colors"
+                          >
+                            <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                            <span className="truncate">{ref.label}</span>
+                          </a>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}
