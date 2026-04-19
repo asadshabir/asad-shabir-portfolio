@@ -6,7 +6,12 @@ import Card3D from "./Card3D";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
 
 const socials = [
-  { icon: Mail, label: "Gmail", href: "mailto:asadshabir505@gmail.com", color: "group-hover:text-red-400" },
+  {
+    icon: Mail,
+    label: "Gmail",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=asadshabir505@gmail.com&su=Hello%20Asad%20%E2%80%94%20from%20your%20portfolio",
+    color: "group-hover:text-red-400",
+  },
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/asad-shabir-programmer110/", color: "group-hover:text-blue-400" },
   { icon: Github, label: "GitHub", href: "https://github.com/asadshabir/", color: "group-hover:text-foreground" },
   { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/Asadalibhatti110", color: "group-hover:text-blue-500" },
@@ -65,7 +70,7 @@ const Contact = () => {
                     key={s.label}
                     whileHover={{ x: 6, scale: 1.02 }}
                     href={s.href}
-                    target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-all group"
                   >
@@ -77,14 +82,16 @@ const Contact = () => {
                 ))}
               </div>
 
-              <motion.button
+              <motion.a
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
+                href="/Asad_Shabir_Resume.pdf"
+                download="Asad_Shabir_Resume.pdf"
                 className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all"
               >
                 <Download className="w-5 h-5" />
                 Download Resume
-              </motion.button>
+              </motion.a>
             </Card3D>
           </motion.div>
 

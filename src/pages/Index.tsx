@@ -12,7 +12,11 @@ import SectionDivider from "@/components/SectionDivider";
 import { Mail, Linkedin, Github, Facebook } from "lucide-react";
 
 const footerSocials = [
-  { icon: Mail, href: "mailto:asadshabir505@gmail.com", label: "Gmail" },
+  {
+    icon: Mail,
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=asadshabir505@gmail.com&su=Hello%20Asad",
+    label: "Gmail",
+  },
   { icon: Linkedin, href: "https://www.linkedin.com/in/asad-shabir-programmer110/", label: "LinkedIn" },
   { icon: Github, href: "https://github.com/asadshabir/", label: "GitHub" },
   { icon: Facebook, href: "https://www.facebook.com/Asadalibhatti110", label: "Facebook" },
@@ -45,7 +49,7 @@ const Index = () => {
               <a
                 key={s.label}
                 href={s.href}
-                target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
                 className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-muted-foreground hover:text-primary hover:neon-glow-cyan transition-all duration-300"

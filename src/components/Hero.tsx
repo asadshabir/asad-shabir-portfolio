@@ -188,14 +188,16 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
               <MessageCircle className="w-4 h-4" />
               Talk to My AI
             </motion.button>
-            <motion.button
+            <motion.a
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
+              href="/Asad_Shabir_Resume.pdf"
+              download="Asad_Shabir_Resume.pdf"
               className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg glass border-accent/30 text-accent font-semibold hover:neon-glow-magenta transition-all text-sm sm:text-base"
             >
               <Download className="w-4 h-4" />
               Download Resume
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
       </div>
