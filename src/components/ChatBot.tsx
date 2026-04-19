@@ -104,7 +104,38 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                         : "bg-muted/50 text-foreground rounded-bl-md"
                     }`}
                   >
-                    {msg.content}
+                    {msg.content.split("\n").map((line, idx) => (
+                      <p key={idx} className={idx > 0 ? "mt-1.5" : ""}>
+                        {line.split(/(\*\*[^*]+\*\*)/g).map((part, j) =>
+                          part.startsWith("**") && part.endsWith("**") ? (
+                            <strong key={j} className="font-semibold text-primary">
+                              {part.slice(2, -2)}
+                            </strong>
+                          ) : (
+                            <span key={j}>{part}</span>
+                          )
+                        )}
+                      </p>
+                    ))}
+                    {msg.references && msg.references.length > 0 && (
+                      <div className="mt-3 pt-2.5 border-t border-border/40 space-y-1.5">
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-mono">
+                          References
+                        </p>
+                        {msg.references.map((ref) => (
+                          <a
+                            key={ref.url}
+                            href={ref.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 text-xs text-primary hover:text-accent hover:underline transition-colors"
+                          >
+                            <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                            <span className="truncate">{ref.label}</span>
+                          </a>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}
