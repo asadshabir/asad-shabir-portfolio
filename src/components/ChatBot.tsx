@@ -214,7 +214,7 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1, type: "spring" }}
       onClick={onClick}
-      className="fixed bottom-6 right-4 sm:right-6 md:right-8 z-50 group flex items-center gap-3"
+      className="fixed bottom-6 right-4 sm:right-6 md:right-8 z-50 group flex items-center gap-2 sm:gap-3"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       {/* "Ready to Talk!" label - hidden on scroll past hero */}
@@ -225,7 +225,7 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
             transition={{ duration: 0.3 }}
-            className="hidden sm:block px-4 py-2 rounded-full glass-strong border-primary/30 text-sm font-semibold text-primary neon-text-cyan"
+            className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
           >
             <motion.span
               animate={{ opacity: [0.7, 1, 0.7] }}
