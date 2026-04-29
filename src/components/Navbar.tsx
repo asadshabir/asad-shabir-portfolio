@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import profilePhoto from "@/assets/portfolio_profile-2.png";
 
 const links = [
   { label: "About", href: "#about" },
@@ -24,13 +25,18 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? "premium-glass-strong py-3" : "py-5"
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 premium-navbar ${
+        scrolled ? "py-2.5" : "py-4"
       }`}
     >
       <div className="container px-6 flex items-center justify-between">
-        <a href="#" className="text-xl font-black holographic-text">
-          AS.
+        <a href="#" className="flex items-center gap-3 group" aria-label="Asad Shabir portfolio home">
+          <span className="avatar-ring inline-flex h-11 w-11 rounded-full p-[2px] transition-transform duration-300 group-hover:scale-105">
+            <span className="h-full w-full overflow-hidden rounded-full bg-background p-[2px]">
+              <img src={profilePhoto} alt="Asad Shabir" className="h-full w-full rounded-full object-cover object-top" />
+            </span>
+          </span>
+          <span className="text-xl font-black holographic-text">AS.</span>
         </a>
 
         {/* Desktop */}
@@ -57,7 +63,7 @@ const Navbar = () => {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden premium-glass-strong mt-2 mx-4 rounded-xl p-4 space-y-3"
+          className="md:hidden premium-glass-strong mt-2 mx-4 rounded-xl p-4 space-y-3 border border-primary/20"
         >
           {links.map((l) => (
             <a
