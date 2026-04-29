@@ -225,7 +225,7 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
             transition={{ duration: 0.3 }}
-            className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
+            className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full premium-glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
           >
             <motion.span
               animate={{ opacity: [0.7, 1, 0.7] }}
@@ -239,11 +239,11 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
 
       <div className="relative w-14 h-14 sm:w-16 sm:h-16">
         {/* Outer glow ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-30 blur-lg animate-pulse-glow" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-emerald to-accent opacity-40 blur-lg animate-pulse-glow" />
         {/* Main orb - STATIC */}
         <div
-          className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-          style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.4), inset 0 -4px 12px hsl(var(--accent) / 0.3)" }}
+          className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-emerald to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-foreground/20"
+          style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.4), 0 0 48px hsl(var(--emerald) / 0.14), inset 0 -4px 12px hsl(var(--accent) / 0.3)" }}
         >
           {/* Bot icon with subtle wave */}
           <motion.div
