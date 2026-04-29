@@ -26,6 +26,8 @@
 
     --accent: 293 82% 49%;
     --accent-foreground: 210 40% 98%;
+    --emerald: 156 82% 48%;
+    --emerald-foreground: 0 0% 4%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
@@ -38,8 +40,13 @@
 
     --neon-cyan: 187 82% 53%;
     --neon-magenta: 293 82% 49%;
+    --neon-emerald: 156 82% 48%;
     --text-primary: 210 40% 98%;
     --text-muted: 215 16% 47%;
+
+    --gradient-holographic: linear-gradient(110deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 28%, hsl(var(--accent)) 58%, hsl(var(--emerald)) 82%, hsl(var(--foreground)) 100%);
+    --gradient-metallic: linear-gradient(135deg, hsl(220 20% 96%), hsl(var(--primary)), hsl(230 20% 70%), hsl(var(--accent)));
+    --shadow-premium: 0 24px 80px hsl(var(--primary) / 0.14), 0 14px 48px hsl(var(--accent) / 0.12), inset 0 1px 0 hsl(var(--foreground) / 0.12);
 
     --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 210 40% 98%;
