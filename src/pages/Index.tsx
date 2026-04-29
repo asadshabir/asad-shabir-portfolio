@@ -26,7 +26,8 @@ const Index = () => {
   const [chatOpen, setChatOpen] = useState(false);
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden relative">
+      <div className="fixed inset-0 pointer-events-none ambient-mesh opacity-40" />
       <ScrollProgress />
       <Navbar />
       <Hero onOpenChat={() => setChatOpen(true)} />
@@ -42,7 +43,7 @@ const Index = () => {
       <Contact />
 
       {/* Footer */}
-      <footer className="py-8 border-t border-border/30">
+      <footer className="py-8 border-t border-foreground/10 premium-glass">
         <div className="container px-4 sm:px-6 flex flex-col items-center gap-4">
           <div className="flex items-center gap-4">
             {footerSocials.map((s) => (
@@ -52,7 +53,7 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-muted-foreground hover:text-primary hover:neon-glow-cyan transition-all duration-300"
+                className="w-10 h-10 rounded-2xl premium-glass flex items-center justify-center text-muted-foreground hover:text-primary hover:neon-glow-cyan hover:-translate-y-1 transition-all duration-300"
               >
                 <s.icon className="w-4 h-4" />
               </a>
