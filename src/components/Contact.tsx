@@ -10,7 +10,7 @@ const socials = [
     icon: Mail,
     label: "Gmail",
     href: "https://mail.google.com/mail/?view=cm&fs=1&to=asadshabir505@gmail.com&su=Hello%20Asad%20%E2%80%94%20from%20your%20portfolio",
-    color: "group-hover:text-red-400",
+    color: "group-hover:text-brand-gmail",
     glow: "--brand-gmail",
   },
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/asad-shabir-programmer110/", color: "group-hover:text-brand-linkedin", glow: "--brand-linkedin" },
