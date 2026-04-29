@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, MessageCircle, Download } from "lucide-react";
+import { ArrowDown, MessageCircle, Download, Bot, Cpu, Network, Workflow } from "lucide-react";
 import ParticleBackground from "./ParticleBackground";
 import FlipWords from "./aceternity/FlipWords";
 import SparklesEffect from "./aceternity/Sparkles";
-import profilePhoto from "@/assets/profile-photo.png";
+import PremiumBadge from "./PremiumBadge";
+import profilePhoto from "@/assets/portfolio_profile-2.png";
 
 const titles = [
   "Full-Stack Developer",
@@ -21,6 +22,9 @@ const titles = [
   "Backend Developer",
   "DevOps Developer",
 ];
+
+const heroBadges = ["AI Agents", "Digital FTE", "Groq", "OpenAI SDK", "Automation"];
+const orbitIcons = [Bot, Cpu, Network, Workflow];
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   const photoRef = useRef<HTMLDivElement>(null);
@@ -44,11 +48,13 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ParticleBackground />
 
-      {/* Gradient orbs */}
+      <div className="absolute inset-0 ambient-mesh opacity-80" />
+      <div className="absolute top-20 left-1/2 h-px w-[70vw] -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-[120px] animate-float" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] animate-float" style={{ animationDelay: "1.5s" }} />
+      <div className="absolute bottom-16 left-1/3 w-80 h-80 rounded-full bg-emerald/10 blur-[130px] animate-float" style={{ animationDelay: "2.2s" }} />
 
-      <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-20 px-4 sm:px-6 py-20">
+      <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-20 px-4 sm:px-6 py-24 lg:py-20">
         {/* 3D Profile Photo */}
         <motion.div
           ref={photoRef}
@@ -58,43 +64,42 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{ perspective: "1200px" }}
-          className="relative flex-shrink-0"
+          className="relative flex-shrink-0 order-1 lg:order-none"
         >
+          <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-br from-primary/10 via-accent/10 to-emerald/10 blur-3xl" />
           <motion.div
             animate={{ rotateX: photoTilt.x, rotateY: photoTilt.y }}
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80"
+            className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-[22rem] lg:h-[28rem] animate-levitate-3d"
             style={{ transformStyle: "preserve-3d" }}
           >
-            {/* Outer rotating neon ring */}
-            <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-primary via-accent to-primary animate-spin-slow opacity-60 blur-sm" />
-            <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-primary via-accent to-primary animate-spin-slow" style={{ padding: "2px" }}>
-              <div className="w-full h-full rounded-full bg-background" />
+            <div className="absolute -inset-5 rounded-[2.2rem] bg-gradient-to-br from-primary/25 via-accent/25 to-emerald/20 blur-2xl animate-pulse-glow" />
+            <div className="absolute -inset-[3px] rounded-[2rem] overflow-hidden">
+              <div className="absolute inset-0 bg-[conic-gradient(from_0deg,hsl(var(--primary)),hsl(var(--accent)),hsl(var(--emerald)),hsl(var(--primary)))] animate-border-orbit" />
             </div>
-
-            {/* Inner glow ring */}
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 blur-md animate-pulse-glow" />
-
-            {/* Photo - crystal clear */}
-            <img
-              src={profilePhoto}
-              alt="Asad Shabir"
-              className="absolute inset-2 rounded-full object-cover object-top z-10"
-              style={{
-                transform: "translateZ(30px)",
-                boxShadow: "0 0 30px hsl(var(--primary) / 0.3), 0 0 60px hsl(var(--primary) / 0.1)",
-              }}
-            />
+            <div className="absolute inset-0 rounded-[2rem] premium-glass overflow-hidden p-2" style={{ transform: "translateZ(28px)" }}>
+              <div className="relative h-full w-full overflow-hidden rounded-[1.55rem] bg-card">
+                <img
+                  src={profilePhoto}
+                  alt="Asad Shabir"
+                  className="h-full w-full object-cover object-top"
+                  style={{ imageRendering: "auto", transform: "translateZ(34px) scale(1.01)" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-primary/5 pointer-events-none" />
+              </div>
+            </div>
+            <div className="absolute -right-6 top-8 hidden sm:block premium-badge px-3 py-2 text-xs text-emerald border-emerald/30" style={{ transform: "translateZ(70px) rotateY(-16deg)" }}>Digital FTE</div>
+            <div className="absolute -left-7 bottom-16 hidden sm:block premium-badge px-3 py-2 text-xs text-primary border-primary/30" style={{ transform: "translateZ(80px) rotateY(18deg)" }}>AI Agents</div>
 
             {/* Floating orbit particles */}
-            {[0, 1, 2, 3, 4, 5].map((i) => (
+            {orbitIcons.map((Icon, i) => (
               <motion.div
                 key={i}
-                className="absolute w-1.5 h-1.5 rounded-full bg-primary hidden sm:block"
+                className="absolute hidden sm:flex w-10 h-10 rounded-2xl premium-glass items-center justify-center text-primary"
                 style={{
                   top: "50%",
                   left: "50%",
-                  boxShadow: "0 0 8px hsl(var(--primary) / 0.8)",
+                  boxShadow: "0 0 28px hsl(var(--primary) / 0.18)",
                 }}
                 animate={{
                   x: [
@@ -110,7 +115,9 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
                   opacity: [0.3, 0.8, 0.3],
                 }}
                 transition={{ duration: 8 + i * 0.5, repeat: Infinity, ease: "linear" }}
-              />
+              >
+                <Icon className="w-4 h-4" />
+              </motion.div>
             ))}
           </motion.div>
         </motion.div>
@@ -134,12 +141,23 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             style={{ letterSpacing: "0.04em" }}
           >
             <SparklesEffect>
-              <span className="inline-block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.15)" }}>
+              <span className="inline-block metallic-text" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.15)" }}>
                 Asad{" "}
               </span>
-              <span className="gradient-text" style={{ textShadow: "none" }}>Shabir</span>
+              <span className="holographic-text" style={{ textShadow: "none" }}>Shabir</span>
             </SparklesEffect>
           </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+            className="mb-5 flex flex-wrap justify-center lg:justify-start gap-2"
+          >
+            {heroBadges.map((badge, i) => (
+              <PremiumBadge key={badge} tone={i % 3 === 0 ? "cyan" : i % 3 === 1 ? "magenta" : "emerald"}>{badge}</PremiumBadge>
+            ))}
+          </motion.div>
 
           {/* FlipWords cycling titles */}
           <div className="h-10 sm:h-12 md:h-14 mb-6">
@@ -174,7 +192,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={scrollToProjects}
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold neon-glow-cyan transition-all text-sm sm:text-base"
+              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary via-emerald to-accent text-primary-foreground font-semibold neon-glow-cyan transition-all text-sm sm:text-base shadow-2xl shadow-primary/20"
             >
               <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
               Explore My Projects
@@ -183,7 +201,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={onOpenChat}
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg glass border-primary/30 text-primary font-semibold hover:neon-glow-cyan transition-all text-sm sm:text-base"
+              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl premium-glass border-primary/30 text-primary font-semibold hover:neon-glow-cyan transition-all text-sm sm:text-base"
             >
               <MessageCircle className="w-4 h-4" />
               Talk to My AI
@@ -193,7 +211,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
               whileTap={{ scale: 0.98 }}
               href="/Asad_Shabir_Resume.pdf"
               download="Asad_Shabir_Resume.pdf"
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg glass border-accent/30 text-accent font-semibold hover:neon-glow-magenta transition-all text-sm sm:text-base"
+              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl premium-glass border-accent/30 text-accent font-semibold hover:neon-glow-magenta transition-all text-sm sm:text-base"
             >
               <Download className="w-4 h-4" />
               Download Resume

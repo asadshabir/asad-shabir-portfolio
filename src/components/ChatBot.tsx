@@ -64,7 +64,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            className="fixed z-50 glass-strong flex flex-col overflow-hidden
+            className="fixed z-50 premium-glass-strong flex flex-col overflow-hidden
               inset-0 rounded-none md:rounded-2xl
               md:bottom-24 md:right-4 lg:right-8 md:top-auto md:left-auto
               md:w-[400px] md:h-[540px] md:max-w-[calc(100vw-2rem)]"
@@ -100,8 +100,8 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                   <div
                     className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                       msg.role === "user"
-                        ? "bg-primary text-primary-foreground rounded-br-md"
-                        : "bg-muted/50 text-foreground rounded-bl-md"
+                        ? "bg-gradient-to-r from-primary to-emerald text-primary-foreground rounded-br-md shadow-lg shadow-primary/20"
+                        : "premium-glass text-foreground rounded-bl-md"
                     }`}
                   >
                     {msg.content.split("\n").map((line, idx) => (
@@ -158,7 +158,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                       key={s}
                       whileHover={{ scale: 1.05 }}
                       onClick={() => sendMessage(s)}
-                      className="text-xs px-3 py-1.5 rounded-full glass text-primary hover:bg-primary/10 transition-colors"
+                      className="text-xs px-3 py-1.5 rounded-full premium-glass text-primary hover:bg-primary/10 transition-colors"
                     >
                       {s}
                     </motion.button>
@@ -176,14 +176,14 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask me anything..."
-                className="flex-1 px-4 py-3 rounded-full bg-background/50 border border-border/50 focus:border-primary/50 outline-none text-sm"
+                className="flex-1 px-4 py-3 rounded-full premium-glass border border-foreground/10 focus:border-primary/50 outline-none text-sm"
               />
               <motion.button
                 type="submit"
                 disabled={!input.trim()}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-11 h-11 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-all flex-shrink-0"
+                className="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-emerald text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-all flex-shrink-0 neon-glow-cyan"
               >
                 <Send className="w-4 h-4" />
               </motion.button>
@@ -225,7 +225,7 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
             transition={{ duration: 0.3 }}
-            className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
+            className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full premium-glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
           >
             <motion.span
               animate={{ opacity: [0.7, 1, 0.7] }}
@@ -239,11 +239,11 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
 
       <div className="relative w-14 h-14 sm:w-16 sm:h-16">
         {/* Outer glow ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-30 blur-lg animate-pulse-glow" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-emerald to-accent opacity-40 blur-lg animate-pulse-glow" />
         {/* Main orb - STATIC */}
         <div
-          className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-          style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.4), inset 0 -4px 12px hsl(var(--accent) / 0.3)" }}
+          className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-emerald to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-foreground/20"
+          style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.4), 0 0 48px hsl(var(--emerald) / 0.14), inset 0 -4px 12px hsl(var(--accent) / 0.3)" }}
         >
           {/* Bot icon with subtle wave */}
           <motion.div

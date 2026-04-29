@@ -43,6 +43,10 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        emerald: {
+          DEFAULT: "hsl(var(--emerald))",
+          foreground: "hsl(var(--emerald-foreground))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -84,6 +88,15 @@ export default {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "levitate-3d": {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg)" },
+          "33%": { transform: "translate3d(0, -14px, 18px) rotateX(2deg) rotateY(-3deg)" },
+          "66%": { transform: "translate3d(0, 8px, 10px) rotateX(-2deg) rotateY(3deg)" },
+        },
+        "border-orbit": {
+          from: { transform: "rotate(0deg) scale(1.35)" },
+          to: { transform: "rotate(360deg) scale(1.35)" },
+        },
         "spin-slow": {
           from: { transform: "rotate(0deg)" },
           to: { transform: "rotate(360deg)" },
@@ -98,6 +111,8 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "float": "float 3s ease-in-out infinite",
+        "levitate-3d": "levitate-3d 7s ease-in-out infinite",
+        "border-orbit": "border-orbit 8s linear infinite",
         "spin-slow": "spin-slow 8s linear infinite",
         "marquee": "marquee 30s linear infinite",
       },

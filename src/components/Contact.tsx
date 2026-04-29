@@ -49,7 +49,7 @@ const Contact = () => {
             <Heart className="w-4 h-4" /> Get In Touch
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            Let's <span className="gradient-text">Connect</span>
+            Let's <span className="holographic-text">Connect</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-md mx-auto text-sm sm:text-base">
             Have a project in mind or want to collaborate? I'd love to hear from you.
@@ -72,9 +72,9 @@ const Contact = () => {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-all group"
+                    className="premium-glass rounded-2xl p-3 flex items-center gap-4 text-muted-foreground hover:text-primary transition-all group"
                   >
-                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:neon-glow-cyan group-hover:scale-110 transition-all duration-300">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 flex items-center justify-center group-hover:neon-glow-cyan group-hover:scale-110 transition-all duration-300 border border-foreground/10">
                       <s.icon className={`w-5 h-5 text-primary ${s.color} transition-colors`} />
                     </div>
                     <span className="font-semibold text-base sm:text-lg">{s.label}</span>
@@ -87,7 +87,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.98 }}
                 href="/Asad_Shabir_Resume.pdf"
                 download="Asad_Shabir_Resume.pdf"
-                className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all"
+                className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-primary via-emerald to-accent text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all"
               >
                 <Download className="w-5 h-5" />
                 Download Resume
@@ -109,7 +109,7 @@ const Contact = () => {
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl premium-glass border border-foreground/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
                 />
                 <input
                   type="email"
@@ -117,7 +117,7 @@ const Contact = () => {
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl premium-glass border border-foreground/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
                 />
                 <textarea
                   placeholder="Your message"
@@ -125,14 +125,14 @@ const Contact = () => {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm resize-none flex-1"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl premium-glass border border-foreground/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm resize-none flex-1"
                 />
                 <motion.button
                   type="submit"
                   disabled={sending}
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-xl bg-primary text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-primary to-emerald text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all disabled:opacity-50"
                 >
                   <Send className="w-5 h-5" />
                   {sending ? "Sending..." : "Send Message"}
