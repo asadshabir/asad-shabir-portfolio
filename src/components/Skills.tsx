@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Bot, Brain, Cpu, Workflow, Code2, Cloud } from "lucide-react";
+import type { CSSProperties } from "react";
 import Card3D from "./Card3D";
 import InfiniteMovingCards from "./aceternity/InfiniteMovingCards";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
@@ -63,7 +64,7 @@ const Skills = () => (
             <Card3D glowColor={cat.glow} className="p-4 sm:p-6 text-center group cursor-default min-h-[178px] rounded-[1.7rem]">
               <div
                 className="skill-isometric relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-3"
-                style={{ "--skill-glow": `var(${cat.token})` } as React.CSSProperties}
+                style={{ "--skill-glow": `var(${cat.token})` } as CSSProperties}
               >
                 <div className={`absolute inset-[10px] bg-gradient-to-br ${cat.gradient} opacity-35 blur-md`} />
                 <div className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center border border-foreground/20 shadow-2xl skill-icon-3d`}
