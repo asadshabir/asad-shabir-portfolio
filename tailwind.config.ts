@@ -47,6 +47,16 @@ export default {
           DEFAULT: "hsl(var(--emerald))",
           foreground: "hsl(var(--emerald-foreground))",
         },
+        brand: {
+          linkedin: "hsl(var(--brand-linkedin))",
+          github: "hsl(var(--brand-github))",
+          gmail: "hsl(var(--brand-gmail))",
+          facebook: "hsl(var(--brand-facebook))",
+          python: "hsl(var(--brand-python))",
+          n8n: "hsl(var(--brand-n8n))",
+          react: "hsl(var(--brand-react))",
+          devops: "hsl(var(--brand-devops))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
