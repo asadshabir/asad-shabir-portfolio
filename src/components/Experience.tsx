@@ -56,7 +56,7 @@ const Experience = () => (
           <Sparkles className="w-4 h-4" /> Experience
         </p>
         <h2 className="text-4xl md:text-5xl font-bold">
-          My <span className="gradient-text">Journey</span>
+          My <span className="holographic-text">Journey</span>
         </h2>
         <p className="text-muted-foreground mt-4 max-w-md mx-auto">
           A timeline of growth, impact, and continuous learning.
@@ -105,7 +105,7 @@ const Experience = () => (
               style={{ boxShadow: "0 0 16px hsl(var(--primary) / 0.7), 0 0 32px hsl(var(--primary) / 0.25)" }}
             />
 
-            <Card3D glowColor={i === 0 ? "cyan" : i === 1 ? "magenta" : "both"} className="p-7">
+            <Card3D glowColor={i === 0 ? "cyan" : i === 1 ? "magenta" : "both"} className="p-7 relative">
               {/* Soft light beam behind card */}
               <div
                 className="absolute -inset-2 -z-10 rounded-xl opacity-20 blur-xl"
@@ -121,7 +121,7 @@ const Experience = () => (
                 <Briefcase className="w-4 h-4" />
                 {exp.date}
               </div>
-              <h3 className="text-xl font-bold mb-1.5">{exp.role}</h3>
+              <h3 className="text-xl font-bold mb-1.5 metallic-text">{exp.role}</h3>
               <p className="text-muted-foreground font-medium mb-5 text-sm">{exp.company}</p>
               <ul className="space-y-3">
                 {exp.points.map((point, j) => (
