@@ -22,7 +22,7 @@ const projects = [
     github: "https://github.com/asadshabir/asa-mind",
     gradient: "from-violet-600/30 via-primary/15 to-violet-900/30",
     border: "border-violet-400/40",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80",
     featured: true,
   },
   {
@@ -34,7 +34,7 @@ const projects = [
     github: "https://github.com/asadshabir/robotics-ai-book",
     gradient: "from-purple-600/30 via-primary/15 to-indigo-900/30",
     border: "border-purple-400/40",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80",
     featured: false,
   },
   {
@@ -46,7 +46,7 @@ const projects = [
     github: "https://github.com/asadshabir/ecommerce-platform",
     gradient: "from-accent/30 via-primary/15 to-fuchsia-900/30",
     border: "border-accent/40",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80",
     featured: false,
   },
   {
@@ -58,7 +58,7 @@ const projects = [
     github: "https://github.com/asadshabir/workflow-automation",
     gradient: "from-teal-600/30 via-primary/15 to-cyan-900/30",
     border: "border-teal-400/40",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
     featured: false,
   },
   {
@@ -70,7 +70,7 @@ const projects = [
     github: "https://github.com/asadshabir/ai-resume-analyzer",
     gradient: "from-violet-600/30 via-indigo-500/15 to-primary/30",
     border: "border-violet-400/40",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
     featured: false,
   },
   {
@@ -82,7 +82,7 @@ const projects = [
     github: "https://github.com/asadshabir/realtime-dashboard",
     gradient: "from-fuchsia-600/30 via-accent/15 to-primary/30",
     border: "border-accent/40",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80",
     featured: false,
   },
 ];
@@ -157,15 +157,13 @@ const Projects = () => {
                   <div className={`relative h-40 sm:h-48 overflow-hidden bg-gradient-to-br ${project.gradient}`}>
                     <img
                       src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700"
+                      alt={`${project.title} technology preview`}
+                      loading="lazy"
+                      className="w-full h-full object-cover opacity-75 group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-4 rounded-2xl border border-foreground/10 bg-background/20 backdrop-blur-sm shadow-2xl shadow-primary/10" />
-                    <div className="absolute left-8 right-8 top-8 h-2 rounded-full bg-gradient-to-r from-primary via-accent to-emerald opacity-80" />
-                    <div className="absolute left-8 top-16 h-16 w-24 rounded-xl bg-primary/20 border border-primary/20" />
-                    <div className="absolute right-8 top-16 h-16 w-24 rounded-xl bg-accent/20 border border-accent/20" />
-                    <div className="absolute left-8 right-8 bottom-8 h-10 rounded-xl bg-emerald/15 border border-emerald/20" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} mix-blend-screen`} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-background/32 to-background/8" />
+                    <div className="absolute inset-x-6 bottom-5 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
 
                     {project.featured && (
                       <div className="absolute top-3 right-3 z-20">
