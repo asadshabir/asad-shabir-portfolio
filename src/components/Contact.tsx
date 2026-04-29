@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Facebook, Download, Send, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -11,10 +11,11 @@ const socials = [
     label: "Gmail",
     href: "https://mail.google.com/mail/?view=cm&fs=1&to=asadshabir505@gmail.com&su=Hello%20Asad%20%E2%80%94%20from%20your%20portfolio",
     color: "group-hover:text-red-400",
+    glow: "--brand-gmail",
   },
-  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/asad-shabir-programmer110/", color: "group-hover:text-blue-400" },
-  { icon: Github, label: "GitHub", href: "https://github.com/asadshabir/", color: "group-hover:text-foreground" },
-  { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/Asadalibhatti110", color: "group-hover:text-blue-500" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/asad-shabir-programmer110/", color: "group-hover:text-brand-linkedin", glow: "--brand-linkedin" },
+  { icon: Github, label: "GitHub", href: "https://github.com/asadshabir/", color: "group-hover:text-brand-github", glow: "--brand-github" },
+  { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/Asadalibhatti110", color: "group-hover:text-brand-facebook", glow: "--brand-facebook" },
 ];
 
 const Contact = () => {
@@ -72,9 +73,10 @@ const Contact = () => {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="premium-glass rounded-2xl p-3 flex items-center gap-4 text-muted-foreground hover:text-primary transition-all group"
+                    style={{ "--social-glow": `var(${s.glow})` } as CSSProperties}
+                    className="social-3d premium-glass rounded-2xl p-3 flex items-center gap-4 text-muted-foreground transition-all group border border-foreground/10"
                   >
-                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 flex items-center justify-center group-hover:neon-glow-cyan group-hover:scale-110 transition-all duration-300 border border-foreground/10">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-foreground/10 via-background/50 to-foreground/5 flex items-center justify-center group-hover:scale-110 transition-all duration-300 border border-foreground/10 shadow-inner">
                       <s.icon className={`w-5 h-5 text-primary ${s.color} transition-colors`} />
                     </div>
                     <span className="font-semibold text-base sm:text-lg">{s.label}</span>
@@ -109,7 +111,7 @@ const Contact = () => {
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl premium-glass border border-foreground/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input border border-foreground/10 outline-none transition-all text-sm"
                 />
                 <input
                   type="email"
@@ -117,7 +119,7 @@ const Contact = () => {
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl premium-glass border border-foreground/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input border border-foreground/10 outline-none transition-all text-sm"
                 />
                 <textarea
                   placeholder="Your message"
@@ -125,14 +127,14 @@ const Contact = () => {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl premium-glass border border-foreground/10 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm resize-none flex-1"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input border border-foreground/10 outline-none transition-all text-sm resize-none flex-1"
                 />
                 <motion.button
                   type="submit"
                   disabled={sending}
                   whileHover={{ scale: 1.02, y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-primary to-emerald text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all disabled:opacity-50"
+                  whileTap={{ scale: 0.96, y: 2 }}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-primary via-emerald to-accent text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all disabled:opacity-50 shadow-2xl shadow-primary/20"
                 >
                   <Send className="w-5 h-5" />
                   {sending ? "Sending..." : "Send Message"}
