@@ -25,11 +25,11 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? "glass-strong py-3" : "py-5"
+        scrolled ? "premium-glass-strong py-3" : "py-5"
       }`}
     >
       <div className="container px-6 flex items-center justify-between">
-        <a href="#" className="text-xl font-black gradient-text">
+        <a href="#" className="text-xl font-black holographic-text">
           AS.
         </a>
 
@@ -57,7 +57,7 @@ const Navbar = () => {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden glass-strong mt-2 mx-4 rounded-xl p-4 space-y-3"
+          className="md:hidden premium-glass-strong mt-2 mx-4 rounded-xl p-4 space-y-3"
         >
           {links.map((l) => (
             <a
