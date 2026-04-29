@@ -41,6 +41,14 @@
     --neon-cyan: 187 82% 53%;
     --neon-magenta: 293 82% 49%;
     --neon-emerald: 156 82% 48%;
+    --brand-linkedin: 205 100% 55%;
+    --brand-github: 210 40% 98%;
+    --brand-gmail: 4 90% 62%;
+    --brand-facebook: 221 94% 61%;
+    --brand-python: 213 80% 52%;
+    --brand-n8n: 142 78% 48%;
+    --brand-react: 187 92% 58%;
+    --brand-devops: 32 92% 58%;
     --text-primary: 210 40% 98%;
     --text-muted: 215 16% 47%;
 
@@ -135,6 +143,30 @@
     box-shadow: 0 30px 100px hsl(var(--background) / 0.5), var(--shadow-premium), inset 0 1px 0 hsl(var(--foreground) / 0.15);
   }
 
+  .premium-navbar {
+    background: linear-gradient(120deg, hsl(var(--card) / 0.7), hsl(var(--background) / 0.46), hsl(var(--accent) / 0.08));
+    backdrop-filter: blur(34px) saturate(170%);
+    -webkit-backdrop-filter: blur(34px) saturate(170%);
+    border-bottom: 1px solid hsl(var(--foreground) / 0.08);
+    box-shadow: 0 18px 70px hsl(var(--background) / 0.5), inset 0 1px 0 hsl(var(--foreground) / 0.12);
+  }
+
+  .premium-navbar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.9), hsl(var(--accent) / 0.85), transparent);
+    box-shadow: 0 0 18px hsl(var(--primary) / 0.36), 0 0 22px hsl(var(--accent) / 0.24);
+  }
+
+  .avatar-ring {
+    background: conic-gradient(from 160deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--emerald)), hsl(var(--primary)));
+    box-shadow: 0 0 24px hsl(var(--primary) / 0.28), 0 0 38px hsl(var(--accent) / 0.16), inset 0 0 0 1px hsl(var(--foreground) / 0.24);
+  }
+
   .neon-glow-cyan {
     box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 60px hsl(var(--primary) / 0.1);
   }
@@ -184,6 +216,37 @@
     border-color: hsl(var(--primary) / 0.36);
     box-shadow: inset 0 1px 0 hsl(var(--foreground) / 0.18), 0 0 28px hsl(var(--primary) / 0.18), 0 14px 36px hsl(var(--background) / 0.45);
     transform: translateY(-2px) translateZ(16px);
+  }
+
+  .skill-isometric {
+    clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0 50%);
+    background: radial-gradient(circle at 30% 18%, hsl(var(--foreground) / 0.16), transparent 28%), linear-gradient(145deg, hsl(var(--card) / 0.76), hsl(var(--background) / 0.42));
+    box-shadow: inset 0 1px 0 hsl(var(--foreground) / 0.16), inset 0 -18px 34px hsl(var(--primary) / 0.06), 0 24px 70px hsl(var(--background) / 0.55);
+  }
+
+  .skill-icon-3d {
+    filter: drop-shadow(0 14px 18px hsl(var(--skill-glow, var(--primary)) / 0.32));
+  }
+
+  .frost-input {
+    background: linear-gradient(145deg, hsl(var(--background) / 0.74), hsl(var(--card) / 0.5));
+    box-shadow: inset 0 2px 12px hsl(var(--background) / 0.65), inset 0 1px 0 hsl(var(--foreground) / 0.08), 0 12px 32px hsl(var(--background) / 0.24);
+  }
+
+  .frost-input:focus {
+    border-color: hsl(var(--primary) / 0.72);
+    box-shadow: inset 0 2px 12px hsl(var(--background) / 0.65), 0 0 0 1px hsl(var(--primary) / 0.45), 0 0 30px hsl(var(--primary) / 0.18);
+  }
+
+  .social-3d:hover {
+    color: hsl(var(--social-glow, var(--primary)));
+    box-shadow: 0 0 28px hsl(var(--social-glow, var(--primary)) / 0.3), 0 16px 34px hsl(var(--background) / 0.45), inset 0 1px 0 hsl(var(--foreground) / 0.18);
+    border-color: hsl(var(--social-glow, var(--primary)) / 0.42);
+  }
+
+  .chat-orb {
+    background: radial-gradient(circle at 32% 24%, hsl(var(--foreground) / 0.9), hsl(var(--primary)) 16%, hsl(var(--emerald)) 46%, hsl(var(--accent)) 78%);
+    box-shadow: 0 0 34px hsl(var(--primary) / 0.48), 0 0 64px hsl(var(--accent) / 0.24), inset -10px -14px 24px hsl(var(--background) / 0.42), inset 8px 8px 18px hsl(var(--foreground) / 0.2);
   }
 
   .glare-sweep::after {
