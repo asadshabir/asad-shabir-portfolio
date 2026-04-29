@@ -45,7 +45,7 @@ const Skills = () => (
       >
         <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4">Skills & Tech</p>
         <h2 className="text-4xl md:text-5xl font-bold">
-          My <span className="gradient-text">Arsenal</span>
+          My <span className="holographic-text">Arsenal</span>
         </h2>
       </motion.div>
 
@@ -59,9 +59,9 @@ const Skills = () => (
         style={{ perspective: "1000px" }}
       >
         {categories.map((cat, i) => (
-          <motion.div key={cat.label} variants={item}>
-            <Card3D glowColor={cat.glow} className="p-6 text-center group cursor-default">
-              <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}
+          <motion.div key={cat.label} variants={item} className="[transform-style:preserve-3d]">
+            <Card3D glowColor={cat.glow} className="p-6 text-center group cursor-default min-h-[178px]">
+              <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-foreground/15`}
                 style={{ boxShadow: `0 0 20px hsl(var(--primary) / 0.2)` }}
               >
                 <cat.icon className="w-8 h-8 text-primary-foreground" />
@@ -81,7 +81,9 @@ const Skills = () => (
       </motion.div>
 
       {/* Infinite 3D Marquee */}
-      <InfiniteMovingCards items={marqueeItems} speed="slow" />
+      <div className="premium-glass rounded-2xl p-4 sm:p-6 max-w-5xl mx-auto">
+        <InfiniteMovingCards items={marqueeItems} speed="slow" />
+      </div>
     </div>
   </section>
 );
