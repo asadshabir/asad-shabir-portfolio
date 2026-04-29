@@ -239,16 +239,19 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
 
       <div className="relative w-14 h-14 sm:w-16 sm:h-16">
         {/* Outer glow ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-emerald to-accent opacity-40 blur-lg animate-pulse-glow" />
-        {/* Main orb - STATIC */}
+        <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-primary via-emerald to-accent opacity-40 blur-xl animate-pulse-glow" />
+        <div className="absolute inset-0 rounded-full border border-primary/40 animate-spin-slow" />
+        {/* Main orb */}
         <div
-          className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-emerald to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-foreground/20"
-          style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.4), 0 0 48px hsl(var(--emerald) / 0.14), inset 0 -4px 12px hsl(var(--accent) / 0.3)" }}
+          className="chat-orb absolute inset-0 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-foreground/20 overflow-hidden"
         >
+          <div className="absolute left-3 top-2 h-3 w-5 rounded-full bg-foreground/35 blur-sm" />
+          <div className="absolute inset-2 rounded-full border border-foreground/15" />
           {/* Bot icon with subtle wave */}
           <motion.div
             animate={{ rotate: [0, 3, -3, 0] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            className="relative z-10"
           >
             <Bot className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground" />
           </motion.div>
