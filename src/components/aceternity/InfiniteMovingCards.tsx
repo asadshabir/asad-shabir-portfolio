@@ -30,7 +30,7 @@ const InfiniteMovingCards = ({
         {doubled.map((item, i) => (
           <div
             key={i}
-            className="flex-shrink-0 px-5 py-3 rounded-xl glass border-primary/20 font-mono text-sm text-muted-foreground/60 hover:text-primary hover:border-primary/40 transition-all duration-300"
+            className="premium-badge flex-shrink-0 px-5 py-3 text-sm text-muted-foreground/70 hover:text-primary transition-all duration-300"
             style={{
               perspective: "600px",
               transform: `rotateY(${Math.sin(i * 0.4) * 6}deg)`,
