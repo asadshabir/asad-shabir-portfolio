@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, Sparkles } from "lucide-react";
 import Card3D from "./Card3D";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
+import PremiumBadge from "./PremiumBadge";
 
 const filters = [
   { label: "All", color: "from-primary to-accent" },
@@ -106,7 +107,7 @@ const Projects = () => {
         >
           <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4">Portfolio</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            Built <span className="gradient-text">Projects</span>
+            Built <span className="holographic-text">Projects</span>
           </h2>
         </motion.div>
 
@@ -121,7 +122,7 @@ const Projects = () => {
               className={`relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all overflow-hidden ${
                 active === f.label
                   ? "text-primary-foreground neon-glow-cyan"
-                  : "glass text-muted-foreground hover:text-foreground"
+                  : "premium-glass text-muted-foreground hover:text-foreground"
               }`}
             >
               {active === f.label && (
@@ -150,15 +151,20 @@ const Projects = () => {
               >
                 <Card3D
                   glowColor={project.category === "AI & Agents" ? "magenta" : project.category === "Automation Tools" ? "cyan" : "both"}
-                  className={`overflow-hidden group h-full ${project.border}`}
+                  className={`overflow-hidden group h-full ${project.border} min-h-[430px]`}
                 >
                   {/* Project image */}
                   <div className={`relative h-40 sm:h-48 overflow-hidden bg-gradient-to-br ${project.gradient}`}>
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700"
                     />
+                    <div className="absolute inset-4 rounded-2xl border border-foreground/10 bg-background/20 backdrop-blur-sm shadow-2xl shadow-primary/10" />
+                    <div className="absolute left-8 right-8 top-8 h-2 rounded-full bg-gradient-to-r from-primary via-accent to-emerald opacity-80" />
+                    <div className="absolute left-8 top-16 h-16 w-24 rounded-xl bg-primary/20 border border-primary/20" />
+                    <div className="absolute right-8 top-16 h-16 w-24 rounded-xl bg-accent/20 border border-accent/20" />
+                    <div className="absolute left-8 right-8 bottom-8 h-10 rounded-xl bg-emerald/15 border border-emerald/20" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
 
                     {project.featured && (
@@ -166,7 +172,7 @@ const Projects = () => {
                         <motion.div
                           animate={{ scale: [1, 1.1, 1] }}
                           transition={{ repeat: Infinity, duration: 2 }}
-                          className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/20 text-primary text-xs font-mono border border-primary/30 backdrop-blur-md"
+                          className="premium-badge flex items-center gap-1 px-2.5 py-1 text-primary text-xs border-primary/30"
                         >
                           <Sparkles className="w-3 h-3" />
                           Featured
@@ -178,7 +184,7 @@ const Projects = () => {
                       <motion.div
                         animate={{ boxShadow: ["0 0 8px hsl(var(--primary) / 0.3)", "0 0 16px hsl(var(--primary) / 0.6)", "0 0 8px hsl(var(--primary) / 0.3)"] }}
                         transition={{ repeat: Infinity, duration: 2 }}
-                        className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-mono border border-primary/20 backdrop-blur-md"
+                        className="premium-badge flex items-center gap-1 px-2 py-0.5 text-primary text-[10px] border-primary/20"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                         Live
@@ -195,13 +201,10 @@ const Projects = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
-                      {project.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-primary/10 text-primary font-mono border border-primary/10"
-                        >
+                      {project.tech.map((t, i) => (
+                        <PremiumBadge key={t} tone={i % 3 === 0 ? "cyan" : i % 3 === 1 ? "magenta" : "emerald"} className="px-2 sm:px-2.5 py-0.5 sm:py-1">
                           {t}
-                        </span>
+                        </PremiumBadge>
                       ))}
                     </div>
 
