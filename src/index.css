@@ -49,6 +49,9 @@
     --brand-n8n: 142 78% 48%;
     --brand-react: 187 92% 58%;
     --brand-devops: 32 92% 58%;
+    --expertise-cyan: 190 92% 52%;
+    --expertise-violet: 285 88% 58%;
+    --expertise-emerald: 156 86% 48%;
     --text-primary: 210 40% 98%;
     --text-muted: 215 16% 47%;
 
@@ -303,11 +306,15 @@
 
   .expertise-card-wrap {
     perspective: 1200px;
+    --expertise-tone: var(--primary);
   }
 
   .expertise-card {
     clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
     transform: skewX(-3deg);
+    background: radial-gradient(circle at 25% 12%, hsl(var(--expertise-tone) / 0.24), transparent 34%), linear-gradient(145deg, hsl(var(--foreground) / 0.075), hsl(var(--background) / 0.42) 58%, hsl(var(--expertise-tone) / 0.08));
+    border-color: hsl(var(--expertise-tone) / 0.34) !important;
+    box-shadow: 0 24px 72px hsl(var(--expertise-tone) / 0.12), inset 0 1px 0 hsl(var(--foreground) / 0.16), inset 0 -24px 46px hsl(var(--expertise-tone) / 0.05);
   }
 
   .expertise-card::before {
@@ -315,15 +322,17 @@
     position: absolute;
     inset: 1px;
     clip-path: inherit;
-    border: 1px solid hsl(var(--primary) / 0.18);
-    opacity: 0.55;
+    border: 1px solid hsl(var(--expertise-tone) / 0.26);
+    opacity: 0.7;
     pointer-events: none;
-    transition: opacity 400ms ease, filter 400ms ease;
+    transition: opacity 400ms ease, filter 400ms ease, border-color 400ms ease;
   }
 
   .expertise-card:hover::before {
     opacity: 1;
-    filter: drop-shadow(0 0 12px hsl(var(--primary) / 0.55)) drop-shadow(0 0 20px hsl(var(--accent) / 0.25));
+    border-color: hsl(var(--expertise-tone) / 0.72);
+    filter: drop-shadow(0 0 12px hsl(var(--expertise-tone) / 0.65)) drop-shadow(0 0 24px hsl(var(--expertise-tone) / 0.28));
+    animation: expertise-border-pulse 1.35s ease-in-out infinite;
   }
 
   .expertise-content {
