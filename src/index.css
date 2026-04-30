@@ -479,6 +479,24 @@
   100% { transform: translate3d(1%, -2%, 0) scale(1.02) rotate(-1deg); }
 }
 
+@keyframes heartbeat-trace {
+  0% { stroke-dashoffset: 510; opacity: 0.35; transform: scaleX(0.96); }
+  14% { opacity: 1; }
+  46% { stroke-dashoffset: 0; transform: scaleX(1.02); }
+  66% { stroke-dashoffset: -160; opacity: 0.72; transform: scaleX(0.99); }
+  100% { stroke-dashoffset: -510; opacity: 0.35; transform: scaleX(0.96); }
+}
+
+@keyframes focus-gradient-flow {
+  0% { background-position: 0 0, 0% 50%; }
+  100% { background-position: 0 0, 260% 50%; }
+}
+
+@keyframes chat-breathe {
+  0%, 100% { box-shadow: 0 0 28px hsl(var(--primary) / 0.4), 0 0 58px hsl(var(--accent) / 0.18), inset -12px -16px 28px hsl(var(--background) / 0.46); transform: translateZ(0) rotate(-2deg); }
+  50% { box-shadow: 0 0 44px hsl(var(--emerald) / 0.42), 0 0 84px hsl(var(--accent) / 0.3), inset -10px -14px 24px hsl(var(--background) / 0.38); transform: translateZ(24px) rotate(2deg); }
+}
+
 @keyframes holographic-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
