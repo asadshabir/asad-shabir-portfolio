@@ -9,6 +9,7 @@ import Contact from "@/components/Contact";
 import ChatBot, { ChatButton } from "@/components/ChatBot";
 import ScrollProgress from "@/components/ScrollProgress";
 import SectionDivider from "@/components/SectionDivider";
+import ScrollToTop from "@/components/ScrollToTop";
 import { Mail, Linkedin, Github, Facebook } from "lucide-react";
 import type { CSSProperties } from "react";
 
@@ -70,6 +71,7 @@ const Index = () => {
       </footer>
 
       <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />
+      <ScrollToTop />
       {!chatOpen && <ChatButton onClick={() => setChatOpen(true)} />}
     </div>
   );
