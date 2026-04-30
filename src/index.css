@@ -611,7 +611,56 @@
   50% { box-shadow: 0 0 44px hsl(var(--emerald) / 0.42), 0 0 84px hsl(var(--accent) / 0.3), inset -10px -14px 24px hsl(var(--background) / 0.38); transform: translateZ(24px) rotate(2deg); }
 }
 
+@keyframes expertise-border-pulse {
+  0%, 100% { box-shadow: 0 0 0 hsl(var(--expertise-tone) / 0), inset 0 0 18px hsl(var(--expertise-tone) / 0.08); }
+  50% { box-shadow: 0 0 28px hsl(var(--expertise-tone) / 0.32), inset 0 0 30px hsl(var(--expertise-tone) / 0.14); }
+}
+
 @keyframes holographic-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+@media (max-width: 640px) {
+  #hero .container {
+    padding-top: 6.5rem;
+    padding-bottom: 4rem;
+  }
+
+  #about, #skills, #experience {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .expertise-card {
+    clip-path: polygon(4% 0, 100% 0, 96% 100%, 0 100%);
+    transform: skewX(-1.5deg);
+  }
+
+  .expertise-content {
+    transform: skewX(1.5deg) translateZ(18px);
+  }
+
+  .contact-panel-shell::before,
+  .contact-panel-shell::after {
+    inset: 10px 0 -8px 8px;
+  }
+
+  .chatbot-photo-aura,
+  .chat-geo-aura {
+    filter: blur(12px);
+  }
+}
+
+@media (max-width: 360px) {
+  .chatbot-photo-stage,
+  .chat-geo-stage {
+    transform: scale(0.94);
+    transform-origin: bottom right;
+  }
+
+  .scroll-top-3d {
+    height: 2.75rem;
+    width: 2.75rem;
+  }
 }
