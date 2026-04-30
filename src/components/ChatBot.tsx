@@ -237,17 +237,12 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
         )}
       </AnimatePresence>
 
-      <div className="relative w-14 h-14 sm:w-16 sm:h-16">
-        {/* Outer glow ring */}
-        <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-primary via-emerald to-accent opacity-40 blur-xl animate-pulse-glow" />
-        <div className="absolute inset-0 rounded-full border border-primary/40 animate-spin-slow" />
-        {/* Main orb */}
-        <div
-          className="chat-orb absolute inset-0 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-foreground/20 overflow-hidden"
-        >
-          <div className="absolute left-3 top-2 h-3 w-5 rounded-full bg-foreground/35 blur-sm" />
-          <div className="absolute inset-2 rounded-full border border-foreground/15" />
-          {/* Bot icon with subtle wave */}
+      <div className="relative w-14 h-14 sm:w-16 sm:h-16 chat-geo-stage">
+        <div className="absolute -inset-3 chat-geo-aura" />
+        <div className="absolute -inset-1 chat-geo-ring animate-spin-slow" />
+        <div className="chat-geo-orb absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+          <div className="absolute left-3 top-2 h-3 w-6 rounded-full bg-foreground/35 blur-sm" />
+          <div className="absolute inset-[7px] chat-geo-inner" />
           <motion.div
             animate={{ rotate: [0, 3, -3, 0] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
