@@ -653,10 +653,13 @@
 }
 
 @media (max-width: 360px) {
-  .chatbot-photo-stage,
   .chat-geo-stage {
     transform: scale(0.94);
     transform-origin: bottom right;
+  }
+
+  .chat-ready-label {
+    display: none;
   }
 
   .scroll-top-3d {
