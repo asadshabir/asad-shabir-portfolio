@@ -59,13 +59,16 @@ const About = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
+              className="expertise-card-wrap"
             >
-              <Card3D glowColor={item.glow} className="p-6 text-center group cursor-default min-h-[180px]">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 flex items-center justify-center mb-4 mx-auto group-hover:neon-glow-cyan transition-all duration-500 border border-foreground/10">
+              <Card3D glowColor={item.glow} className="expertise-card p-6 text-center group cursor-default min-h-[190px]">
+                <div className="expertise-content">
+                <div className="w-14 h-14 rounded-[1.15rem] bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 flex items-center justify-center mb-4 mx-auto group-hover:neon-glow-cyan transition-all duration-500 border border-foreground/10">
                   <item.icon className="w-7 h-7 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
+                </div>
               </Card3D>
             </motion.div>
           ))}
