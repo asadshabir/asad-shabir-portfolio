@@ -4,7 +4,6 @@ import { ArrowDown, MessageCircle, Download, Bot, Cpu, Network, Workflow } from 
 import ParticleBackground from "./ParticleBackground";
 import FlipWords from "./aceternity/FlipWords";
 import SparklesEffect from "./aceternity/Sparkles";
-import PremiumBadge from "./PremiumBadge";
 import profilePhoto from "@/assets/portfolio_profile-2.png";
 
 const titles = [
@@ -23,7 +22,6 @@ const titles = [
   "DevOps Developer",
 ];
 
-const heroBadges = ["AI Agents", "Digital FTE", "Groq", "OpenAI SDK", "Automation"];
 const orbitIcons = [Bot, Cpu, Network, Workflow];
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
@@ -137,26 +135,30 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4"
-            style={{ letterSpacing: "0.04em" }}
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 premium-name-lockup"
           >
             <SparklesEffect>
-              <span className="inline-block metallic-text" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.15)" }}>
-                Asad{" "}
-              </span>
-              <span className="holographic-text" style={{ textShadow: "none" }}>Shabir</span>
+              <span className="inline-block premium-name-text">Asad Shabir</span>
             </SparklesEffect>
           </motion.h1>
 
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, scaleX: 0.7 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45 }}
-            className="mb-5 flex flex-wrap justify-center lg:justify-start gap-2"
+            transition={{ delay: 0.42, duration: 0.7 }}
+            className="heartbeat-line-wrap mx-auto lg:mx-0 mb-5"
           >
-            {heroBadges.map((badge, i) => (
-              <PremiumBadge key={badge} tone={i % 3 === 0 ? "cyan" : i % 3 === 1 ? "magenta" : "emerald"}>{badge}</PremiumBadge>
-            ))}
+            <svg className="heartbeat-line" viewBox="0 0 420 44" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="heartbeatGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="hsl(var(--primary))" />
+                  <stop offset="52%" stopColor="hsl(var(--emerald))" />
+                  <stop offset="100%" stopColor="hsl(var(--accent))" />
+                </linearGradient>
+              </defs>
+              <path className="heartbeat-base" d="M4 24 H115 L132 24 L143 8 L157 36 L171 15 L184 24 H416" />
+              <path className="heartbeat-pulse" d="M4 24 H115 L132 24 L143 8 L157 36 L171 15 L184 24 H416" />
+            </svg>
           </motion.div>
 
           {/* FlipWords cycling titles */}
@@ -175,10 +177,10 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-muted-foreground text-base sm:text-lg max-w-xl mb-8 sm:mb-10 leading-relaxed mx-auto lg:mx-0"
+            className="hero-intro text-base sm:text-lg max-w-xl mb-8 sm:mb-10 mx-auto lg:mx-0"
           >
-            Building intelligent, production-ready AI agents, full-stack applications,
-            and automation systems that actually work.
+            Building <span className="intro-neon-word">intelligent</span>, <span className="intro-neon-word">production-ready</span> AI agents, full-stack applications,
+            and <span className="intro-neon-word">automation</span> systems that actually work.
           </motion.p>
 
           {/* CTA Buttons */}

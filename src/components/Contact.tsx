@@ -62,24 +62,25 @@ const Contact = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="contact-panel-shell"
           >
-            <Card3D glowColor="cyan" className="p-6 sm:p-8 md:p-10 h-full">
+            <Card3D glowColor="cyan" className="contact-layered-panel p-6 sm:p-8 md:p-10 h-full">
               <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">Find me online</h3>
-              <div className="space-y-4 sm:space-y-5 mb-8 sm:mb-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 sm:mb-10">
                 {socials.map((s) => (
                   <motion.a
                     key={s.label}
-                    whileHover={{ x: 6, scale: 1.02 }}
+                    whileHover={{ y: -8, rotateX: 8, rotateY: -8, scale: 1.035 }}
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ "--social-glow": `var(${s.glow})` } as CSSProperties}
-                    className="social-3d premium-glass rounded-2xl p-3 flex items-center gap-4 text-muted-foreground transition-all group border border-foreground/10"
+                    className="social-geo-tile premium-glass p-4 flex flex-col items-center justify-center gap-3 text-muted-foreground transition-all group border border-foreground/10 min-h-[128px]"
                   >
-                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-foreground/10 via-background/50 to-foreground/5 flex items-center justify-center group-hover:scale-110 transition-all duration-300 border border-foreground/10 shadow-inner">
+                    <div className="social-geo-icon w-12 h-12 rounded-[1.1rem] bg-gradient-to-br from-foreground/10 via-background/50 to-foreground/5 flex items-center justify-center group-hover:scale-110 transition-all duration-300 border border-foreground/10 shadow-inner">
                       <s.icon className={`w-5 h-5 text-primary ${s.color} transition-colors`} />
                     </div>
-                    <span className="font-semibold text-base sm:text-lg">{s.label}</span>
+                    <span className="font-semibold text-sm sm:text-base text-center">{s.label}</span>
                   </motion.a>
                 ))}
               </div>
@@ -101,8 +102,9 @@ const Contact = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="contact-panel-shell contact-panel-shell-alt"
           >
-            <Card3D glowColor="magenta" className="p-6 sm:p-8 md:p-10 h-full">
+            <Card3D glowColor="magenta" className="contact-layered-panel p-6 sm:p-8 md:p-10 h-full">
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 h-full flex flex-col">
                 <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4">Send a message</h3>
                 <input
@@ -111,7 +113,7 @@ const Contact = () => {
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input border border-foreground/10 outline-none transition-all text-sm"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border border-foreground/10 outline-none transition-all text-sm"
                 />
                 <input
                   type="email"
@@ -119,7 +121,7 @@ const Contact = () => {
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input border border-foreground/10 outline-none transition-all text-sm"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border border-foreground/10 outline-none transition-all text-sm"
                 />
                 <textarea
                   placeholder="Your message"
@@ -127,7 +129,7 @@ const Contact = () => {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input border border-foreground/10 outline-none transition-all text-sm resize-none flex-1"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border border-foreground/10 outline-none transition-all text-sm resize-none flex-1"
                 />
                 <motion.button
                   type="submit"
