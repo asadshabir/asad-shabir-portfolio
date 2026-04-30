@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Sparkles, Cpu, Zap } from "lucide-react";
+import type { CSSProperties } from "react";
 import Card3D from "./Card3D";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
 import PremiumBadge from "./PremiumBadge";
@@ -60,7 +61,7 @@ const About = () => (
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="expertise-card-wrap"
-              style={{ "--expertise-tone": `var(--expertise-${item.tone})` } as React.CSSProperties}
+              style={{ "--expertise-tone": `var(--expertise-${item.tone})` } as CSSProperties}
             >
               <Card3D glowColor={item.glow} className="expertise-card p-6 text-center group cursor-default min-h-[190px]">
                 <div className="expertise-content">
