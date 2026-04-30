@@ -226,7 +226,7 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
             transition={{ duration: 0.3 }}
-            className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full premium-glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
+            className="chat-ready-label px-3 py-1.5 sm:px-4 sm:py-2 rounded-full premium-glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
           >
             <motion.span
               animate={{ opacity: [0.7, 1, 0.7] }}
