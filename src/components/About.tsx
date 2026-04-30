@@ -5,9 +5,9 @@ import BackgroundBeams from "./aceternity/BackgroundBeams";
 import PremiumBadge from "./PremiumBadge";
 
 const items = [
-  { icon: Cpu, title: "AI & Agents", desc: "Agentic AI systems, RAG pipelines, and intelligent chatbots", glow: "cyan" as const },
-  { icon: Sparkles, title: "Full-Stack", desc: "React, Next.js, Python, FastAPI — end-to-end solutions", glow: "magenta" as const },
-  { icon: Zap, title: "Automation", desc: "Workflow automation and systems that run themselves", glow: "both" as const },
+  { icon: Cpu, title: "AI & Agents", desc: "Agentic AI systems, RAG pipelines, and intelligent chatbots", glow: "cyan" as const, tone: "cyan" },
+  { icon: Sparkles, title: "Full-Stack", desc: "React, Next.js, Python, FastAPI — end-to-end solutions", glow: "magenta" as const, tone: "violet" },
+  { icon: Zap, title: "Automation", desc: "Workflow automation and systems that run themselves", glow: "emerald" as const, tone: "emerald" },
 ];
 
 const About = () => (
@@ -60,6 +60,7 @@ const About = () => (
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="expertise-card-wrap"
+              style={{ "--expertise-tone": `var(--expertise-${item.tone})` } as React.CSSProperties}
             >
               <Card3D glowColor={item.glow} className="expertise-card p-6 text-center group cursor-default min-h-[190px]">
                 <div className="expertise-content">
