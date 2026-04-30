@@ -237,6 +237,14 @@
     stroke-width: 3.25;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+
+  .heartbeat-base {
+    opacity: 0.72;
+    filter: blur(0.15px);
+  }
+
+  .heartbeat-pulse {
     stroke-dasharray: 510;
     animation: heartbeat-trace 2.25s ease-in-out infinite;
   }
