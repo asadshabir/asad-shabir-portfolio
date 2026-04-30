@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Bot, Sparkles, ExternalLink } from "lucide-react";
+import { X, Send, Sparkles, ExternalLink } from "lucide-react";
 import { answerAboutAsad, type ChatResponse } from "@/lib/asadKnowledge";
+import chatbotIcon from "@/assets/chatbot-premium-icon.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -225,7 +226,7 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
             transition={{ duration: 0.3 }}
-            className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full premium-glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
+            className="chat-ready-label px-3 py-1.5 sm:px-4 sm:py-2 rounded-full premium-glass-strong border border-primary/40 text-xs sm:text-sm font-semibold text-primary neon-text-cyan whitespace-nowrap shadow-lg shadow-primary/20"
           >
             <motion.span
               animate={{ opacity: [0.7, 1, 0.7] }}
@@ -238,17 +239,21 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
       </AnimatePresence>
 
       <div className="relative w-14 h-14 sm:w-16 sm:h-16 chat-geo-stage">
-        <div className="absolute -inset-3 chat-geo-aura" />
-        <div className="absolute -inset-1 chat-geo-ring animate-spin-slow" />
-        <div className="chat-geo-orb absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-          <div className="absolute left-3 top-2 h-3 w-6 rounded-full bg-foreground/35 blur-sm" />
-          <div className="absolute inset-[7px] chat-geo-inner" />
+        <div className="absolute -inset-3 chatbot-photo-aura" />
+        <div className="absolute -inset-1 chatbot-photo-ring animate-spin-slow" />
+        <div className="chatbot-photo-shell absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+          <div className="absolute inset-0 chatbot-photo-glass" />
           <motion.div
-            animate={{ rotate: [0, 3, -3, 0] }}
+            animate={{ rotate: [0, 1.6, -1.6, 0] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            className="relative z-10"
+            className="relative z-10 h-[calc(100%-8px)] w-[calc(100%-8px)] overflow-hidden rounded-full"
           >
-            <Bot className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground" />
+            <img
+              src={chatbotIcon}
+              alt="Ask Asad AI chatbot"
+              className="h-full w-full rounded-full object-cover object-center"
+              draggable={false}
+            />
           </motion.div>
         </div>
 
