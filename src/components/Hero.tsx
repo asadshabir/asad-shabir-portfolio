@@ -156,7 +156,8 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
                   <stop offset="100%" stopColor="hsl(var(--accent))" />
                 </linearGradient>
               </defs>
-              <path d="M4 24 H115 L132 24 L143 8 L157 36 L171 15 L184 24 H416" />
+              <path className="heartbeat-base" d="M4 24 H115 L132 24 L143 8 L157 36 L171 15 L184 24 H416" />
+              <path className="heartbeat-pulse" d="M4 24 H115 L132 24 L143 8 L157 36 L171 15 L184 24 H416" />
             </svg>
           </motion.div>
 
