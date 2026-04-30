@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { X } from "lucide-react";
 import profilePhoto from "@/assets/portfolio_profile-2.png";
 
 const links = [
@@ -53,8 +53,21 @@ const Navbar = () => {
         </div>
 
         {/* Mobile toggle */}
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-foreground">
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileOpen}
+          className="nav-toggle-3d md:hidden group"
+        >
+          {mobileOpen ? (
+            <X className="relative z-10 h-5 w-5" />
+          ) : (
+            <span className="relative z-10 flex h-5 w-6 flex-col justify-center gap-1.5">
+              <span className="nav-toggle-bar w-6" />
+              <span className="nav-toggle-bar w-4 self-end" />
+              <span className="nav-toggle-bar w-5" />
+            </span>
+          )}
         </button>
       </div>
 
@@ -63,7 +76,7 @@ const Navbar = () => {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden premium-glass-strong mt-2 mx-4 rounded-xl p-4 space-y-3 border border-primary/20"
+          className="md:hidden premium-mobile-menu mt-2 mx-4 rounded-2xl p-4 space-y-3"
         >
           {links.map((l) => (
             <a
