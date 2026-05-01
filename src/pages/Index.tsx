@@ -75,7 +75,7 @@ const Index = () => {
       </footer>
 
       <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />
-      <ScrollToTop />
+      <ScrollToTop hidden={chatOpen} />
       {!chatOpen && <ChatButton onClick={() => setChatOpen(true)} />}
     </div>
   );

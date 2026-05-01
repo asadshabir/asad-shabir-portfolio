@@ -57,7 +57,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 md:hidden"
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[80] md:hidden"
             onClick={onClose}
           />
           <motion.div
@@ -65,7 +65,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            className="fixed z-50 premium-glass-strong flex flex-col overflow-hidden
+            className="fixed z-[90] premium-glass-strong flex flex-col overflow-hidden
               inset-0 rounded-none md:rounded-2xl
               md:bottom-24 md:right-4 lg:right-8 md:top-auto md:left-auto
               md:w-[400px] md:h-[540px] md:max-w-[calc(100vw-2rem)]"
@@ -252,6 +252,7 @@ export const ChatButton = ({ onClick }: { onClick: () => void }) => {
               src={chatbotIcon}
               alt="Ask Asad AI chatbot"
               className="h-full w-full rounded-full object-cover object-center"
+              style={{ filter: "none", borderRadius: "50%" }}
               draggable={false}
             />
           </motion.div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
-const ScrollToTop = () => {
+const ScrollToTop = ({ hidden = false }: { hidden?: boolean }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const ScrollToTop = () => {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !hidden && (
         <motion.button
           type="button"
           aria-label="Scroll to top"
