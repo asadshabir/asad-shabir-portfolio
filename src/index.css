@@ -161,7 +161,7 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.9), hsl(var(--accent) / 0.85), transparent);
+    background: linear-gradient(90deg, transparent 0%, hsl(var(--primary)) 25%, hsl(var(--accent)) 75%, transparent 100%);
     box-shadow: 0 0 18px hsl(var(--primary) / 0.36), 0 0 22px hsl(var(--accent) / 0.24);
   }
 
@@ -554,7 +554,7 @@
     content: "";
     position: absolute;
     inset: -45% -80%;
-    background: linear-gradient(115deg, transparent 35%, hsl(var(--foreground) / 0.18), transparent 62%);
+    background: linear-gradient(115deg, transparent 35%, hsl(var(--foreground) / 0.22), transparent 62%);
     transform: translateX(-55%) rotate(8deg);
     opacity: 0;
     transition: transform 700ms ease, opacity 400ms ease;
@@ -564,6 +564,7 @@
   .glare-sweep:hover::after {
     opacity: 1;
     transform: translateX(55%) rotate(8deg);
+    animation: metallic-sweep 1.2s ease-out;
   }
 
   .ambient-mesh {
@@ -619,6 +620,12 @@
 @keyframes holographic-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+@keyframes metallic-sweep {
+  0% { transform: translateX(-80%) rotate(8deg); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateX(80%) rotate(8deg); opacity: 0; }
 }
 
 @media (max-width: 640px) {
