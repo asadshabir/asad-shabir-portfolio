@@ -6,8 +6,11 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Certifications from "@/components/Certifications";
+import CaseStudiesSection from "@/components/CaseStudiesSection";
 import Contact from "@/components/Contact";
 import TrustSection from "@/components/TrustSection";
+import ProjectEstimator from "@/components/ProjectEstimator";
+import ResumeReviewer from "@/components/ResumeReviewer";
 import EmailCapture from "@/components/EmailCapture";
 import Sidebar from "@/components/Sidebar";
 import SeoMeta from "@/components/seo/SeoMeta";
@@ -61,6 +64,9 @@ const Index = () => {
       <Projects />
 
       <SectionDivider />
+      <CaseStudiesSection />
+
+      <SectionDivider />
       <Certifications />
 
       <SectionDivider />
@@ -68,6 +74,12 @@ const Index = () => {
 
       <SectionDivider />
       <TrustSection />
+
+      <SectionDivider />
+      <ProjectEstimator />
+
+      <SectionDivider />
+      <ResumeReviewer />
 
       <SectionDivider />
       <EmailCapture />
