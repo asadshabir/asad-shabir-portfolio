@@ -8,7 +8,7 @@ import {
   MessageSquare,
   MousePointerClick,
   RefreshCw,
-  Resume,
+  FileText,
   Shield,
   Sparkles,
   UserCheck,
@@ -64,7 +64,7 @@ const METRIC_CONFIGS: {
   {
     key: "resume_downloads",
     label: "Resume Downloads",
-    icon: <Resume className="w-5 h-5" />,
+    icon: <FileText className="w-5 h-5" />,
     color: "var(--primary)",
   },
   {

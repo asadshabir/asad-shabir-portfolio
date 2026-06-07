@@ -5,7 +5,12 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
+import Certifications from "@/components/Certifications";
 import Contact from "@/components/Contact";
+import TrustSection from "@/components/TrustSection";
+import EmailCapture from "@/components/EmailCapture";
+import Sidebar from "@/components/Sidebar";
+import SeoMeta from "@/components/seo/SeoMeta";
 import ChatBot, { ChatButton } from "@/components/ChatBot";
 import ScrollProgress from "@/components/ScrollProgress";
 import SectionDivider from "@/components/SectionDivider";
@@ -30,21 +35,47 @@ const Index = () => {
 
   return (
     <div className="premium-page min-h-screen overflow-x-hidden relative">
+      {/* Global SEO */}
+      <SeoMeta
+        title="Asad Shabir — AI Full-Stack Developer"
+        description="AI Full-Stack Developer building intelligent agents, full-stack apps, and automation systems. Available for freelance and contract work."
+      />
+
       <div className="fixed inset-0 pointer-events-none ambient-mesh opacity-50" />
+
+      {/* Persistent Elements */}
       <ScrollProgress />
       <Navbar />
+      <Sidebar />
+
+      {/* Main Sections */}
       <Hero onOpenChat={() => setChatOpen(true)} />
+
       <SectionDivider />
       <About />
+
       <SectionDivider />
       <Skills />
+
       <SectionDivider />
       <Projects />
+
+      <SectionDivider />
+      <Certifications />
+
       <SectionDivider />
       <Experience />
+
+      <SectionDivider />
+      <TrustSection />
+
+      <SectionDivider />
+      <EmailCapture />
+
       <SectionDivider />
       <Contact />
 
+      {/* Premium Footer */}
       <footer className="obsidian-footer relative overflow-hidden pb-28 pt-12 sm:pb-14 sm:pt-16">
         <div className="obsidian-footer-border" />
         <div className="container relative z-10 px-4 sm:px-6">
@@ -93,6 +124,7 @@ const Index = () => {
         </div>
       </footer>
 
+      {/* Chatbot */}
       <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />
       {!chatOpen && <ScrollToTop />}
       {!chatOpen && <ChatButton onClick={() => setChatOpen(true)} />}

@@ -152,30 +152,6 @@ const TrustSection = () => {
           </div>
         </div>
 
-        {/* Project highlights — honest, verifiable outcomes */}
-        <div className="max-w-3xl mx-auto mt-10">
-          <p className="text-center text-xs font-mono uppercase tracking-widest text-muted-foreground/60 mb-6">
-            What I&apos;ve delivered
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {projectHighlights.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6 + i * 0.1 }}
-                className="flex items-start gap-3 p-4 rounded-xl bg-card/30 border border-border/40"
-              >
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <item.icon className="w-4 h-4 text-primary" />
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
         {/* Trust statement */}
         <motion.p
           initial={{ opacity: 0 }}

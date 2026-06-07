@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, Sparkles } from "lucide-react";
+import { ExternalLink, Github, Sparkles, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
 import Card3D from "./Card3D";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
 import PremiumBadge from "./PremiumBadge";
@@ -14,6 +15,19 @@ const filters = [
 
 const projects = [
   {
+    title: "MediBridge",
+    description: "AI-powered healthcare management platform connecting patients, doctors, and pharmacies with AI-driven diagnostics, appointment scheduling, and prescription management.",
+    category: "AI & Agents",
+    tech: ["Python", "FastAPI", "React", "PostgreSQL", "OpenAI", "AWS"],
+    live: "https://medibridge.vercel.app",
+    github: "https://github.com/asadshabir/medibridge",
+    gradient: "from-emerald-600/30 via-primary/15 to-teal-900/30",
+    border: "border-emerald-400/40",
+    image: "/medibridge.png",
+    featured: true,
+    caseStudy: "/case-studies/medibridge-healthcare-platform",
+  },
+  {
     title: "ASA-Mind",
     description: "Intelligent AI chat assistant powered by OpenAI Agents SDK with multi-agent orchestration, streaming responses, and conversational memory.",
     category: "AI & Agents",
@@ -22,20 +36,21 @@ const projects = [
     github: "https://github.com/asadshabir/asa-mind",
     gradient: "from-violet-600/30 via-primary/15 to-violet-900/30",
     border: "border-violet-400/40",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80",
+    image: "/asa-mind.png",
     featured: true,
   },
   {
     title: "AI-Powered Robotics Book",
     description: "Interactive AI-generated educational book exploring robotics × artificial intelligence with rich visuals and chapter-level Q&A.",
     category: "AI & Agents",
-    tech: ["Next.js", "OpenAI", "TypeScript", "Tailwind"],
+    tech: ["Next.js", "OpenAI", "TypeScript", "Tailwind", "Three.js"],
     live: "https://robotics-ai-book.vercel.app",
     github: "https://github.com/asadshabir/robotics-ai-book",
     gradient: "from-purple-600/30 via-primary/15 to-indigo-900/30",
     border: "border-purple-400/40",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80",
+    image: "/robotic-book.png",
     featured: false,
+    caseStudy: "/case-studies/ai-robotics-book-platform",
   },
   {
     title: "Full-Stack E-Commerce Platform",
@@ -70,7 +85,7 @@ const projects = [
     github: "https://github.com/asadshabir/ai-resume-analyzer",
     gradient: "from-violet-600/30 via-indigo-500/15 to-primary/30",
     border: "border-violet-400/40",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+    image: "/resume-analyzer.png",
     featured: false,
   },
   {
@@ -82,7 +97,19 @@ const projects = [
     github: "https://github.com/asadshabir/realtime-dashboard",
     gradient: "from-fuchsia-600/30 via-accent/15 to-primary/30",
     border: "border-accent/40",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80",
+    image: "/realtime-dashboard.png",
+    featured: false,
+  },
+  {
+    title: "Todo App",
+    description: "Full-stack task management application with real-time sync, drag-and-drop kanban board, team collaboration, and push notifications.",
+    category: "Full-Stack Apps",
+    tech: ["React", "Node.js", "PostgreSQL", "WebSockets"],
+    live: "https://todo-asad.vercel.app",
+    github: "https://github.com/asadshabir/todo-app",
+    gradient: "from-amber-600/30 via-primary/15 to-orange-900/30",
+    border: "border-amber-400/40",
+    image: "/todo-app.png",
     featured: false,
   },
 ];
@@ -206,7 +233,7 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-3">
                       <a
                         href={project.live}
                         target="_blank"
@@ -223,6 +250,14 @@ const Projects = () => {
                       >
                         <Github className="w-3.5 h-3.5" /> GitHub
                       </a>
+                      {"caseStudy" in project && project.caseStudy && (
+                        <Link
+                          to={project.caseStudy}
+                          className="project-action-link flex items-center gap-1.5 text-sm text-accent font-medium"
+                        >
+                          <FileText className="w-3.5 h-3.5" /> Case Study
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </Card3D>
