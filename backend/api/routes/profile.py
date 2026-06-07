@@ -78,17 +78,24 @@ async def get_profile_data():
         name=profile.get("name", "Asad Shabir"),
         title=profile.get("title", "AI-Native Full-Stack Developer"),
         location="Sehwan Sharif, Sindh, Pakistan",
-        background=profile.get("personal", {}).get("location", "Sehwan Sharif, Sindh"),
-        family=profile.get("family"),
-        education=profile.get("education", []),
+        background=profile.get("location", "Sehwan Sharif, Sindh"),
+        family=None,
+        education=[],
         skills={
-            "core": skills_data.get("core_skills", []),
-            "technical": skills_data.get("technical_skills", []),
-            "general_strengths": skills_data.get("general_strengths", []),
+            "core": next((s["items"] for s in skills_data if s["category"] == "AI/ML"), []),
+            "technical": [item for s in skills_data if s["category"] in ("Backend", "Frontend", "DevOps") for item in s["items"]],
+            "general_strengths": [],
         },
-        projects=projects_data.get("projects", []),
+        projects=[
+            {
+                "title": p["title"],
+                "description": p["description"],
+                "tech": ", ".join(p["tech"]) if isinstance(p.get("tech"), list) else str(p.get("tech", "")),
+            }
+            for p in projects_data
+        ],
         experience_story=experience,
-        goals=profile.get("goals", []),
+        goals=[],
         contact=ContactResponse(
             email=contact.get("email"),
             phone=contact.get("phone"),
