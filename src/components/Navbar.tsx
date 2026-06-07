@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, X } from "lucide-react";
-import profilePhoto from "@/assets/portfolio_profile-2.png";
 import { useNavbarScroll } from "@/hooks/useNavbarScroll";
+import navbarAvatar from "@/assets/avatar.png";
 
 const links = [
   { label: "About", href: "#about" },
@@ -69,7 +69,7 @@ const Navbar = () => {
         >
           <span className="premium-brand-avatar">
             <img
-              src='src/assets/avatar.png'
+              src={navbarAvatar}
               alt="Asad Shabir"
               className="h-full w-full object-cover object-top"
             />
