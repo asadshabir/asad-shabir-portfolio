@@ -1,0 +1,88 @@
+"""
+Tests for function tools.
+Tools are tested by verifying they return non-empty strings
+and don't raise exceptions.
+"""
+import pytest
+from backend.services.tools_profile import get_profile_info, get_profile_info_tool
+from backend.services.tools_projects import get_projects, get_projects_tool
+from backend.services.tools_technical import get_technical_skills, get_technical_skills_tool
+from backend.services.tools_contact import get_contact_info, get_contact_info_tool
+
+
+class TestProfileTools:
+    def test_get_profile_info_returns_string(self):
+        """get_profile_info returns a non-empty string."""
+        result = get_profile_info()
+        assert isinstance(result, str)
+        assert len(result) > 0
+        assert "Asad" in result
+
+    def test_get_profile_info_contains_name(self):
+        """Profile contains the name."""
+        result = get_profile_info()
+        assert "Asad Shabir" in result
+
+    def test_get_profile_info_contains_title(self):
+        """Profile contains the title."""
+        result = get_profile_info()
+        assert "Full-Stack" in result or "AI" in result
+
+    def test_get_profile_info_tool_matches(self):
+        """Tool wrapper returns the same content."""
+        result = get_profile_info_tool()
+        assert result == get_profile_info()
+
+
+class TestProjectsTools:
+    def test_get_projects_returns_string(self):
+        """get_projects returns a non-empty string."""
+        result = get_projects()
+        assert isinstance(result, str)
+        assert len(result) > 0
+
+    def test_get_projects_contains_header(self):
+        """Projects output has a header."""
+        result = get_projects()
+        assert "Projects" in result or "projects" in result
+
+    def test_get_projects_tool_matches(self):
+        """Tool wrapper returns the same content."""
+        result = get_projects_tool()
+        assert result == get_projects()
+
+
+class TestTechnicalTools:
+    def test_get_technical_skills_returns_string(self):
+        """get_technical_skills returns a non-empty string."""
+        result = get_technical_skills()
+        assert isinstance(result, str)
+        assert len(result) > 0
+
+    def test_get_technical_skills_contains_skills(self):
+        """Skills output mentions technical skills."""
+        result = get_technical_skills()
+        assert "skill" in result.lower() or "python" in result.lower()
+
+    def test_get_technical_skills_tool_matches(self):
+        """Tool wrapper returns the same content."""
+        result = get_technical_skills_tool()
+        assert result == get_technical_skills()
+
+
+class TestContactTools:
+    def test_get_contact_info_returns_string(self):
+        """get_contact_info returns a non-empty string."""
+        result = get_contact_info()
+        assert isinstance(result, str)
+        assert len(result) > 0
+
+    def test_get_contact_info_contains_contact(self):
+        """Contact output mentions contact info."""
+        result = get_contact_info()
+        assert "Contact" in result or "Email" in result or "email" in result
+
+    def test_get_contact_info_tool_matches(self):
+        """Tool wrapper returns the same content."""
+        result = get_contact_info_tool()
+        assert result == get_contact_info()

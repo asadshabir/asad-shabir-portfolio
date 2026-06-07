@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+.env
+
+# Claude AI config (local)
+.claude/
+
+# Python / Backend cache
+__pycache__/
+*.pyc
+.pytest_cache/
