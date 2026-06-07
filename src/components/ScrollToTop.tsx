@@ -16,6 +16,8 @@ const ScrollToTop = ({ hidden = false }: { hidden?: boolean }) => {
     document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  if (hidden) return null;
+
   return (
     <AnimatePresence>
       {visible && !hidden && (
@@ -29,7 +31,7 @@ const ScrollToTop = ({ hidden = false }: { hidden?: boolean }) => {
           whileTap={{ scale: 0.94 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
           onClick={scrollToHero}
-          className="scroll-top-3d fixed bottom-6 left-4 sm:left-6 md:left-8 z-50 h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center text-primary"
+          className="scroll-top-3d fixed bottom-6 left-4 sm:left-6 md:left-8 z-[50] h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center text-primary"
           style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
         >
           <ArrowUp className="relative z-10 h-5 w-5 sm:h-6 sm:w-6" />

@@ -53,14 +53,14 @@ const Card3D = ({ children, className = "", glowColor = "cyan", intensity = 15 }
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ rotateX, rotateY }}
-      whileHover={{ y: -10, scale: 1.018, boxShadow: shadowColors[glowColor] }}
+      whileHover={{ y: -20, scale: 1.025, rotateX: -15, rotateY: 15, boxShadow: shadowColors[glowColor] }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       style={{
         perspective: "1000px",
         transformStyle: "preserve-3d",
         background: `radial-gradient(circle at ${glowX}% ${glowY}%, ${glowColors[glowColor]}, transparent 56%), linear-gradient(145deg, hsl(var(--card) / 0.58), hsl(var(--background) / 0.25))`,
       }}
-      className={`premium-glass glare-sweep rounded-2xl relative overflow-hidden ${className}`}
+      className={`premium-project-card premium-glass glare-sweep rounded-2xl relative overflow-hidden ${className}`}
     >
       {/* Neon border glow on hover */}
       <div
@@ -73,7 +73,7 @@ const Card3D = ({ children, className = "", glowColor = "cyan", intensity = 15 }
             : "inset 0 0 38px hsl(var(--primary) / 0.14), 0 0 34px hsl(var(--primary) / 0.12)",
         }}
       />
-      <div style={{ transform: "translateZ(20px)" }}>
+      <div className="premium-project-card__content" style={{ transform: "translateZ(34px)" }}>
         {children}
       </div>
     </motion.div>

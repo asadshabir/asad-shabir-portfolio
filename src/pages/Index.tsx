@@ -10,7 +10,7 @@ import ChatBot, { ChatButton } from "@/components/ChatBot";
 import ScrollProgress from "@/components/ScrollProgress";
 import SectionDivider from "@/components/SectionDivider";
 import ScrollToTop from "@/components/ScrollToTop";
-import { Mail, Linkedin, Github, Facebook } from "lucide-react";
+import { Bot, Cpu, Facebook, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import type { CSSProperties } from "react";
 
 const footerSocials = [
@@ -29,8 +29,8 @@ const Index = () => {
   const [chatOpen, setChatOpen] = useState(false);
 
   return (
-    <div className="min-h-screen overflow-x-hidden relative">
-      <div className="fixed inset-0 pointer-events-none ambient-mesh opacity-40" />
+    <div className="premium-page min-h-screen overflow-x-hidden relative">
+      <div className="fixed inset-0 pointer-events-none ambient-mesh opacity-50" />
       <ScrollProgress />
       <Navbar />
       <Hero onOpenChat={() => setChatOpen(true)} />
@@ -45,37 +45,56 @@ const Index = () => {
       <SectionDivider />
       <Contact />
 
-      {/* Footer */}
-      <footer className="premium-footer relative overflow-hidden py-10 sm:py-12 pb-28 sm:pb-12">
-        <div className="footer-top-glow absolute inset-x-0 top-0 h-px" />
-        <div className="container px-4 sm:px-6 flex flex-col items-center gap-5 relative z-10">
-          <div className="text-center">
-            <p className="text-sm font-mono tracking-widest uppercase text-primary mb-2">Premium AI Portfolio</p>
-            <h2 className="text-2xl sm:text-3xl font-black holographic-text">Asad Shabir</h2>
+      <footer className="obsidian-footer relative overflow-hidden pb-28 pt-12 sm:pb-14 sm:pt-16">
+        <div className="obsidian-footer-border" />
+        <div className="container relative z-10 px-4 sm:px-6">
+          <div className="footer-glass-panel mx-auto max-w-6xl px-5 py-8 sm:px-8 sm:py-10">
+            <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+              <div className="space-y-5">
+                <div className="powered-ai-badge">
+                  <Sparkles className="h-4 w-4" />
+                  Powered by AI
+                </div>
+                <div>
+                  <p className="mb-2 text-xs font-mono uppercase tracking-[0.38em] text-primary/80">Premium AI Portfolio</p>
+                  <h2 className="text-3xl font-black sm:text-5xl holographic-text">Asad Shabir</h2>
+                </div>
+                <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
+                  High-end AI agents, full-stack products, automation systems, and production-grade digital experiences.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-5 md:items-end">
+                <div className="flex items-center gap-3">
+                  <span className="footer-tech-chip"><Bot className="h-4 w-4" /> AI Native</span>
+                  <span className="footer-tech-chip"><Cpu className="h-4 w-4" /> Full Stack</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  {footerSocials.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      style={{ "--social-glow": `var(${social.glow})` } as CSSProperties}
+                      className="footer-orb-link"
+                    >
+                      <social.icon className="h-4 w-4" />
+                    </a>
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground sm:text-sm">
+                  © {new Date().getFullYear()} Asad Shabir. Built with passion & AI.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            {footerSocials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                style={{ "--social-glow": `var(${s.glow})` } as CSSProperties}
-                className="social-3d footer-social-link w-10 h-10 rounded-2xl premium-glass flex items-center justify-center text-muted-foreground hover:-translate-y-1 transition-all duration-300 border border-foreground/10"
-              >
-                <s.icon className="w-4 h-4" />
-              </a>
-            ))}
-          </div>
-          <p className="text-sm text-muted-foreground text-center leading-relaxed">
-            © {new Date().getFullYear()} Asad Shabir. Built with passion & AI.
-          </p>
         </div>
       </footer>
 
       <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />
-      <ScrollToTop hidden={chatOpen} />
+      {!chatOpen && <ScrollToTop />}
       {!chatOpen && <ChatButton onClick={() => setChatOpen(true)} />}
     </div>
   );

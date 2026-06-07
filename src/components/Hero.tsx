@@ -5,6 +5,7 @@ import ParticleBackground from "./ParticleBackground";
 import FlipWords from "./aceternity/FlipWords";
 import SparklesEffect from "./aceternity/Sparkles";
 import profilePhoto from "@/assets/portfolio_profile-2.png";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 const titles = [
   "Full-Stack Developer",
@@ -27,6 +28,7 @@ const orbitIcons = [Bot, Cpu, Network, Workflow];
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   const photoRef = useRef<HTMLDivElement>(null);
   const [photoTilt, setPhotoTilt] = useState({ x: 0, y: 0 });
+  const { trackDownload } = useAnalytics();
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!photoRef.current) return;
@@ -52,7 +54,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] animate-float" style={{ animationDelay: "1.5s" }} />
       <div className="absolute bottom-16 left-1/3 w-80 h-80 rounded-full bg-emerald/10 blur-[130px] animate-float" style={{ animationDelay: "2.2s" }} />
 
-      <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-20 px-4 sm:px-6 py-24 lg:py-20">
+      <div className="container relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-20 px-4 sm:px-6 pt-28 pb-20 lg:py-20">
         {/* 3D Profile Photo */}
         <motion.div
           ref={photoRef}
@@ -62,7 +64,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{ perspective: "1200px" }}
-          className="relative flex-shrink-0 order-1 lg:order-none"
+          className="relative flex-shrink-0 order-2 lg:order-none"
         >
           <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-br from-primary/10 via-accent/10 to-emerald/10 blur-3xl" />
           <motion.div
@@ -121,7 +123,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
         </motion.div>
 
         {/* Text Content */}
-        <div className="flex-1 text-center lg:text-left">
+        <div className="flex-1 text-center lg:text-left order-1 lg:order-none">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -146,18 +148,71 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             initial={{ opacity: 0, scaleX: 0.7 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.42, duration: 0.7 }}
-            className="heartbeat-line-wrap mx-auto lg:mx-0 mb-5"
+            className="heartbeat-line-wrap heartbeat-shock mx-auto lg:mx-0 mb-5"
           >
-            <svg className="heartbeat-line" viewBox="0 0 420 44" preserveAspectRatio="none" aria-hidden="true">
+            <svg className="heartbeat-line" viewBox="0 0 640 80" preserveAspectRatio="none" aria-hidden="true">
               <defs>
                 <linearGradient id="heartbeatGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="hsl(var(--primary))" />
-                  <stop offset="52%" stopColor="hsl(var(--emerald))" />
-                  <stop offset="100%" stopColor="hsl(var(--accent))" />
+                  <stop offset="0%" stopColor="hsl(var(--primary) / 0)" />
+                  <stop offset="18%" stopColor="hsl(var(--primary))" />
+                  <stop offset="54%" stopColor="hsl(var(--foreground))" />
+                  <stop offset="82%" stopColor="hsl(var(--primary))" />
+                  <stop offset="100%" stopColor="hsl(var(--primary) / 0)" />
                 </linearGradient>
+                <filter id="heartbeatNeon" x="-20%" y="-80%" width="140%" height="260%">
+                  <feGaussianBlur stdDeviation="3.6" result="glow" />
+                  <feMerge>
+                    <feMergeNode in="glow" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <filter id="codeSymbolGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
-              <path className="heartbeat-base" d="M4 24 H115 L132 24 L143 8 L157 36 L171 15 L184 24 H416" />
-              <path className="heartbeat-pulse" d="M4 24 H115 L132 24 L143 8 L157 36 L171 15 L184 24 H416" />
+              <path className="heartbeat-base" d="M8 42 H120 L145 42 L164 16 L190 68 L220 25 L244 42 H320 L344 42 L360 30 L378 52 L398 42 H632" />
+              <path className="heartbeat-pulse" filter="url(#heartbeatNeon)" d="M8 42 H120 L145 42 L164 16 L190 68 L220 25 L244 42 H320 L344 42 L360 30 L378 52 L398 42 H632" />
+
+              {/* Premium coding symbols with glass backgrounds */}
+              <g className="heartbeat-code-symbol" style={{ animationDelay: '0s' }}>
+                <rect x="82" y="26" width="32" height="20" rx="6" fill="hsl(var(--primary) / 0.15)" stroke="hsl(var(--primary) / 0.4)" strokeWidth="1" filter="url(#codeSymbolGlow)" />
+                <text x="98" y="40" fill="hsl(var(--primary))" fontSize="13" fontFamily="JetBrains Mono, monospace" fontWeight="700" textAnchor="middle" filter="url(#codeSymbolGlow)">&lt;/&gt;</text>
+              </g>
+
+              <g className="heartbeat-code-symbol" style={{ animationDelay: '0.2s' }}>
+                <rect x="168" y="8" width="28" height="20" rx="6" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent) / 0.4)" strokeWidth="1" filter="url(#codeSymbolGlow)" />
+                <text x="182" y="22" fill="hsl(var(--accent))" fontSize="13" fontFamily="JetBrains Mono, monospace" fontWeight="700" textAnchor="middle" filter="url(#codeSymbolGlow)">&#123;&#125;</text>
+              </g>
+
+              <g className="heartbeat-code-symbol" style={{ animationDelay: '0.4s' }}>
+                <circle cx="210" cy="65" r="10" fill="hsl(var(--emerald) / 0.15)" stroke="hsl(var(--emerald) / 0.4)" strokeWidth="1" filter="url(#codeSymbolGlow)" />
+                <text x="210" y="69" fill="hsl(var(--emerald))" fontSize="12" fontFamily="JetBrains Mono, monospace" fontWeight="700" textAnchor="middle" filter="url(#codeSymbolGlow)">;</text>
+              </g>
+
+              <g className="heartbeat-code-symbol" style={{ animationDelay: '0.1s' }}>
+                <rect x="277" y="26" width="30" height="20" rx="6" fill="hsl(var(--primary) / 0.15)" stroke="hsl(var(--primary) / 0.4)" strokeWidth="1" filter="url(#codeSymbolGlow)" />
+                <text x="292" y="40" fill="hsl(var(--primary))" fontSize="12" fontFamily="JetBrains Mono, monospace" fontWeight="700" textAnchor="middle" filter="url(#codeSymbolGlow)">=&gt;</text>
+              </g>
+
+              <g className="heartbeat-code-symbol" style={{ animationDelay: '0.3s' }}>
+                <rect x="362" y="36" width="28" height="20" rx="6" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent) / 0.4)" strokeWidth="1" filter="url(#codeSymbolGlow)" />
+                <text x="376" y="50" fill="hsl(var(--accent))" fontSize="12" fontFamily="JetBrains Mono, monospace" fontWeight="700" textAnchor="middle" filter="url(#codeSymbolGlow)">( )</text>
+              </g>
+
+              <g className="heartbeat-code-symbol" style={{ animationDelay: '0.5s' }}>
+                <rect x="442" y="26" width="28" height="20" rx="6" fill="hsl(var(--emerald) / 0.15)" stroke="hsl(var(--emerald) / 0.4)" strokeWidth="1" filter="url(#codeSymbolGlow)" />
+                <text x="456" y="40" fill="hsl(var(--emerald))" fontSize="13" fontFamily="JetBrains Mono, monospace" fontWeight="700" textAnchor="middle" filter="url(#codeSymbolGlow)">&#123;&#125;</text>
+              </g>
+
+              <g className="heartbeat-code-symbol" style={{ animationDelay: '0.15s' }}>
+                <rect x="542" y="26" width="32" height="20" rx="6" fill="hsl(var(--primary) / 0.15)" stroke="hsl(var(--primary) / 0.4)" strokeWidth="1" filter="url(#codeSymbolGlow)" />
+                <text x="558" y="40" fill="hsl(var(--primary))" fontSize="13" fontFamily="JetBrains Mono, monospace" fontWeight="700" textAnchor="middle" filter="url(#codeSymbolGlow)">&lt;/&gt;</text>
+              </g>
             </svg>
           </motion.div>
 
@@ -194,16 +249,16 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={scrollToProjects}
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary via-emerald to-accent text-primary-foreground font-semibold neon-glow-cyan transition-all text-sm sm:text-base shadow-2xl shadow-primary/20"
+              className="premium-glass-button premium-glass-button--primary group"
             >
               <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-              Explore My Projects
+              View My Work
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={onOpenChat}
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl premium-glass border-primary/30 text-primary font-semibold hover:neon-glow-cyan transition-all text-sm sm:text-base"
+              className="premium-glass-button group"
             >
               <MessageCircle className="w-4 h-4" />
               Talk to My AI
@@ -211,9 +266,10 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             <motion.a
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              href="/Asad_Shabir_Resume.pdf"
-              download="Asad_Shabir_Resume.pdf"
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl premium-glass border-accent/30 text-accent font-semibold hover:neon-glow-magenta transition-all text-sm sm:text-base"
+              href="/Asad_Shabir_Developer.pdf"
+              download="Asad_Shabir_Developer.pdf"
+              onClick={trackDownload}
+              className="premium-glass-button premium-glass-button--magenta group"
             >
               <Download className="w-4 h-4" />
               Download Resume

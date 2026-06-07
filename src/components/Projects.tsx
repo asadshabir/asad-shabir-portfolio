@@ -138,7 +138,7 @@ const Projects = () => {
         </div>
 
         {/* Card Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 max-w-6xl mx-auto">
+        <div className="premium-project-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 max-w-6xl mx-auto">
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
               <motion.div
@@ -151,7 +151,7 @@ const Projects = () => {
               >
                 <Card3D
                   glowColor={project.category === "AI & Agents" ? "magenta" : project.category === "Automation Tools" ? "cyan" : "both"}
-                  className={`overflow-hidden group h-full ${project.border} min-h-[430px]`}
+                  className={`project-card-1500 overflow-hidden group h-full ${project.border} min-h-[430px]`}
                 >
                   {/* Project image */}
                   <div className={`relative h-40 sm:h-48 overflow-hidden bg-gradient-to-br ${project.gradient}`}>
@@ -211,7 +211,7 @@ const Projects = () => {
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium"
+                        className="project-action-link flex items-center gap-1.5 text-sm text-primary font-medium"
                       >
                         <ExternalLink className="w-3.5 h-3.5" /> Live Demo
                       </a>
@@ -219,7 +219,7 @@ const Projects = () => {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+                        className="project-action-link flex items-center gap-1.5 text-sm text-muted-foreground"
                       >
                         <Github className="w-3.5 h-3.5" /> GitHub
                       </a>
