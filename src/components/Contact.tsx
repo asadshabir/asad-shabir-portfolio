@@ -1,7 +1,9 @@
 import { useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Facebook, Download, Send, Heart } from "lucide-react";
+import { Mail, Linkedin, Github, Facebook, Download, Send, Heart, Loader2, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { submitContact } from "@/lib/contactService";
 import Card3D from "./Card3D";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
 
@@ -20,16 +22,57 @@ const socials = [
 
 const Contact = () => {
   const { toast } = useToast();
+  const { trackContact } = useAnalytics();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
+
+    setFieldErrors({});
     setSending(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon!" });
-    setForm({ name: "", email: "", message: "" });
-    setSending(false);
+    trackContact();
+
+    try {
+      const result = await submitContact(form);
+
+      if (result.ok) {
+        toast({
+          title: "Message sent! 🎉",
+          description: "Thanks for reaching out. I'll get back to you within 24 hours.",
+        });
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        // Backend returned a business-level error
+        if (result.details && result.details.length > 0) {
+          // Field-level validation errors
+          const errors: Record<string, string> = {};
+          result.details.forEach((d) => { errors[d.field] = d.error; });
+          setFieldErrors(errors);
+          toast({
+            title: "Validation error",
+            description: "Please check the highlighted fields and try again.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Couldn't send message",
+            description: result.message || "Something went wrong on our end. Please try again or email me directly.",
+            variant: "destructive",
+          });
+        }
+      }
+    } catch (err) {
+      toast({
+        title: "Network error",
+        description: err instanceof Error ? err.message : "Couldn't reach the server. Please check your connection and try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -111,34 +154,62 @@ const Contact = () => {
                   type="text"
                   placeholder="Your name"
                   value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  onChange={(e) => { setForm({ ...form, name: e.target.value }); setFieldErrors((prev) => ({ ...prev, name: "" })); }}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border border-foreground/10 outline-none transition-all text-sm"
+                  disabled={sending}
+                  className={`w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border outline-none transition-all text-sm ${
+                    fieldErrors.name ? "border-red-500/50 focus:border-red-500" : "border-foreground/10 focus:border-primary/50"
+                  }`}
                 />
+                {fieldErrors.name && (
+                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" /> {fieldErrors.name}
+                  </p>
+                )}
                 <input
                   type="email"
                   placeholder="Your email"
                   value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  onChange={(e) => { setForm({ ...form, email: e.target.value }); setFieldErrors((prev) => ({ ...prev, email: "" })); }}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border border-foreground/10 outline-none transition-all text-sm"
+                  disabled={sending}
+                  className={`w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border outline-none transition-all text-sm ${
+                    fieldErrors.email ? "border-red-500/50 focus:border-red-500" : "border-foreground/10 focus:border-primary/50"
+                  }`}
                 />
+                {fieldErrors.email && (
+                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" /> {fieldErrors.email}
+                  </p>
+                )}
                 <textarea
                   placeholder="Your message"
                   rows={4}
                   value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  onChange={(e) => { setForm({ ...form, message: e.target.value }); setFieldErrors((prev) => ({ ...prev, message: "" })); }}
                   required
-                  className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border border-foreground/10 outline-none transition-all text-sm resize-none flex-1"
+                  disabled={sending}
+                  className={`w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl frost-input premium-focus-field border outline-none transition-all text-sm resize-none flex-1 ${
+                    fieldErrors.message ? "border-red-500/50 focus:border-red-500" : "border-foreground/10 focus:border-primary/50"
+                  }`}
                 />
+                {fieldErrors.message && (
+                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" /> {fieldErrors.message}
+                  </p>
+                )}
                 <motion.button
                   type="submit"
                   disabled={sending}
-                  whileHover={{ scale: 1.02, y: -1 }}
-                  whileTap={{ scale: 0.96, y: 2 }}
+                  whileHover={{ scale: sending ? 1 : 1.02, y: sending ? 0 : -1 }}
+                  whileTap={{ scale: sending ? 1 : 0.96, y: sending ? 0 : 2 }}
                   className="w-full flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-primary via-emerald to-accent text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all disabled:opacity-50 shadow-2xl shadow-primary/20"
                 >
-                  <Send className="w-5 h-5" />
+                  {sending ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <Send className="w-5 h-5" />
+                  )}
                   {sending ? "Sending..." : "Send Message"}
                 </motion.button>
               </form>
