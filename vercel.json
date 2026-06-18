@@ -1,5 +1,8 @@
 {
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://Asadali110-asad-shabir-portfolio-backend.hf.space/api/$1" },
+    { "source": "/chat", "destination": "https://Asadali110-asad-shabir-portfolio-backend.hf.space/chat" },
+    { "source": "/chat/", "destination": "https://Asadali110-asad-shabir-portfolio-backend.hf.space/chat" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
