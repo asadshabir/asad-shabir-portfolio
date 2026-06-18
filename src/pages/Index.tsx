@@ -16,6 +16,7 @@ import Sidebar from "@/components/Sidebar";
 import SeoMeta from "@/components/seo/SeoMeta";
 import ChatBot, { ChatButton } from "@/components/ChatBot";
 import ScrollProgress from "@/components/ScrollProgress";
+import useScrollHide from "@/hooks/useScrollHide";
 import SectionDivider from "@/components/SectionDivider";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Bot, Cpu, Facebook, Github, Linkedin, Mail, Sparkles } from "lucide-react";
@@ -35,6 +36,7 @@ const footerSocials = [
 
 const Index = () => {
   const [chatOpen, setChatOpen] = useState(false);
+  const isScrolling = useScrollHide(260);
 
   return (
     <div className="premium-page min-h-screen overflow-x-hidden relative">
@@ -138,8 +140,8 @@ const Index = () => {
 
       {/* Chatbot */}
       <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />
-      {!chatOpen && <ScrollToTop />}
-      {!chatOpen && <ChatButton onClick={() => setChatOpen(true)} />}
+      {!chatOpen && <ScrollToTop isScrolling={isScrolling} />}
+      {!chatOpen && <ChatButton onClick={() => setChatOpen(true)} isScrolling={isScrolling} />}
     </div>
   );
 };

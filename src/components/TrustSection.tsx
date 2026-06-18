@@ -6,52 +6,47 @@ const stats = [
     icon: Clock,
     value: "<24h",
     label: "Response Time",
-    desc: "I personally reply to every inquiry within 24 hours.",
+    desc: "I personally respond to project inquiries within 24 hours.",
     color: "primary",
   },
   {
     icon: Code2,
     value: "30+",
-    label: "Projects Shipped",
-    desc: "From AI agents to full-stack apps, automation systems, and more.",
+    label: "Projects Built",
+    desc: "AI systems, full-stack applications, and automation solutions.",
     color: "accent",
   },
   {
     icon: Users,
-    value: "Multiple",
-    label: "Happy Clients",
-    desc: "Small teams, startups, and enterprises across industries.",
+    value: "3 Languages",
+    label: "Communication",
+    desc: "English, Urdu, and Sindhi for better collaboration.",
     color: "emerald",
   },
   {
     icon: Zap,
     value: "100%",
-    label: "Production Ready",
-    desc: "Every project I build is designed to scale, not just to demo.",
+    label: "Production Mindset",
+    desc: "Built with scalability, maintainability, and real-world deployment in mind.",
     color: "cyan",
   },
 ];
-
-/**
- * Project highlights — honest, no-fake-testimony trust block.
- * Shows the kinds of projects and domains I've worked in.
- */
 const projectHighlights = [
   {
     icon: Building2,
-    text: "E-commerce platforms with AI-powered product recommendations",
+    text: "Built AI-powered customer support and Digital FTE systems.",
   },
   {
     icon: Globe,
-    text: "Multi-language support: English, Urdu, and Sindhi",
+    text: "Delivered multilingual experiences in English, Urdu, and Sindhi.",
   },
   {
     icon: Sparkles,
-    text: "500+ daily AI conversations handled in production",
+    text: "Developed RAG applications, agentic workflows, and automation pipelines.",
   },
   {
     icon: Building2,
-    text: "Logistics automation: 10,000+ daily events processed",
+    text: "Created production-ready full-stack applications using FastAPI and Next.js.",
   },
 ];
 
@@ -85,13 +80,13 @@ const TrustSection = () => {
           className="text-center mb-12 sm:mb-14"
         >
           <p className="text-sm font-mono tracking-widest uppercase text-primary mb-3">
-            Why Work With Me
+            Professional Highlights
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-            Credibility, in <span className="holographic-text">numbers</span>
+            Built for <span className="holographic-text">Real-World</span> Impact
           </h2>
           <p className="text-muted-foreground mt-3 max-w-lg mx-auto text-sm sm:text-base">
-            No inflated claims. Just real delivery and honest commitments.
+            Focused on building intelligent systems that deliver measurable value.
           </p>
         </motion.div>
 
@@ -160,7 +155,7 @@ const TrustSection = () => {
           transition={{ delay: 0.5 }}
           className="text-center text-muted-foreground mt-10 text-sm sm:text-base max-w-xl mx-auto"
         >
-          I take on a limited number of projects at a time to ensure every client gets the attention they deserve.
+          I focus on building reliable AI products with clean architecture, scalable systems, and long-term maintainability.
         </motion.p>
       </div>
     </section>

@@ -46,10 +46,11 @@ const STACK_ICONS: Record<string, React.ReactNode> = {
   infrastructure: <Cloud className="w-4 h-4" />,
 };
 
+
 const ESTIMATE_LABELS = {
   en: {
-    heading: "AI Project Estimator",
-    subheading: "Get a rough sense of your project's complexity, timeline, and recommended tech stack.",
+    heading: "AI Product Discovery Assistant",
+    subheading: "Describe your idea and get an AI-powered analysis including architecture, timeline, risks, business value, and recommended technologies.",
     placeholder: "Describe your project here... e.g. A web app where users can upload images, and an AI model classifies them into categories, with a dashboard for the admin.",
     submit: "Get Estimate",
     loading: "Analyzing your project...",

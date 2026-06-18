@@ -33,3 +33,4 @@ dist-ssr
 __pycache__/
 *.pyc
 .pytest_cache/
+.env*.local

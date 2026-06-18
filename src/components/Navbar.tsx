@@ -75,10 +75,10 @@ const Navbar = () => {
             />
           </span>
           <span className="leading-none">
-            <span className="block text-[10px] font-mono uppercase tracking-[0.35em] text-primary/80">
+            <span className="block text-lg font-black holographic-text">
               Asad
             </span>
-            <span className="block text-lg font-black holographic-text">
+            <span className="block text-[12px] font-black holographic-text">
               Shabir
             </span>
           </span>

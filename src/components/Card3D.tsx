@@ -53,7 +53,7 @@ const Card3D = ({ children, className = "", glowColor = "cyan", intensity = 15 }
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ rotateX, rotateY }}
-      whileHover={{ y: -20, scale: 1.025, rotateX: -15, rotateY: 15, boxShadow: shadowColors[glowColor] }}
+      whileHover={{ y: -10, scale: 1.02, rotateX: -4, rotateY: 6, boxShadow: shadowColors[glowColor] }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       style={{
         perspective: "1000px",

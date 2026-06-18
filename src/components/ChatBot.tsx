@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Loader2 } from "lucide-react";
 import { sendChat, type ChatMessage, type ChatError, type ChatErrorKind } from "@/lib/chatbotService";
 import chatbotIcon from "@/assets/chatbot-premium-icon.png";
-import profilePhoto from "@/assets/portfolio_profile-2.png";
+import profilePhoto from "@/assets/chaticon.png";
 import { useToast } from "@/hooks/use-toast";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
@@ -23,16 +23,19 @@ interface Message {
  * Quick replies: Hire Asad, Tech Stack, Projects, Contact
  */
 const QUICK_REPLIES = [
-  "What is your tech stack?",
-  "Show me your projects",
-  "How can I hire you?",
-  "How to contact you?",
+    "Tell me about your AI projects",
+    "What are Digital FTEs?",
+    "Show your tech stack",
+    "Tell me about your experience",
+
 ];
 
 const INITIAL_GREETING = {
-  en: "Assalam o Alaikum! 👋 I'm **Asad Shabir**. I build AI agents, full-stack apps, and automation systems. What would you like to know about my work, skills, or how we can collaborate?",
-  ur: "وع السلام علیکم! 👋 میں اسد شابر ہوں۔ میں AI ایجنٹس، فل سٹیک ایپس، اور آٹومیشن سسٹمز بنایا ہاں۔ آپ میرے کام، مہارتوں، یا تعاون کے بارے میں کیا جاننا چاہتے ہیں؟",
-  sd: "وعليکم السلام! 👋 آئی اسد شابذ آھيان. آئی ایجنٽس، فل سٽيڪ اپس، ۽ آٽوميشن سسٽمز ببناء آھيان. تون پنھجي ڪم، مهارت، يا تعاون بابت ڇا ڄاڻڻ چاهين؟",
+  en: "Hi ! 👋 I'm **Asad Shabir** — an Agentic AI Engineer, Digital FTE Architect, and Full-Stack AI Developer. I design intelligent AI products, multi-agent systems, advanced RAG applications, and enterprise automations that deliver real business impact. What would you like to explore today?",
+
+  ur: "وعلیکم السلام! 👋 میں **اسد شابیر** ہوں — Agentic AI Engineer، Digital FTE Architect، اور Full-Stack AI Developer۔ میں ذہین AI سسٹمز، Multi-Agent Architectures، Advanced RAG Applications، اور Enterprise Automations تیار کرتا ہوں جو حقیقی کاروباری نتائج فراہم کرتے ہیں۔ آپ آج کس بارے میں جاننا چاہتے ہیں؟",
+
+  sd: "وعليڪم السلام! 👋 آئون **اسد شابير** آھيان — Agentic AI Engineer، Digital FTE Architect، ۽ Full-Stack AI Developer. آئون ذهين AI سسٽمز، Multi-Agent Architectures، Advanced RAG Applications، ۽ Enterprise Automations ٺاھيان ٿو جيڪي حقيقي ڪاروباري قدر پيدا ڪن ٿا. اڄ توھان ڇا ڄاڻڻ چاھيو ٿا؟",
 };
 
 const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
@@ -307,7 +310,10 @@ export const ChatButton = ({ onClick, isScrolling = false }: { onClick: () => vo
       transition={{ duration: 0.3, ease: "easeInOut" }}
       onClick={onClick}
       className="fixed bottom-6 right-4 sm:right-6 md:right-8 z-[9999] group flex items-center gap-3"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      style={{
+        paddingBottom: "env(safe-area-inset-bottom)",
+        pointerEvents: isScrolling ? "none" as const : "auto" as const,
+      }}
     >
       {/* Floating label - shows when button is visible */}
       <AnimatePresence>

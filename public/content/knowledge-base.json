@@ -1,0 +1,74 @@
+[
+  {
+    "q": "What are Digital FTEs?",
+    "a": "Digital FTEs are AI Employees designed to automate repetitive business processes. I build AI customer support employees, AI sales assistants, AI CRM agents, and multi-agent systems that work like full-time digital team members — 24/7, without breaks."
+  },
+  {
+    "q": "What is Agentic AI?",
+    "a": "Agentic AI means AI systems that can reason, make decisions, use tools, and collaborate with other agents autonomously. Unlike traditional chatbots that only respond to questions, Agentic AI performs tasks and workflows without human step-by-step guidance."
+  },
+  {
+    "q": "What is RAG?",
+    "a": "RAG (Retrieval-Augmented Generation) combines large language models with external knowledge sources to provide more accurate and context-aware answers. I build RAG systems using Qdrant, Pinecone, Cohere embeddings, and LangChain."
+  },
+  {
+    "q": "What technologies do you use?",
+    "a": "My primary technologies are Python, FastAPI, Next.js, TypeScript, PostgreSQL, Docker, OpenAI Agents SDK, LangGraph, n8n, Kafka, and Dapr. I select the right tools based on project requirements."
+  },
+  {
+    "q": "What experience do you have?",
+    "a": "I'm a self-taught AI engineer from Pakistan. I've built production-ready AI systems including multi-agent platforms, RAG applications, full-stack SaaS products, and enterprise automation tools. My portfolio includes MediBridge (healthcare), RAG Book Platform (education), and Personal AI Employee (autonomous agents)."
+  },
+  {
+    "q": "Can you work on freelance projects?",
+    "a": "Yes. I'm available for freelance projects, consulting, and full-time remote roles. My focus areas are Agentic AI, Digital FTEs, RAG applications, and full-stack AI development."
+  },
+  {
+    "q": "How much do your projects cost?",
+    "a": "Basic AI solutions start under $500. Complex systems require detailed scoping. I offer free initial consultations to understand requirements before quoting."
+  },
+  {
+    "q": "What is a Multi-Agent System?",
+    "a": "A Multi-Agent System is a team of specialized AI agents working together. Each agent has a specific role (researcher, writer, executor) and its own tools. They hand off tasks to each other, like a human team. I build these with OpenAI Agents SDK and custom orchestration."
+  },
+  {
+    "q": "What is your background?",
+    "a": "I'm Asad Shabir, a 23-year-old self-taught AI engineer from Sehwan Sharif, Sindh, Pakistan. I previously served in the Pakistan Navy (Marine Sailor) and cleared Sindh Police SSU Commando training before choosing software engineering. I now build AI systems full-time."
+  },
+  {
+    "q": "What projects have you built?",
+    "a": "My key projects include: MediBridge (AI healthcare platform), AI RAG Book Platform (interactive textbook), Personal AI Employee (autonomous agent system), AI Portfolio Platform (this website), and a full-stack Todo application. All are on my GitHub."
+  },
+  {
+    "q": "How can I contact you?",
+    "a": "You can email me at asadshabir505@gmail.com, reach me on WhatsApp at +92 325 3939049, connect on LinkedIn at /in/asad-shabir-programmer110, or use the contact form on this portfolio."
+  },
+  {
+    "q": "Can you build a chatbot for my business?",
+    "a": "Yes. I build custom AI chatbots using OpenAI Agents SDK, custom knowledge bases, and multi-agent architectures. These aren't simple Q&A bots — they're autonomous AI employees that handle real business workflows."
+  },
+  {
+    "q": "Do you work with specific industries?",
+    "a": "I work across healthcare, education, e-commerce, logistics, and SaaS. My approach adapts to each industry's specific needs and compliance requirements."
+  },
+  {
+    "q": "What is Digital FTE kya hota hai?",
+    "a": "Mere context mein Digital FTE ka matlab AI Employee hai. Ye intelligent systems hote hain jo insano ki tarah repetitive kaam automate karte hain. Misal ke taur par AI Customer Support Agent, AI CRM Assistant ya Multi-Agent Team."
+  },
+  {
+    "q": "Digital FTE کیا ہے؟",
+    "a": "میرے تناظر میں Digital FTE سے مراد AI Employee ہے جو کاروباری کاموں کو خودکار بنانے میں مدد دیتا ہے۔ میں AI Customer Support Agents اور Multi-Agent Systems بناتا ہوں۔"
+  },
+  {
+    "q": "Can you build this for me?",
+    "a": "Yes, I've built similar systems before. My approach is: 1) Understand your requirements through a free consultation, 2) Design the architecture with the right tech stack, 3) Build with regular updates and testing, 4) Deploy and provide documentation. My MediBridge and Personal AI Employee projects showcase the quality you can expect."
+  },
+  {
+    "q": "Who are you?",
+    "a": "I'm Asad Shabir — an Agentic AI Engineer, Digital FTE Architect, and Full-Stack AI Developer. I design intelligent AI products, multi-agent systems, advanced RAG applications, and enterprise automations that deliver measurable business value."
+  },
+  {
+    "q": "Tell me about yourself",
+    "a": "I'm Asad Shabir — an Agentic AI Engineer and Full-Stack AI Developer from Pakistan. I specialize in building AI Employees (Digital FTEs), multi-agent systems, and production-grade RAG applications. My journey includes military service, commando training, and a self-taught path into AI engineering."
+  }
+]

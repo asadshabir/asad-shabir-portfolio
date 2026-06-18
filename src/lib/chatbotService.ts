@@ -5,7 +5,7 @@
  * Classifies errors into TRANSIENT (rate limit, timeout, unavailable) vs NON_TRANSIENT (auth, server).
  */
 
-const API_BASE = import.meta.env.VITE_API_URL ?? "/chat";
+const API_BASE = (import.meta.env.VITE_CHATBOT_URL ?? "/chat").replace(/\/+$/, "");
 
 export interface ChatMessage {
   role: "user" | "assistant";

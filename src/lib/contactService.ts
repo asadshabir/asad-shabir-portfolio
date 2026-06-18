@@ -4,7 +4,7 @@
  * Dev: proxies through Vite dev server
  */
 
-const API_BASE = import.meta.env.VITE_API_URL ?? "/api";
+const API_BASE = (import.meta.env.VITE_API_URL ?? "/api").replace(/\/+$/, "");
 
 export interface ContactPayload {
   name: string;

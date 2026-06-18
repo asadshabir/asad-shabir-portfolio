@@ -1,50 +1,33 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 /**
- * Hook to detect when user is scrolling vs stopped
- * Returns true when scrolling, false when stopped
- *
- * @param delay - Milliseconds to wait after last scroll event before considering stopped (default: 150ms)
+ * useScrollHide
+ * - returns `true` while the user is actively scrolling
+ * - switches back to `false` after `delay` ms of no scroll events
+ * - only activates when scrolled past 50px (avoids tiny scroll flickers at top)
  */
-export const useScrollHide = (delay: number = 150) => {
+export default function useScrollHide(delay = 250): boolean {
   const [isScrolling, setIsScrolling] = useState(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
+    let timer: ReturnType<typeof setTimeout> | null = null;
 
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // Only trigger if actually scrolling (not just at top)
-      if (currentScrollY > 50) {
+    const onScroll = () => {
+      // Only trigger when actually scrolled past the threshold
+      if (window.scrollY > 50) {
         setIsScrolling(true);
       }
 
-      // Clear existing timeout
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-
-      // Set new timeout to detect when scrolling stops
-      scrollTimeoutRef.current = setTimeout(() => {
-        setIsScrolling(false);
-      }, delay);
-
-      lastScrollY = currentScrollY;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => setIsScrolling(false), delay);
     };
 
-    // Add scroll listener
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Cleanup
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
+      window.removeEventListener("scroll", onScroll);
+      if (timer) clearTimeout(timer);
     };
   }, [delay]);
 
   return isScrolling;
-};
+}

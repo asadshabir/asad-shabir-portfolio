@@ -6,18 +6,73 @@ import InfiniteMovingCards from "./aceternity/InfiniteMovingCards";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
 
 const categories = [
-  { icon: Bot, label: "AI Chatbots", gradient: "from-primary to-emerald", glow: "cyan" as const, token: "--primary" },
-  { icon: Brain, label: "Agentic AI", gradient: "from-accent to-primary", glow: "magenta" as const, token: "--accent" },
-  { icon: Cpu, label: "Python AI", gradient: "from-brand-python to-primary", glow: "both" as const, token: "--brand-python" },
-  { icon: Workflow, label: "n8n Flows", gradient: "from-brand-n8n to-emerald", glow: "emerald" as const, token: "--brand-n8n" },
-  { icon: Code2, label: "React Apps", gradient: "from-brand-react to-accent", glow: "cyan" as const, token: "--brand-react" },
-  { icon: Cloud, label: "DevOps", gradient: "from-brand-devops to-accent", glow: "both" as const, token: "--brand-devops" },
+  {
+    icon: Brain,
+    label: "Agentic AI Systems",
+    gradient: "from-primary to-emerald",
+    glow: "cyan" as const,
+    token: "--primary",
+  },
+  {
+    icon: Bot,
+    label: "Digital FTEs",
+    gradient: "from-accent to-primary",
+    glow: "magenta" as const,
+    token: "--accent",
+  },
+  {
+    icon: Cpu,
+    label: "Multi-Agent Architecture",
+    gradient: "from-brand-python to-primary",
+    glow: "both" as const,
+    token: "--brand-python",
+  },
+  {
+    icon: Workflow,
+    label: "Enterprise Automation",
+    gradient: "from-brand-n8n to-emerald",
+    glow: "emerald" as const,
+    token: "--brand-n8n",
+  },
+  {
+    icon: Code2,
+    label: "Full-Stack AI Products",
+    gradient: "from-brand-react to-accent",
+    glow: "cyan" as const,
+    token: "--brand-react",
+  },
+  {
+    icon: Cloud,
+    label: "Cloud & DevOps",
+    gradient: "from-brand-devops to-accent",
+    glow: "both" as const,
+    token: "--brand-devops",
+  },
 ];
 
 const marqueeItems = [
-  "React", "Next.js", "TypeScript", "Python", "FastAPI", "OpenAI",
-  "LangChain", "Supabase", "Tailwind", "Docker", "Node.js", "PostgreSQL",
-  "Vercel", "Git", "GraphQL", "Framer Motion",
+  "OpenAI Agents SDK",
+  "LangGraph",
+  "FastAPI",
+  "Python",
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Docker",
+  "Kubernetes",
+  "Dapr",
+  "Kafka",
+  "PostgreSQL",
+  "Supabase",
+  "n8n",
+  "LangChain",
+  "Claude Code",
+  "Spec-Kit",
+  "RAG Systems",
+  "MCP Servers",
+  "Digital FTEs",
+  "Multi-Agent AI",
+  "Cloud Architecture",
 ];
 
 const container = {
@@ -44,9 +99,13 @@ const Skills = () => (
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4">Skills & Tech</p>
+        <p className="text-sm font-mono tracking-widest uppercase text-primary mb-4">
+          Expertise & Technologies
+        </p>
+
         <h2 className="text-4xl md:text-5xl font-bold">
-          My <span className="holographic-text">Arsenal</span>
+          My <span className="holographic-text">Technology Arsenal</span>
+          
         </h2>
       </motion.div>
 

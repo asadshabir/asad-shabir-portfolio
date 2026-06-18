@@ -239,7 +239,9 @@ const Certifications = () => {
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-2 mt-8
+          
+          ">
             {certificates.map((_, idx) => (
               <button
                 key={idx}

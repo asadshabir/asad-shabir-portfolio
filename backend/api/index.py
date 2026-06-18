@@ -2,6 +2,11 @@
 FastAPI entrypoint — mounts all route modules.
 Compatible with uvicorn (local dev) and Vercel Python runtime.
 """
+import os
+from dotenv import load_dotenv
+
+# Load .env FIRST so services that use os.getenv() can find API keys
+load_dotenv()
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,10 +41,16 @@ def create_app() -> FastAPI:
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-    # CORS
+    # CORS — allow localhost dev, Vercel frontend, HF Spaces, and custom domain
+    # Uses regex to avoid wildcard issues with allow_credentials=True
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=settings.cors_origins,
+        allow_origin_regex=(
+            r"https?://(?:localhost|127\.0\.0\.1)(?::\d+)?|"
+            r"https://[a-zA-Z0-9-]+\.hf\.space|"
+            r"https://[a-zA-Z0-9-]+\.vercel\.app|"
+            r"https://asadshabir\.com"
+        ),
         allow_credentials=True,
         allow_methods=["GET", "POST"],
         allow_headers=["*"],

@@ -3,38 +3,45 @@ import { Briefcase, Sparkles } from "lucide-react";
 import Card3D from "./Card3D";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
 
+
 const experiences = [
   {
-    role: "AI Engineer & Full-Stack Developer",
-    company: "Freelance / GIAIC Projects",
+    role: "Agentic AI Engineer & Full-Stack AI Developer",
+    company: "Independent Projects & Freelance",
     date: "2024 – Present",
     points: [
-      "Building agentic AI systems with OpenAI Agents SDK",
-      "Developing production-grade chatbots and RAG pipelines",
-      "Full-stack applications with Next.js, FastAPI & Supabase",
+      "Designing and building Digital FTEs (AI Employees) that automate business workflows and operate 24/7.",
+      "Developing multi-agent systems, advanced RAG architectures, and conversational AI platforms using OpenAI Agents SDK and modern AI frameworks.",
+      "Building production-grade full-stack applications with FastAPI, Next.js, React, TypeScript, PostgreSQL, and Supabase.",
+      "Architecting scalable cloud-native systems with Docker, Kubernetes, Dapr, Kafka, and automation pipelines.",
+      "Transforming business requirements into reliable AI products focused on usability, automation, and measurable impact.",
     ],
   },
+
   {
-    role: "Software Engineer",
-    company: "Techlogix",
-    date: "2023 – 2024",
+    role: "Agentic AI Specialization",
+    company: "Governor's Initiative for AI & Computing (GIAIC)",
+    date: "2023 – Present",
     points: [
-      "Built enterprise-grade web applications using React & Node.js",
-      "Integrated AI/ML models into production workflows",
-      "Led development of automation tools for internal processes",
+      "Studying Agentic AI, multi-agent orchestration, AI product architecture, and production engineering practices.",
+      "Applying Spec-Driven Development, CI/CD workflows, and cloud-native design principles to real-world projects.",
+      "Building hands-on experience with modern AI ecosystems, automation tools, and distributed application architectures.",
     ],
   },
+
   {
-    role: "Associate Software Engineer",
-    company: "Arbisoft",
-    date: "2022 – 2023",
+    role: "Healthcare Professional",
+    company: "Public Healthcare Sector",
+    date: "2022 – Present",
     points: [
-      "Developed scalable full-stack features for edtech platforms",
-      "Collaborated on Python/Django backend services",
-      "Implemented UI components with React and TypeScript",
+      "Working in healthcare while continuously advancing AI engineering skills outside working hours.",
+      "Developing discipline, communication, and problem-solving abilities through real-world operational environments.",
+      "Combining healthcare experience with technology to design AI solutions that solve meaningful problems.",
     ],
   },
 ];
+
+
 
 const Experience = () => (
   <section id="experience" className="py-32 relative overflow-hidden">

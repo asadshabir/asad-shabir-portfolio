@@ -4,25 +4,24 @@ import { ArrowDown, MessageCircle, Download, Bot, Cpu, Network, Workflow } from 
 import ParticleBackground from "./ParticleBackground";
 import FlipWords from "./aceternity/FlipWords";
 import SparklesEffect from "./aceternity/Sparkles";
-import profilePhoto from "@/assets/portfolio_profile-2.png";
+import profilePhoto from "@/assets/portfolio_profile-2.jpeg";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
 const titles = [
-  "Full-Stack Developer",
+  "Agentic AI Engineer",
+  "Digital FTE Architect",
+  "Full-Stack AI Developer",
+  "Multi-Agent Systems Builder",
+  "AI Automation Engineer",
+  "Advanced RAG Architect",
+  "AI Product Engineer",
   "AI-Native Developer",
-  "Python Developer",
-  "Chatbot Developer",
-  "QA Engineer",
-  "AI Engineer",
-  "Debug Master",
-  "Premium Apps Builder",
-  "Spec-Driven Developer",
-  "Prompt Engineer",
-  "Agentic AI Orchestration",
-  "Backend Developer",
-  "DevOps Developer",
+  "Workflow Automation Specialist",
+  "Cloud-Native Application Builder",
+  "FastAPI & Next.js Developer",
+  "OpenAI Agents SDK Specialist",
+  "Production AI Systems Engineer",
 ];
-
 const orbitIcons = [Bot, Cpu, Network, Workflow];
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
@@ -227,16 +226,18 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
               <FlipWords words={titles} duration={2500} />
             </motion.div>
           </div>
-
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             className="hero-intro text-base sm:text-lg max-w-xl mb-8 sm:mb-10 mx-auto lg:mx-0"
-          >
-            Building <span className="intro-neon-word">intelligent</span>, <span className="intro-neon-word">production-ready</span> AI agents, full-stack applications,
-            and <span className="intro-neon-word">automation</span> systems that actually work.
-          </motion.p>
+           >
+            I design and build{" "}
+            <span className="intro-neon-word">Agentic AI systems</span>,{" "}
+            <span className="intro-neon-word">Digital FTEs</span>, and{" "}
+            <span className="intro-neon-word">production-grade full-stack applications</span>{" "}
+            that automate workflows, scale businesses, and create measurable impact.
+            </motion.p>
 
           {/* CTA Buttons */}
           <motion.div

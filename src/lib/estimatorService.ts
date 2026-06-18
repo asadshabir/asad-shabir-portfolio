@@ -2,7 +2,7 @@
  * Project Estimator API service.
  */
 
-const API_BASE = "/api";
+const API_BASE = (import.meta.env.VITE_API_URL ?? "/api").replace(/\/+$/, "");
 
 export interface ComplexityDetail {
   level: string;
