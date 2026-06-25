@@ -1378,7 +1378,15 @@ def index_all_chunks(chunks: list[dict[str, Any]]) -> int:
     co = cohere.Client(COHERE_API_KEY)
 
     print(f"Connecting to Qdrant at {QDRANT_URL}...")
-    qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+    # Try cloud first; if unreachable, use local file-based storage
+    try:
+        qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY, timeout=5)
+        qdrant.get_collections()  # test connectivity
+        print("  Connected to Qdrant cloud")
+    except Exception:
+        print("  Qdrant cloud unreachable, switching to local file-based storage")
+        import tempfile
+        qdrant = QdrantClient(path=os.path.join(tempfile.gettempdir(), "qdrant_portfolio"))
 
     # Create/recreate collection
     collections = [c.name for c in qdrant.get_collections().collections]
@@ -1434,6 +1442,50 @@ def index_all_chunks(chunks: list[dict[str, Any]]) -> int:
     return count
 
 
+def index_all_chunks_inmemory(qdrant: QdrantClient, chunks: list[dict[str, Any]]) -> int:
+    """Embed all chunks with Cohere and index into an in-memory Qdrant instance."""
+    co = cohere.Client(COHERE_API_KEY)
+
+    # Create collection
+    collections = [c.name for c in qdrant.get_collections().collections]
+    if QDRANT_COLLECTION in collections:
+        qdrant.delete_collection(QDRANT_COLLECTION)
+
+    qdrant.create_collection(
+        collection_name=QDRANT_COLLECTION,
+        vectors_config=models.VectorParams(
+            size=COHERE_EMBED_DIMS,
+            distance=models.Distance.COSINE,
+        ),
+    )
+
+    texts = [chunk["content"] for chunk in chunks]
+    response = co.embed(
+        texts=texts,
+        model=COHERE_EMBED_MODEL,
+        input_type="search_document",
+        embedding_types=["float"],
+    )
+    embeddings = response.embeddings.float_
+
+    points = []
+    for i, chunk in enumerate(chunks):
+        points.append(models.PointStruct(
+            id=i,
+            vector=embeddings[i],
+            payload={
+                "id": chunk["id"],
+                "title": chunk["title"],
+                "category": chunk["category"],
+                "tags": chunk["tags"],
+                "content": chunk["content"],
+            },
+        ))
+
+    qdrant.upsert(collection_name=QDRANT_COLLECTION, points=points, wait=True)
+    return qdrant.count(collection_name=QDRANT_COLLECTION).count
+
+
 # ── CLI ──────────────────────────────────────────────────────
 
 if __name__ == "__main__":
@@ -1443,9 +1495,6 @@ if __name__ == "__main__":
 
     if not COHERE_API_KEY:
         print("ERROR: COHERE_API_KEY is not set")
-        sys.exit(1)
-    if not QDRANT_API_KEY:
-        print("ERROR: QDRANT_API_KEY is not set")
         sys.exit(1)
 
     print("\nPhase 1: Building knowledge chunks...")

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Clock, Code2, Users, Zap, Building2, Globe, Sparkles } from "lucide-react";
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
 const stats = [
   {
     icon: Clock,
@@ -98,7 +100,7 @@ const TrustSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
+              transition={{ delay: i * (isMobile ? 0.05 : 0.1), duration: 0.4 }}
               className="rounded-2xl border border-border/40 bg-card/40 backdrop-blur-sm p-5 sm:p-6 text-center group hover:border-primary/20 transition-colors"
             >
               <div

@@ -25,14 +25,8 @@ const CaseStudyCard = ({ caseStudy: cs, featured }: Props) => {
 
   return (
     <motion.div
-      whileHover={{
-        y: -10,
-        scale: 1.05,
-        boxShadow: cs.tags[0]?.toLowerCase().includes("ai")
-          ? "0 30px 90px hsl(var(--accent) / 0.3), 0 15px 50px hsl(var(--accent) / 0.2)"
-          : "0 30px 90px hsl(var(--primary) / 0.3), 0 15px 50px hsl(var(--primary) / 0.2)",
-        transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
-      }}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
       className={`premium-glass-card group relative overflow-hidden rounded-2xl border ${borderColor} p-0 h-full flex flex-col`}
     >
       {/* Image */}
@@ -42,7 +36,7 @@ const CaseStudyCard = ({ caseStudy: cs, featured }: Props) => {
             src={cs.screenshots[0]}
             alt={`${cs.title} preview`}
             loading="lazy"
-            className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700"
+            className="w-full h-full object-cover opacity-70"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">

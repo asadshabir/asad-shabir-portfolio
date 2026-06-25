@@ -154,7 +154,7 @@ export async function sendChat(
   sessionId?: string
 ): Promise<ChatResponse> {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 30000);
+  const timeoutId = setTimeout(() => controller.abort(), 70000);
 
   try {
     const res = await fetch(API_BASE, {

@@ -19,7 +19,7 @@ const projects = [
     description: "AI-powered healthcare management platform connecting patients, doctors, and pharmacies with AI-driven diagnostics, appointment scheduling, and prescription management.",
     category: "AI & Agents",
     tech: ["Python", "FastAPI", "React", "PostgreSQL", "OpenAI", "AWS"],
-    live: "https://medibridge.vercel.app",
+    live: "https://medi-bridge-hospital.vercel.app/",
     github: "https://github.com/asadshabir/medibridge",
     gradient: "from-emerald-600/30 via-primary/15 to-teal-900/30",
     border: "border-emerald-400/40",
@@ -33,7 +33,7 @@ const projects = [
     description: "Interactive AI-generated educational book exploring robotics × artificial intelligence with rich visuals and chapter-level Q&A.",
     category: "AI & Agents",
     tech: ["Next.js", "OpenAI", "TypeScript", "Tailwind", "Three.js"],
-    live: "https://robotics-ai-book.vercel.app",
+    live: "https://humaniod-robotic-book.vercel.app/",
     github: "https://github.com/asadshabir/robotics-ai-book",
     gradient: "from-purple-600/30 via-primary/15 to-indigo-900/30",
     border: "border-purple-400/40",
@@ -46,7 +46,7 @@ const projects = [
     description: "Full-stack task management application with real-time sync, drag-and-drop kanban board, team collaboration, and push notifications.",
     category: "Full-Stack Apps",
     tech: ["React", "Node.js", "PostgreSQL", "WebSockets"],
-    live: "https://todo-asad.vercel.app",
+    live: "https://todo-app-asadshabir.vercel.app/",
     github: "https://github.com/asadshabir/todo-app",
     gradient: "from-amber-600/30 via-primary/15 to-orange-900/30",
     border: "border-amber-400/40",
@@ -58,7 +58,7 @@ const projects = [
     description: "Smart resume parser using NLP to extract skills, score experience, and suggest targeted improvements.",
     category: "AI & Agents",
     tech: ["Python", "LangChain", "React", "FastAPI"],
-    live: "https://resume-ai-asad.vercel.app",
+    live: "https://asad-shabir-portfolio.vercel.app/",
     github: "https://github.com/asadshabir/ai-resume-analyzer",
     gradient: "from-violet-600/30 via-indigo-500/15 to-primary/30",
     border: "border-violet-400/40",
@@ -70,7 +70,7 @@ const projects = [
     description: "Live analytics dashboard with WebSocket connections, interactive charts, and role-based access control.",
     category: "Full-Stack Apps",
     tech: ["React", "Node.js", "PostgreSQL", "WebSockets"],
-    live: "https://realtime-dash.vercel.app",
+    live: "https://asad-shabir-portfolio.vercel.app/",
     github: "https://github.com/asadshabir/realtime-dashboard",
     gradient: "from-fuchsia-600/30 via-accent/15 to-primary/30",
     border: "border-accent/40",
@@ -82,7 +82,7 @@ const projects = [
     description: "Intelligent AI chat assistant powered by OpenAI Agents SDK with multi-agent orchestration, streaming responses, and conversational memory.",
     category: "AI & Agents",
     tech: ["OpenAI Agents SDK", "Python", "FastAPI", "React", "Supabase"],
-    live: "https://asa-mind.vercel.app",
+    live: "https://asad-shabir-portfolio.vercel.app/",
     github: "https://github.com/asadshabir/asa-mind",
     gradient: "from-violet-600/30 via-primary/15 to-violet-900/30",
     border: "border-violet-400/40",
@@ -134,7 +134,7 @@ const Projects = () => {
                 <motion.div
                   layoutId="activeFilter"
                   className={`absolute inset-0 bg-gradient-to-r ${f.color} rounded-full`}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  transition={{ type: "tween", duration: 0.35, ease: "easeOut" }}
                 />
               )}
               <span className="relative z-10">{f.label}</span>
@@ -152,7 +152,7 @@ const Projects = () => {
                 initial={{ opacity: 0, scale: 0.85, rotateX: -10 }}
                 animate={{ opacity: 1, scale: 1, rotateX: 0 }}
                 exit={{ opacity: 0, scale: 0.85 }}
-                transition={{ duration: 0.4, type: "spring" }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
               >
                 <Card3D
                   glowColor={project.category === "AI & Agents" ? "magenta" : project.category === "Automation Tools" ? "cyan" : "both"}
@@ -164,7 +164,7 @@ const Projects = () => {
                       src={project.image}
                       alt={`${project.title} technology preview`}
                       loading="lazy"
-                      className="w-full h-full object-cover opacity-75 group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover opacity-75"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} mix-blend-screen`} />
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-background/32 to-background/8" />

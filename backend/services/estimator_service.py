@@ -46,25 +46,25 @@ class EstimatorService:
         project_description: str,
         language: str = "en",
     ) -> Dict[str, Any]:
-        """Generate a structured project estimate — tries Gemini first, then Groq."""
+        """Generate a structured project estimate — tries Groq first (fast), then Gemini."""
         system_prompt = self._build_system_prompt(language)
         user_prompt = f"Project description:\n\n{project_description}"
 
-        # Try Gemini (primary)
-        if self.gemini_key:
-            try:
-                response = self._call_api(self.gemini_url, self.gemini_key, self.model, system_prompt, user_prompt)
-                return self._parse_response(response)
-            except requests.RequestException as e:
-                logger.warning(f"Gemini failed, falling back to Groq: {e}")
-
-        # Try Groq (fallback)
+        # Try Groq first (fast, reliable, free tier)
         if self.groq_key:
             try:
                 response = self._call_api(self.groq_url, self.groq_key, self.groq_model, system_prompt, user_prompt)
                 return self._parse_response(response)
             except requests.RequestException as e:
-                logger.error(f"Both Gemini and Groq failed: {e}")
+                logger.warning(f"Groq failed, falling back to Gemini: {e}")
+
+        # Try Gemini (fallback)
+        if self.gemini_key:
+            try:
+                response = self._call_api(self.gemini_url, self.gemini_key, self.model, system_prompt, user_prompt)
+                return self._parse_response(response)
+            except requests.RequestException as e:
+                logger.error(f"Both Groq and Gemini failed: {e}")
 
         raise EstimateParseError(
             "AI service temporarily unavailable. Please try again in a moment."
@@ -207,10 +207,10 @@ Guidelines: realistic, modern stack, 2-4 risks, 3-5 next steps."""
         match = re.search(r"\{.*\}", text, re.DOTALL)
         if match:
             candidate = match.group(0)
-            # Try closing unclosed strings
-            for quote_char in ('"', "'"):
-                if candidate.count(quote_char) % 2 != 0:
-                    candidate += quote_char
+            # Only try closing unclosed double-quote strings, NOT single quotes
+            # (single quotes inside JSON text like "don't" would corrupt it)
+            if candidate.count('"') % 2 != 0:
+                candidate += '"'
             try:
                 return json.loads(candidate)
             except json.JSONDecodeError:

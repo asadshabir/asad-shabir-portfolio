@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import CaseStudyCard from "./CaseStudyCard";
 import { loadCaseStudies, type CaseStudy } from "@/lib/caseStudiesLoader";
+
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
 const CaseStudiesSection = () => {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
@@ -69,7 +70,7 @@ const CaseStudiesSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.5, delay: i * (isMobile ? 0.05 : 0.1) }}
               >
                 <CaseStudyCard caseStudy={cs} />
               </motion.div>
@@ -84,13 +85,13 @@ const CaseStudiesSection = () => {
           transition={{ delay: 0.4 }}
           className="text-center mt-10 sm:mt-12"
         >
-          <Link
-            to="/case-studies"
+          <a
+            href="/#case-studies"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
           >
             View All Case Studies
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>

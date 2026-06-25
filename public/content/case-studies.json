@@ -5,20 +5,40 @@
     "excerpt": "Built a comprehensive healthcare platform connecting patients, doctors, and pharmacies with AI-driven diagnostics, appointment scheduling, and prescription management.",
     "challenge": "Healthcare providers struggled with fragmented systems — patient records scattered across multiple platforms, manual appointment scheduling causing delays, and no unified communication channel between patients, doctors, and pharmacies. The client needed a HIPAA-compliant solution that could integrate existing systems while providing a modern, intuitive interface for all stakeholders.",
     "approach": "Designed a multi-tenant healthcare platform with role-based access for patients, doctors, and pharmacies. Implemented AI-powered symptom analysis using medical knowledge graphs and NLP to provide preliminary diagnostics. Built a real-time appointment scheduling system with automated reminders via SMS and email. Created a secure prescription management workflow where doctors can e-prescribe and pharmacies can fulfill orders digitally. Used FastAPI for high-performance backend APIs, React for responsive frontend, and PostgreSQL for secure data storage with encryption at rest.",
-    "stack": ["Python", "FastAPI", "React", "PostgreSQL", "OpenAI API", "Twilio", "AWS", "Docker", "Redis"],
+    "stack": [
+  "OpenAI Agents SDK",
+  "Python",
+  "FastAPI",
+  "React",
+  "TypeScript",
+  "PostgreSQL",
+  "RAG",
+  "Vector Search",
+  "Docker",
+  "JWT Authentication",
+  "REST APIs"
+],
     "results": [
-      "Reduced appointment scheduling time from 15 minutes to under 2 minutes",
-      "Serving 2,000+ patients and 50+ healthcare providers",
-      "AI diagnostics achieved 87% accuracy in preliminary symptom analysis",
-      "Prescription fulfillment time reduced by 60% through digital workflow",
-      "HIPAA-compliant with zero security incidents in 8 months of operation",
-      "Patient satisfaction score: 4.8/5.0"
-    ],
+  "Reduced repetitive support workload through AI automation",
+  "Enabled 24/7 patient assistance using Digital FTE architecture",
+  "Improved healthcare information accessibility through RAG",
+  "Delivered scalable full-stack healthcare platform",
+  "Streamlined appointment and support workflows",
+  "Production-ready architecture for future expansion"
+],
     "screenshots": [
       "/medibridge.png"
     ],
     "published_date": "2026-04-10",
-    "tags": ["Healthcare", "AI", "Python", "FastAPI", "React", "HIPAA"]
+    "tags": [
+  "Agentic AI",
+  "Digital FTE",
+  "Healthcare AI",
+  "OpenAI Agents SDK",
+  "RAG",
+  "FastAPI",
+  "React"
+]
   },
   {
     "slug": "ai-robotics-book-platform",
@@ -26,19 +46,38 @@
     "excerpt": "Developed an interactive digital book platform for robotics education with AI-powered code assistance, 3D simulations, and real-time feedback for learners.",
     "challenge": "Traditional robotics textbooks couldn't provide hands-on experience, and students struggled to visualize complex concepts like kinematics, path planning, and sensor fusion. The client wanted an interactive learning platform where students could write code, see immediate results in 3D simulations, and get AI-powered guidance when stuck — all without needing physical robots.",
     "approach": "Built a full-stack interactive learning platform combining educational content with practical coding exercises. Integrated a browser-based Python IDE with AI code assistance powered by GPT-4 for real-time help and debugging. Created 3D robot simulations using Three.js where students can visualize their code's impact on robot movement and sensor readings. Implemented a progressive learning path with 50+ exercises covering fundamentals to advanced topics. Added a community forum for peer learning and instructor support. Used React for the frontend, FastAPI for backend services, and WebSockets for real-time code execution feedback.",
-    "stack": ["Python", "FastAPI", "React", "Three.js", "OpenAI API", "WebSockets", "MongoDB", "Docker"],
+    "stack": [
+  "OpenAI Agents SDK",
+  "Python",
+  "FastAPI",
+  "React",
+  "TypeScript",
+  "RAG",
+  "Vector Database",
+  "Embeddings",
+  "PostgreSQL",
+  "Docker"
+],
     "results": [
-      "1,500+ students enrolled in first 3 months",
-      "Average completion rate of 78% — 3x higher than traditional online courses",
-      "AI code assistant resolved 65% of student queries without human intervention",
-      "Students reported 92% satisfaction with interactive simulations",
-      "Reduced time-to-competency by 40% compared to traditional textbook learning",
-      "Featured in 5 university robotics curricula"
-    ],
+  "Delivered intelligent knowledge discovery experience",
+  "Improved learning through contextual AI guidance",
+  "Reduced information retrieval friction",
+  "Enabled natural language exploration of robotics concepts",
+  "Built scalable RAG architecture for future content expansion",
+  "Demonstrated production-grade Agentic AI implementation"
+],
     "screenshots": [
       "/robotic-book.png"
     ],
     "published_date": "2026-03-25",
-    "tags": ["EdTech", "AI", "Robotics", "Python", "React", "3D Simulation"]
+    "tags": [
+  "Agentic AI",
+  "RAG",
+  "OpenAI Agents SDK",
+  "Knowledge Assistant",
+  "Robotics",
+  "Conversational AI",
+  "Full Stack"
+]
   }
 ]

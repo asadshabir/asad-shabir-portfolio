@@ -13,9 +13,8 @@ export default defineConfig(({ mode }) => ({
     },
     proxy: {
       "/chat": {
-        target: "http://localhost:8000",
+        target: "http://localhost:8001",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/chat/, "/api/chat"),
       },
       "/api": {
         target: "http://localhost:8000",

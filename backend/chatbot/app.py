@@ -194,6 +194,8 @@ async def _direct_chat_completion(
                 return msg
         except Exception as e:
             logger.warning(f"Direct completion on {provider}/{model_name} failed: {e}")
+            # Small delay before fallback to avoid hammering rate limiters
+            await asyncio.sleep(1.0)
             continue
 
     return ""
@@ -501,14 +503,17 @@ async def _handle_chat(request: ChatRequest):
     # ── Intent classification ──────────────────────────────────────
     intent = classify_intent(last_user_msg, session.conversation_mode)
 
-    # Build conversation context
+    # Build conversation context from session history + ONLY the last user message.
+    # CRITICAL: Do NOT pass conv_messages (full frontend history) + session history —
+    # that duplicates messages and rapidly fills the LLM context window,
+    # causing API failures and "unavailable" errors after 1-2 responses.
     history = session.get_history(8)
-    context_messages = history + conv_messages
+    context_messages = history + [{"role": "user", "content": last_user_msg}]
 
     # ── EMAIL-SEND ROUTE (before template path) ───────────────────
     if intent == "email_send":
-        for m in conv_messages:
-            session.add_message(m["role"], m["content"])
+        # Store only new messages (the last user message)
+        session.add_message("user", last_user_msg)
 
         assistant_msg = await _handle_email_send(
             user_message=last_user_msg,
@@ -535,8 +540,8 @@ async def _handle_chat(request: ChatRequest):
         template_msg = get_template_response(last_user_msg, request.language or "en")
         if template_msg:
             session.conversation_mode = "casual"
-            for m in conv_messages:
-                session.add_message(m["role"], m["content"])
+            # Store only new messages
+            session.add_message("user", last_user_msg)
             session.add_message("assistant", template_msg)
             _cleanup_expired_sessions()
             return JSONResponse(
@@ -605,9 +610,11 @@ async def _handle_chat(request: ChatRequest):
             "In the meantime, feel free to browse the portfolio — all projects and case studies are available!"
         )
 
-    # Store in session
-    for m in conv_messages:
-        session.add_message(m["role"], m["content"])
+    # Store ONLY the new user message and assistant response in session.
+    # DO NOT store the entire conv_messages (full frontend history) — that
+    # duplicates what's already in session.get_history() and causes the
+    # context window to fill up after 1-2 responses, triggering API failures.
+    session.add_message("user", last_user_msg)
     if assistant_msg:
         session.add_message("assistant", assistant_msg)
 

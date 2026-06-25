@@ -5,6 +5,8 @@ import Card3D from "./Card3D";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
 import PremiumBadge from "./PremiumBadge";
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
 const items = [
   {
     icon: Cpu,
@@ -133,7 +135,7 @@ const About = () => (
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.5 }}
+              transition={{ delay: i * (isMobile ? 0.08 : 0.15), duration: 0.5 }}
               className="expertise-card-wrap"
               style={
                 {
@@ -146,7 +148,7 @@ const About = () => (
                 className="expertise-card p-6 text-center group cursor-default min-h-[240px]"
               >
                 <div className="expertise-content">
-                  <div className="w-14 h-14 rounded-[1.15rem] bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 flex items-center justify-center mb-4 mx-auto group-hover:neon-glow-cyan transition-all duration-500 border border-foreground/10">
+                  <div className="w-14 h-14 rounded-[1.15rem] bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 flex items-center justify-center mb-4 mx-auto border border-foreground/10">
                     <item.icon className="w-7 h-7 text-primary" />
                   </div>
 

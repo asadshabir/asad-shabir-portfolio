@@ -47,7 +47,7 @@ const CaseStudyPage = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Case study not found</h1>
-          <Link to="/case-studies" className="text-primary hover:underline">
+          <Link to="/#case-studies" className="text-primary hover:underline">
             ← Back to Case Studies
           </Link>
         </div>
@@ -103,7 +103,7 @@ const CaseStudyPage = () => {
           <div className="container px-4 sm:px-6 relative z-10">
             {/* Back link */}
             <Link
-              to="/case-studies"
+              to="/#case-studies"
               onClick={() => window.scrollTo(0, 0)}
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 text-sm"
             >

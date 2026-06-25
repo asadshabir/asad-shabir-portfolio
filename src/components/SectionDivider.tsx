@@ -32,7 +32,7 @@ const SectionDivider = () => (
       initial={{ scale: 0 }}
       whileInView={{ scale: 1 }}
       viewport={{ once: true }}
-      transition={{ delay: 0.3, type: "spring" }}
+      transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
       className="absolute w-2 h-2 rounded-full bg-primary neon-glow-cyan"
     />
   </div>

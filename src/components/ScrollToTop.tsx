@@ -30,7 +30,7 @@ const ScrollToTop = ({ hidden = false, isScrolling = false }: { hidden?: boolean
           exit={{ opacity: 0, y: 18, scale: 0.86 }}
           whileHover={{ y: -6, rotateX: 10, scale: 1.06 }}
           whileTap={{ scale: 0.94 }}
-          transition={{ type: "spring", stiffness: 260, damping: 22 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
           onClick={scrollToHero}
           className="scroll-top-3d fixed bottom-6 left-4 sm:left-6 md:left-8 z-[50] h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center text-primary"
           style={{ paddingBottom: "env(safe-area-inset-bottom)" }}

@@ -75,14 +75,16 @@ const marqueeItems = [
   "Cloud Architecture",
 ];
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: isMobile ? 0.05 : 0.1 } },
 };
 
 const item = {
   hidden: { opacity: 0, scale: 0.7, rotateX: -30 },
-  show: { opacity: 1, scale: 1, rotateX: 0, transition: { type: "spring" as const, stiffness: 200, damping: 20 } },
+  show: { opacity: 1, scale: 1, rotateX: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 const Skills = () => (
@@ -139,7 +141,7 @@ const Skills = () => (
                 initial={{ width: 0 }}
                 whileInView={{ width: "60%" }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}
+                transition={{ delay: 0.3 + i * (isMobile ? 0.05 : 0.1), duration: 0.6 }}
               />
             </Card3D>
           </motion.div>

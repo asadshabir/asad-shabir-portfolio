@@ -63,25 +63,25 @@ class ReviewerService:
         target_role: Optional[str] = None,
         language: str = "en",
     ) -> Dict[str, Any]:
-        """Generate a structured resume review — tries Gemini first, then Groq."""
+        """Generate a structured resume review — tries Groq first (fast), then Gemini."""
         system_prompt = self._build_system_prompt(language)
         user_prompt = self._build_user_prompt(resume_text, target_role)
 
-        # Try Gemini (primary)
-        if self.gemini_key:
-            try:
-                response = self._call_api(self.gemini_url, self.gemini_key, self.model, system_prompt, user_prompt)
-                return self._parse_response(response)
-            except requests.RequestException as e:
-                logger.warning(f"Gemini failed, falling back to Groq: {e}")
-
-        # Try Groq (fallback)
+        # Try Groq first (fast, reliable, free tier)
         if self.groq_key:
             try:
                 response = self._call_api(self.groq_url, self.groq_key, self.groq_model, system_prompt, user_prompt)
                 return self._parse_response(response)
             except requests.RequestException as e:
-                logger.error(f"Both Gemini and Groq failed: {e}")
+                logger.warning(f"Groq failed, falling back to Gemini: {e}")
+
+        # Try Gemini (fallback)
+        if self.gemini_key:
+            try:
+                response = self._call_api(self.gemini_url, self.gemini_key, self.model, system_prompt, user_prompt)
+                return self._parse_response(response)
+            except requests.RequestException as e:
+                logger.error(f"Both Groq and Gemini failed: {e}")
 
         raise ReviewerParseError(
             "AI service temporarily unavailable. Please try again in a moment."
@@ -204,9 +204,6 @@ Guidelines:
         match = re.search(r"\{.*\}", text, re.DOTALL)
         if match:
             candidate = match.group(0)
-            for quote_char in ('"', "'"):
-                if candidate.count(quote_char) % 2 != 0:
-                    candidate += quote_char
             try:
                 return json.loads(candidate)
             except json.JSONDecodeError:

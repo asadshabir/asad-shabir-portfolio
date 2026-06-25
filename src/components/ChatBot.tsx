@@ -146,7 +146,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
             initial={{ opacity: 0, y: 24, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 280, damping: 28 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="fixed z-[9999] premium-glass-strong flex flex-col overflow-hidden
               inset-0 rounded-none md:rounded-2xl
               md:bottom-24 md:right-4 lg:right-8 md:top-auto md:left-auto
@@ -191,7 +191,7 @@ const ChatBot = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                   key={i}
                   initial={{ opacity: 0, y: 8, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 320, damping: 26 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div

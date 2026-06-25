@@ -118,22 +118,20 @@ const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ "--social-tone": s.tone } as CSSProperties}
-                      className="group relative flex flex-col items-center justify-center gap-3 p-5 rounded-[2rem] transition-all duration-400 overflow-hidden"
+                      className="group relative flex flex-col items-center justify-center gap-3 p-5 rounded-[2rem] overflow-hidden"
                     >
                       {/* Premium glass background */}
-                      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-foreground/[0.06] to-background/[0.3] border border-foreground/10 transition-all duration-400 group-hover:border-[hsl(var(--social-tone)/0.5)] group-hover:shadow-[0_0_32px_hsl(var(--social-tone)/0.2)]" />
-                      {/* Brand radial glow */}
-                      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-24 h-24 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" style={{ background: `radial-gradient(circle, hsl(var(--social-tone) / 0.35), transparent 70%)` }} />
+                      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-foreground/[0.06] to-background/[0.3] border border-foreground/10" />
 
                       {/* Icon — matches About's premium icon styling */}
                       <div
-                        className="relative w-14 h-14 rounded-[1.15rem] bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_24px_hsl(var(--social-tone)/0.4)] transition-all duration-400 border border-foreground/10"
+                        className="relative w-14 h-14 rounded-[1.15rem] bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 flex items-center justify-center border border-foreground/10"
                       >
                         <s.icon
-                          className="w-6 h-6 text-primary group-hover:text-[hsl(var(--social-tone))] transition-all duration-300"
+                          className="w-6 h-6 text-primary"
                         />
                       </div>
-                      <span className="relative font-semibold text-sm sm:text-base text-center text-muted-foreground group-hover:text-[hsl(var(--social-tone))] transition-colors duration-300">
+                      <span className="relative font-semibold text-sm sm:text-base text-center text-muted-foreground">
                         {s.label}
                       </span>
                     </a>
@@ -147,7 +145,6 @@ const Contact = () => {
                     download="Asad_Shabir_Resume.pdf"
                     className="relative group/download w-full flex items-center justify-center gap-3 px-8 py-4 rounded-[2rem] bg-gradient-to-r from-primary via-emerald to-accent text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all shadow-2xl shadow-primary/20 overflow-hidden"
                   >
-                    <div className="absolute inset-0 -translate-x-full group-hover/download:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-20deg]" />
                     <Download className="w-5 h-5 relative z-10" />
                     <span className="relative z-10">Download Resume</span>
                   </a>
@@ -229,11 +226,10 @@ const Contact = () => {
                   <motion.button
                     type="submit"
                     disabled={sending}
-                    whileHover={{ scale: sending ? 1 : 1.02, y: sending ? 0 : -1 }}
-                    whileTap={{ scale: sending ? 1 : 0.96, y: sending ? 0 : 2 }}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ y: 1 }}
                     className="relative group/submit w-full flex items-center justify-center gap-2 px-6 py-4 rounded-[2rem] bg-gradient-to-r from-primary via-emerald to-accent text-primary-foreground font-bold text-base sm:text-lg neon-glow-cyan transition-all disabled:opacity-50 shadow-2xl shadow-primary/20 overflow-hidden"
                   >
-                    <div className="absolute inset-0 -translate-x-full group-hover/submit:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-20deg]" />
                     {sending ? (
                       <Loader2 className="w-5 h-5 animate-spin relative z-10" />
                     ) : (

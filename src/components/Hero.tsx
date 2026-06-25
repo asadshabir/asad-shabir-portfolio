@@ -22,15 +22,17 @@ const titles = [
   "OpenAI Agents SDK Specialist",
   "Production AI Systems Engineer",
 ];
-const orbitIcons = [Bot, Cpu, Network, Workflow];
+const allOrbitIcons = [Bot, Cpu, Network, Workflow];
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const orbitIcons = isMobile ? allOrbitIcons.slice(0, 2) : allOrbitIcons;
   const photoRef = useRef<HTMLDivElement>(null);
   const [photoTilt, setPhotoTilt] = useState({ x: 0, y: 0 });
   const { trackDownload } = useAnalytics();
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!photoRef.current) return;
+    if (!photoRef.current || isMobile) return;
     const rect = photoRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -59,7 +61,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           ref={photoRef}
           initial={{ opacity: 0, scale: 0.7, rotateY: -30 }}
           animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          transition={{ duration: 1, type: "spring", stiffness: 80 }}
+          transition={isMobile ? { duration: 0.8, ease: "easeOut" } : { duration: 1, type: "spring", stiffness: 80 }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{ perspective: "1200px" }}
@@ -113,7 +115,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
                   ],
                   opacity: [0.3, 0.8, 0.3],
                 }}
-                transition={{ duration: 8 + i * 0.5, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: isMobile ? 16 + i * 1 : 8 + i * 0.5, repeat: Infinity, ease: "linear" }}
               >
                 <Icon className="w-4 h-4" />
               </motion.div>
@@ -126,7 +128,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: isMobile ? 0.1 : 0.2 }}
             className="text-xs sm:text-sm font-mono tracking-widest uppercase text-primary mb-4"
           >
             Welcome to my universe
@@ -135,7 +137,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: isMobile ? 0.15 : 0.3, duration: 0.6 }}
             className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 premium-name-lockup"
           >
             <SparklesEffect>
@@ -146,7 +148,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           <motion.div
             initial={{ opacity: 0, scaleX: 0.7 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.42, duration: 0.7 }}
+            transition={{ delay: isMobile ? 0.2 : 0.42, duration: 0.7 }}
             className="heartbeat-line-wrap heartbeat-shock mx-auto lg:mx-0 mb-5"
           >
             <svg className="heartbeat-line" viewBox="0 0 640 80" preserveAspectRatio="none" aria-hidden="true">
@@ -220,7 +222,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: isMobile ? 0.25 : 0.5 }}
               className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold neon-text-cyan text-primary"
             >
               <FlipWords words={titles} duration={2500} />
@@ -229,7 +231,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: isMobile ? 0.3 : 0.5 }}
             className="hero-intro text-base sm:text-lg max-w-xl mb-8 sm:mb-10 mx-auto lg:mx-0"
            >
             I design and build{" "}
@@ -243,7 +245,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: isMobile ? 0.4 : 0.7 }}
             className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start"
           >
             <motion.button

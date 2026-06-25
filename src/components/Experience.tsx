@@ -3,6 +3,8 @@ import { Briefcase, Sparkles } from "lucide-react";
 import Card3D from "./Card3D";
 import BackgroundBeams from "./aceternity/BackgroundBeams";
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
 
 const experiences = [
   {
@@ -99,7 +101,7 @@ const Experience = () => (
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.2, duration: 0.6, type: "spring" }}
+            transition={{ delay: i * (isMobile ? 0.1 : 0.2), duration: 0.6, ease: "easeOut" }}
             className="relative pl-16 md:pl-20 pb-14 last:pb-0"
           >
             {/* Glowing dot */}
@@ -107,7 +109,7 @@ const Experience = () => (
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.2 + 0.3, type: "spring" }}
+              transition={{ delay: i * 0.2 + 0.3, duration: 0.5, ease: "easeOut" }}
               className="absolute left-4 md:left-6 top-1 w-5 h-5 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background"
               style={{ boxShadow: "0 0 16px hsl(var(--primary) / 0.7), 0 0 32px hsl(var(--primary) / 0.25)" }}
             />
